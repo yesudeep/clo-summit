@@ -1,0 +1,111 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+Import('env')
+
+from util import match_patterns, minifiables, filter_files
+from fnmatch import fnmatch
+from os.path import basename
+from filesystem import walk_dir
+
+SRC_DIR = './'
+DEST_DIR = '../' + env['MEDIA_DEST_DIR'] + '/'
+
+SCRIPT_FILES = Split("""
+
+""")
+SCRIPT_FILES = ["script/" + f for f in SCRIPT_FILES]
+
+IMAGE_FILES = Split("""
+
+""")
+
+CSS_FILES = Split("""
+    css/screen.css
+""")
+
+# Do not include IMAGE files in here.
+# Please include them in IMAGE_FILES above.
+# If you would like images to be copied "as is" without
+# any optimizations, then you may include them here.
+PLAIN_COPIES = SCRIPT_FILES + CSS_FILES + Split("""
+    robots.txt
+""")
+
+PLAIN_COPY_DIRECTORIES = Split("""
+
+""")
+
+# Recursively add all the files in the directories to files to copy.
+for directory in set(PLAIN_COPY_DIRECTORIES):
+    files = [f[len(SRC_DIR):] for f in walk_dir(SRC_DIR + directory)]
+    PLAIN_COPIES.extend(files)
+
+# Plain copies.
+for f in set(PLAIN_COPIES):
+    env.Command(DEST_DIR + f, SRC_DIR + f, Copy("$TARGET", "$SOURCE"))
+
+# Optimize graphics
+for f in IMAGE_FILES:
+    filename = str(f)
+    if match_patterns(filename, patterns=['*.png']):
+        env.OptimizePNG(DEST_DIR + f, SRC_DIR + f)
+    elif match_patterns(filename, patterns=['*.jpg', '*.jpeg']):
+        env.OptimizeJPEG(DEST_DIR + f, SRC_DIR + f)
+    else:
+        env.Command(DEST_DIR + f, SRC_DIR + f, Copy("$TARGET", "$SOURCE"))
+
+
+# Stitching graphics together
+stitched_images = [
+        #dict(
+        #    target='image/affiliates/affiliates.png',
+        #    sources=Split("""
+        #        image/affiliates/one_minute_manager.png
+        #        image/affiliates/who_moved_my_cheese.png
+        #    """),
+        #    orientation='horizontal'  # or "vertical"
+        #    ),
+]
+for stitch in stitched_images:
+    func = env.HStitchImages if stitch.get('orientation', 'horizontal') == 'horizontal' else env.VStitchImages
+    func(DEST_DIR + stitch['target'], [SRC_DIR + f for f in stitch['sources']])
+
+
+# Minification of the generated CSS and JS files.
+MINIFIABLE_FILES = SCRIPT_FILES + CSS_FILES + Split("""
+
+""")
+
+# Exclude these files specifically from minification.
+NON_MINIFIABLE_FILES = Split("""
+
+""")
+
+
+# Don't minify all files in one command.  Minify them separately.
+# It keeps build times small.
+for f in minifiables(MINIFIABLE_FILES, NON_MINIFIABLE_FILES):
+    filepath = DEST_DIR + str(f)
+    env.YuiCompressorMinify(filepath)
+    #if fnmatch(basename(filepath), '*.js'):
+    #    env.JsminMinify(filepath)
+
+# Combine these JavaScript files and create a common js.
+#
+# Warning:  THE ORDER MATTERS.
+#
+LIB_INDEX_JS_FILES =  Split("""
+
+""")
+LIB_INDEX_JS_FILES = [SRC_DIR + f for f in LIB_INDEX_JS_FILES]
+lib_index_js = env.Concatenate([DEST_DIR + 'script/lib/page/index.js'], LIB_INDEX_JS_FILES)
+env.YuiCompressorMinify(lib_index_js)
+env.JsminMinify(lib_index_js)
+
+# Include licenses.
+#c3 = env.Concatenate([DEST_DIR + 'script/lib/all-min.js'], [
+#    DEST_DIR + 'script/LICENSES',
+#    DEST_DIR + 'script/lib/all_o-min.js',
+#])
+
