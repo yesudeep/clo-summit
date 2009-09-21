@@ -21,20 +21,29 @@
 {% endblock %}
 
 {% block tag_body %}
-    {% block tag_header %}
-      <nav>
-        <ul>
-          <li><a href="/program">Program</a></li>
-          <li><a href="/research">Research</a></li>
-          <li><a href="/sponsors">Sponsors</a></li>
-          <li><a href="/media">Media</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/register" id="register" class="tag"></a></li>
-          <li><a href="/speaker" id="nominate_speaker" class="tag"></a></li>
-        </ul>
-      </nav>    
-    
-    {% endblock %}
-    {% block tag_trunk %}{% endblock %}
-    {% block tag_footer %}{% endblock %}
+    <div id="main_wrapper" {% block logo_class %}{% endblock %}>
+      {% block tag_header %}
+        <nav>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/program">Program</a></li>
+            <li><a href="/research">Research</a></li>
+            <li><a href="/sponsors">Sponsors</a></li>
+            <li><a href="/media">Media</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/register" id="register" class="tag"></a></li>
+            <li><a href="/speaker" id="nominate_speaker" class="tag"></a></li>
+          </ul>
+        </nav>    
+        <header>
+          <h1>
+          Organisational Learning.
+          <span>Impacting Bussiness.</span>
+          <span>Changing The Game.</span>
+          </h1>
+        </header>
+      {% endblock %}
+      {% block tag_trunk %}{% endblock %}
+      {% block tag_footer %}{% endblock %}
+    </div>
 {% endblock %}

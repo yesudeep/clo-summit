@@ -10,14 +10,21 @@ a
   
 a:hover
   :color= !color_nav_link_hover
-nav
+  
+#main_wrapper
+  +grid-container
   :background= "transparent" !url_nav_bg "no-repeat scroll top right"
+  :min-height 403px
+  :overflow auto
+  :margin-top 10px
+#main_wrapper.logo
+  :background= "transparent" !url_logo "no-repeat scroll top right"
+nav
   :width 700px
-  :height 403px
   :float right
   >ul
-    :margin 50px 0px 10px 80px
-    :font-size 1.2em
+    :margin 50px 0px 10px 70px
+    :font-size 1.1em
     >li
       +display-inline-block
       :margin-right 15px
@@ -35,3 +42,16 @@ nav
         :top 350px
         :left -1px
         :background-position 0px -150px
+
+header
+  //:clear both
+  //:width 90%
+  :margin 45px auto 20px
+  >h1
+    :line-height 1.4
+    :font-size 1.3em
+    :color #556a00
+    >span
+      :display block  
+  
+  
