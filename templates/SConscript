@@ -15,11 +15,12 @@ env.Cheetah(TEMPLATE_BUILD_DIR + 'base_site.html', 'base_site.html.tmpl', PICKLE
 env.Cheetah(TEMPLATE_BUILD_DIR + 'admin/base_site.html', 'base_site.html.tmpl', PICKLE=base_site_pickle)
 
 HTML_FILES = Split("""
-
+  base.html
+  index.html
 """)
 
 TEMPLATE_FILES = HTML_FILES + Split("""
-
+  
 """)
 
 PLAIN_COPIES = Split("""
