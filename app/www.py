@@ -13,9 +13,51 @@ class IndexPage(webapp.RequestHandler):
         response = render_template('index.html')
         self.response.out.write(response)
 
+class ProgramPage(webapp.RequestHandler):
+    def get(self):
+        response = render_template('program.html')
+        self.response.out.write(response)
+        
+class ResearchPage(webapp.RequestHandler):
+    def get(self):
+        response = render_template('research.html')
+        self.response.out.write(response)
+        
+class SponsorsPage(webapp.RequestHandler):
+    def get(self):
+        response = render_template('sponsors.html')
+        self.response.out.write(response)
+
+class MediaPage(webapp.RequestHandler):
+    def get(self):
+        response = render_template('media.html')
+        self.response.out.write(response)
+
+class AboutPage(webapp.RequestHandler):
+    def get(self):
+        response = render_template('about.html')
+        self.response.out.write(response)
+
+class RegisterPage(webapp.RequestHandler):
+    def get(self):
+        response = render_template('register.html')
+        self.response.out.write(response)
+
+class SpeakerPage(webapp.RequestHandler):
+    def get(self):
+        response = render_template('speaker.html')
+        self.response.out.write(response)
+
 
 urls = (
     ('/', IndexPage),
+    ('/program/?', ProgramPage),
+    ('/research/?', ResearchPage),
+    ('/sponsors/?', SponsorsPage),
+    ('/media/?', MediaPage),
+    ('/register/?', RegisterPage),
+    ('/about/?', AboutPage),
+    ('/speaker/?', SpeakerPage),
 )
 
 
