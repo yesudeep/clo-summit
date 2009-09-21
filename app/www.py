@@ -40,7 +40,7 @@ class AboutPage(webapp.RequestHandler):
 
 class RegisterPage(webapp.RequestHandler):
     def get(self):
-        response = render_template('register.html')
+        response = render_template('register/register.html')
         self.response.out.write(response)
 
 class SpeakerPage(webapp.RequestHandler):
