@@ -1,4 +1,4 @@
-#require 'ninesixty'
+require 'ninesixty'
 # require 'susy'
 # Require any additional compass plugins here.
 
