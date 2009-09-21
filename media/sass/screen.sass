@@ -1,0 +1,23 @@
+@import base.sass
+
+body
+  :font-size 1em
+  :font-family= !font_stack_verdana
+
+a
+  :text-decoration none
+  :color= !color_nav_link
+  
+a:hover
+  :color= !color_nav_link_hover
+nav
+  :background= "transparent" !url_nav_bg "no-repeat scroll top right"
+  :width 700px
+  :height 403px
+  :float right
+  >ul
+    :margin 50px 0px 10px 80px
+    :font-size 1.2em
+    >li
+      +display-inline-block
+      :margin-right 15px
