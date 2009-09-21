@@ -58,14 +58,14 @@ for f in IMAGE_FILES:
 
 # Stitching graphics together
 stitched_images = [
-        #dict(
-        #    target='image/affiliates/affiliates.png',
-        #    sources=Split("""
-        #        image/affiliates/one_minute_manager.png
-        #        image/affiliates/who_moved_my_cheese.png
-        #    """),
-        #    orientation='horizontal'  # or "vertical"
-        #    ),
+        dict(
+            target='image/button/nav.png',
+            sources=Split("""
+                image/button/register.png
+                image/button/nominate_speaker.png
+            """),
+            orientation='vertical'  # or "vertical"
+            ),
 ]
 for stitch in stitched_images:
     func = env.HStitchImages if stitch.get('orientation', 'horizontal') == 'horizontal' else env.VStitchImages
