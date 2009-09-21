@@ -2,9 +2,14 @@
 
 body
   :font-size 1em
+  :color #555
+  :line-height 1.4
   :font-family= !font_stack_verdana
+  
+p
 
 a
+  :font-family= !font_stack_verdana
   :text-decoration none
   :color= !color_nav_link
   
@@ -52,9 +57,10 @@ header
   :margin 45px auto 20px
   >h1
     :line-height 1.2
-    :font-size 2.1em
+    :font-size 2.2em
     :color #006c94
     :letter-spacing -0.03em
+    :font-family= !font_stack_trebuchet
     >span
       :display block
       :color #0090C6 
@@ -64,5 +70,10 @@ header
 section
   :width 90%
   :margin 0px auto
+  >header
+    :margin-bottom 10px
+    >h1
+      :color= !color_nav_link
+      :font-size 1.8em
   
   
