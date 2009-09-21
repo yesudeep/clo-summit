@@ -22,7 +22,7 @@ HTML_FILES = Split("""
   program.html
   sponsors.html
   media.html
-  register.html
+  register/register.html
   speaker.html
 """)
 

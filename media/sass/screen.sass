@@ -20,10 +20,10 @@ a:hover
 #main_wrapper.logo
   :background= "transparent" !url_logo "no-repeat scroll top right"
 nav
-  :width 700px
+  :width 470px
   :float right
+  :margin 50px 0px 10px 70px
   >ul
-    :margin 50px 0px 10px 70px
     :font-size 1.1em
     >li
       +display-inline-block
@@ -42,16 +42,27 @@ nav
         :top 350px
         :left -1px
         :background-position 0px -150px
+        
+#home
+  :margin 40px 75px 10px 0px
 
 header
   //:clear both
   //:width 90%
   :margin 45px auto 20px
   >h1
-    :line-height 1.4
-    :font-size 1.3em
-    :color #556a00
+    :line-height 1.2
+    :font-size 2.1em
+    :color #006c94
+    :letter-spacing -0.03em
     >span
-      :display block  
+      :display block
+      :color #0090C6 
+    >span#light_color
+      :color #00bae8
+      
+section
+  :width 90%
+  :margin 0px auto
   
   
