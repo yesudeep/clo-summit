@@ -23,6 +23,9 @@ HTML_FILES = Split("""
   sponsors.html
   media.html
   register/register.html
+  register/scheme.html
+  register/participant_detail.html
+  register/payment.html
   speaker.html
 """)
 

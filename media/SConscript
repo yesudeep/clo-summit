@@ -21,6 +21,9 @@ IMAGE_FILES = Split("""
     image/background/logo.png
     image/logo/tiss.png
     image/logo/leapvault.png
+    image/background/individual_pricing.png
+    image/background/group_of_3_pricing.png
+    image/background/group_of_6_pricing.png
 """)
 
 CSS_FILES = Split("""

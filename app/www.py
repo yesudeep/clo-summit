@@ -43,11 +43,26 @@ class RegisterPage(webapp.RequestHandler):
         response = render_template('register/register.html')
         self.response.out.write(response)
 
+class SchemePage(webapp.RequestHandler):
+    def get(self):
+        response = render_template('register/scheme.html')
+        self.response.out.write(response)
+        
+class ParticipantDetailPage(webapp.RequestHandler):
+    def get(self):
+        response = render_template('register/participant_detail.html')
+        self.response.out.write(response)
+        
+class PaymentPage(webapp.RequestHandler):
+    def get(self):
+        response = render_template('register/payment.html')
+        self.response.out.write(response)
+
+
 class SpeakerPage(webapp.RequestHandler):
     def get(self):
         response = render_template('speaker.html')
         self.response.out.write(response)
-
 
 urls = (
     ('/', IndexPage),
@@ -56,6 +71,9 @@ urls = (
     ('/sponsors/?', SponsorsPage),
     ('/media/?', MediaPage),
     ('/register/?', RegisterPage),
+    ('/register/scheme/?', SchemePage),
+    ('/register/participant_detail/?', ParticipantDetailPage),
+    ('/register/payment/?', PaymentPage),
     ('/about/?', AboutPage),
     ('/speaker/?', SpeakerPage),
 )

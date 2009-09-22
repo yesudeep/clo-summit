@@ -4,11 +4,25 @@
 {% endblock %}
   {% block tag_trunk %}
     <section>
+      {% block register_info %}
       <header>
-        <h1>Registration</h1>
+        <h1>Sample Heading</h1>
       </header>
       <article>
         <p>A never before opportunity to meet and network with CEOs, CLOs and other thought leaders in the fields of learning, training, coaching, organisation development, and assessments  who have and will continue to shape the learning dna of organizations.</p>
+      </article>
+      {% endblock %}
+      <article>
+        <h1>Register now, it's as easy as 1, 2, 3!</h1>
+        <ul>
+          <li><a href="/register/scheme" class ="awesome-button large coolest"{% block scheme_id %}{% endblock %}>1. Scheme</a></li>
+          <li><a href="/register/participant_detail" class ="awesome-button large cool"{% block participant_detail_id %}{% endblock %}>2. Participant Details</a></li>
+          <li><a href="/register/payment" class ="awesome-button large cooler"{% block payment_id %}{% endblock %}>3. Payment</a></li>
+        </ul>
+        {% block scheme %} {% endblock %}
+        {% block participant_detail %} {% endblock %}
+        {% block payment %} {% endblock %}
+        
       </article>
     </section>
   {% endblock %}
