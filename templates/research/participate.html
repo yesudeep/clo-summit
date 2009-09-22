@@ -8,7 +8,7 @@
       <h1>CLO Survey Participation Form.</h1>
     </header>
     <article>
-      <form id="participate_survey" class="decorated-fields table" action="/research/participate" method="post">
+      <form id="participate_survey" class="decorated-fields table column-1of2" action="/research/participate" method="post">
         <label for="first_name">
           <span class="prefix">First Name</span>
           <input type="text" name="first_name" value="" />
@@ -81,6 +81,9 @@
           <span class="suffix"></span>
         </label>
       </form>
+      <aside class= "column-2of2">
+          <img src= "{{ MEDIA_URL }}image/background/survey.png" width="300px" height= "300px"/>
+      </aside>
     </article>
   </section>
 {% endblock %}
