@@ -5,6 +5,18 @@
   {% block tag_trunk %}
     <section>
       {% block register_info %}
+      <article class="clearfix">
+        <h1>Register Now, It's As Easy As 1, 2, 3!</h1>
+        <ul>
+          <li><a href="/register/scheme" class ="awesome-button large coolest"{% block scheme_id %}{% endblock %}>1. Select A Scheme</a></li>
+          <li><a href="/register/participant_detail" class ="awesome-button large cool"{% block participant_detail_id %}{% endblock %}>2. Provide Details</a></li>
+          <li><a href="/register/payment" class ="awesome-button large cooler"{% block payment_id %}{% endblock %}>3. Make Payment</a></li>
+        </ul>
+        {% block scheme %} {% endblock %}
+        {% block participant_detail %} {% endblock %}
+        {% block payment %} {% endblock %}
+        
+      </article>
       <header>
         <h1>Sample Heading</h1>
       </header>
@@ -17,17 +29,5 @@
         </aside>
       </article>
       {% endblock %}
-      <article>
-        <h1>Register Now, It's As Easy As 1, 2, 3!</h1>
-        <ul>
-          <li><a href="/register/scheme" class ="awesome-button large coolest"{% block scheme_id %}{% endblock %}>1. Scheme</a></li>
-          <li><a href="/register/participant_detail" class ="awesome-button large cool"{% block participant_detail_id %}{% endblock %}>2. Participant Details</a></li>
-          <li><a href="/register/payment" class ="awesome-button large cooler"{% block payment_id %}{% endblock %}>3. Payment</a></li>
-        </ul>
-        {% block scheme %} {% endblock %}
-        {% block participant_detail %} {% endblock %}
-        {% block payment %} {% endblock %}
-        
-      </article>
     </section>
   {% endblock %}
