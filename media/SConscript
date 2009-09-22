@@ -33,6 +33,7 @@ IMAGE_FILES = Split("""
 CSS_FILES = Split("""
     css/screen.css
     css/generic.css
+    css/print.css
 """)
 
 # Do not include IMAGE files in here.
