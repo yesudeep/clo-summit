@@ -21,6 +21,7 @@ IMAGE_FILES = Split("""
     image/background/logo.png
     image/logo/tiss.png
     image/logo/leapvault.png
+    image/icon/favicon.png
 """)
 
 CSS_FILES = Split("""
