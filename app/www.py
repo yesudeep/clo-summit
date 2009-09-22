@@ -20,7 +20,7 @@ class ProgramPage(webapp.RequestHandler):
         
 class ResearchPage(webapp.RequestHandler):
     def get(self):
-        response = render_template('research.html')
+        response = render_template('research/research.html')
         self.response.out.write(response)
         
 class SponsorsPage(webapp.RequestHandler):
@@ -58,6 +58,10 @@ class PaymentPage(webapp.RequestHandler):
         response = render_template('register/payment.html')
         self.response.out.write(response)
 
+class ParticipatePage(webapp.RequestHandler):
+    def get(self):
+        response = render_template('research/participate.html')
+        self.response.out.write(response)
 
 class SpeakerPage(webapp.RequestHandler):
     def get(self):
@@ -68,6 +72,7 @@ urls = (
     ('/', IndexPage),
     ('/program/?', ProgramPage),
     ('/research/?', ResearchPage),
+    ('/research/participate/?', ParticipatePage),
     ('/sponsors/?', SponsorsPage),
     ('/media/?', MediaPage),
     ('/register/?', RegisterPage),

@@ -25,10 +25,14 @@ IMAGE_FILES = Split("""
     image/background/group_of_6_pricing.png
     image/icon/favicon.png
     image/background/register.png
+    image/background/survey.png
+    image/background/textfield_normal.png
+    image/background/textfield_readonly.png
 """)
 
 CSS_FILES = Split("""
     css/screen.css
+    css/generic.css
 """)
 
 # Do not include IMAGE files in here.
@@ -109,6 +113,14 @@ LIB_INDEX_JS_FILES = [SRC_DIR + f for f in LIB_INDEX_JS_FILES]
 lib_index_js = env.Concatenate([DEST_DIR + 'script/lib/page/index.js'], LIB_INDEX_JS_FILES)
 env.YuiCompressorMinify(lib_index_js)
 env.JsminMinify(lib_index_js)
+
+screen_all_css_files =  Split("""
+    css/generic.css
+    css/screen.css
+    """)
+screen_all_css_files = [SRC_DIR + f for f in screen_all_css_files]
+screen_all_css = env.Concatenate([DEST_DIR + 'css/screen-all.css'], screen_all_css_files)
+env.YuiCompressorMinify(screen_all_css)
 
 # Include licenses.
 #c3 = env.Concatenate([DEST_DIR + 'script/lib/all-min.js'], [

@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block logo_class %}
+  class= "logo"
+{% endblock %}
+{% block tag_trunk %}
+  <section>
+    <header>
+      <h1>CLO Survey Participation Form.</h1>
+    </header>
+    <article>
+      <form id="participate_survey" class="decorated-fields table" action="/research/participate" method="post">
+        <label for="first_name">
+          <span class="prefix">First Name</span>
+          <input type="text" name="first_name" value="" />
+          <span class="suffix"></span>
+        </label>
+
+        <label for="last_name">
+          <span class="prefix">Last Name</span>
+          <input type="text" name="last_name" value="" />
+          <span class="suffix"></span>
+        </label>
+
+        <label for="designation">
+          <span class="prefix">Designation</span>
+          <input type="text" name="designation" value="" />
+          <span class="suffix"></span>
+        </label>
+        
+        <label for="department">
+          <span class="prefix">Function/Department</span>
+          <input type="text" name="department" value="" />
+          <span class="suffix"></span>
+        </label>
+        
+        <label for="person_responsible">
+          <span class="prefix">Person Responsible</span>
+          <select name="job_type">
+              <option value="">Chief Learning Officer</option>
+              <option value="">Head Of Learning &amp; Development</option>
+              <option value="">Talent Management</option>
+              <option value="">Employee Development</option>
+              <option value="">Head Of Human Resources</option>
+          </select>
+          <span class="suffix"></span>
+        </label>
+        
+        <label for="organisation">
+          <span class="prefix">Organisation</span>
+          <input type="text" name="organisation" value="" />
+          <span class="suffix"></span>
+        </label>
+        
+        <label for="organisation_website">
+          <span class="prefix">Organisation Website</span>
+          <input type="text" name="organisation_website" value="" />
+          <span class="suffix"></span>
+        </label>
+        
+        <label for="City">
+          <span class="prefix">City</span>
+          <input type="text" name="city" value="" />
+          <span class="suffix"></span>
+        </label>
+        
+        <label for="email">
+          <span class="prefix">Email</span>
+          <input type="text" name="email" value="" />
+          <span class="suffix"></span>
+        </label>
+        
+        <label for="mobile_number">
+          <span class="prefix">Mobile Number</span>
+          <input type="text" name="mobile_number" value="" />
+          <span class="suffix"></span>
+        </label>
+        
+        <label for="submit">
+          <span class="prefix"></span>
+          <input type="submit" name="submit" value="Participate &raquo;" />
+          <span class="suffix"></span>
+        </label>
+      </form>
+    </article>
+  </section>
+{% endblock %}
