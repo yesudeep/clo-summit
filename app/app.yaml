@@ -1,5 +1,5 @@
-application: clo-summit
-version: sandbox
+application: closummit
+version: latest
 runtime: python
 api_version: 1
 
