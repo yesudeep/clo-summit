@@ -8,11 +8,12 @@ body
   
 p
   :line-height 1.6
+  :margin-bottom 15px
   
 ul
   li
     +display-inline-block
-    :margin 15px 15px 0px 0px
+    :margin 0px 15px 0px 0px
 
 a
   :font-family= !font_stack_verdana
@@ -77,9 +78,34 @@ header
       
 section
   :width 90%
-  :margin 0px auto
+  :margin 0px auto 20px
   h1
     :color= !color_nav_link
     :font-size 1.8em
-
+    
+aside
+  ul
+    li
+      :font-size 1.2em
+      :font-weight bold
+      :margin-bottom 10px
+      a
+        :font-size 0.8em
+        :font-weight normal
+        :display block
+        :width 180px
+        :height 170px
+#leapvault
+  :background= "transparent" !url_leapvault_logo "no-repeat scroll 0 bottom"
+  :height 90px  
+#tiss
+  :background= "transparent" !url_tiss_logo "no-repeat scroll center bottom"
   
+.column-1of2
+  :width 65%
+  :float left
+.column-2of2
+  :width 30%
+  :float right
+.clearfix
+  :clear both  

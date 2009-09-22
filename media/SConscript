@@ -19,6 +19,8 @@ SCRIPT_FILES = ["script/" + f for f in SCRIPT_FILES]
 IMAGE_FILES = Split("""
     image/background/clo_block.png
     image/background/logo.png
+    image/logo/tiss.png
+    image/logo/leapvault.png
 """)
 
 CSS_FILES = Split("""
