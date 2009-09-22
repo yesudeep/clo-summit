@@ -12,7 +12,7 @@ SRC_DIR = './'
 DEST_DIR = '../' + env['MEDIA_DEST_DIR'] + '/'
 
 SCRIPT_FILES = Split("""
-    script/lib/chickoojs/src/jquery/jquery-1.3.2.js
+
 """)
 
 IMAGE_FILES = Split("""
@@ -24,7 +24,7 @@ IMAGE_FILES = Split("""
     image/background/group_of_3_pricing.png
     image/background/group_of_6_pricing.png
     image/icon/favicon.png
-
+    image/background/register.png
 """)
 
 CSS_FILES = Split("""

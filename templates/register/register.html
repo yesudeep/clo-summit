@@ -9,11 +9,16 @@
         <h1>Sample Heading</h1>
       </header>
       <article>
-        <p>A never before opportunity to meet and network with CEOs, CLOs and other thought leaders in the fields of learning, training, coaching, organisation development, and assessments  who have and will continue to shape the learning dna of organizations.</p>
+        <div class="column-1of2">
+          <p>A never before opportunity to meet and network with CEOs, CLOs and other thought leaders in the fields of learning, training, coaching, organisation development, and assessments  who have and will continue to shape the learning dna of organizations.</p>
+        </div>
+        <aside class= "column-2of2">
+          <img src= "{{ MEDIA_URL }}image/background/register.png" width="300px" height= "300px"/>
+        </aside>
       </article>
       {% endblock %}
       <article>
-        <h1>Register now, it's as easy as 1, 2, 3!</h1>
+        <h1>Register Now, It's As Easy As 1, 2, 3!</h1>
         <ul>
           <li><a href="/register/scheme" class ="awesome-button large coolest"{% block scheme_id %}{% endblock %}>1. Scheme</a></li>
           <li><a href="/register/participant_detail" class ="awesome-button large cool"{% block participant_detail_id %}{% endblock %}>2. Participant Details</a></li>
