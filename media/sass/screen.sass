@@ -7,6 +7,12 @@ body
   :font-family= !font_stack_verdana
   
 p
+  :line-height 1.6
+  
+ul
+  li
+    +display-inline-block
+    :margin 15px 15px 0px 0px
 
 a
   :font-family= !font_stack_verdana
@@ -16,6 +22,8 @@ a
 a:hover
   :color= !color_nav_link_hover
   
+a.current
+  :color #fffccc
 #main_wrapper
   +grid-container
   :background= "transparent" !url_nav_bg "no-repeat scroll top right"
@@ -70,10 +78,8 @@ header
 section
   :width 90%
   :margin 0px auto
-  >header
-    :margin-bottom 10px
-    >h1
-      :color= !color_nav_link
-      :font-size 1.8em
-  
+  h1
+    :color= !color_nav_link
+    :font-size 1.8em
+
   
