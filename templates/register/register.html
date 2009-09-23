@@ -7,48 +7,46 @@
       <article class="clearfix">
         <h1>Register Now, It's As Easy As 1, 2, 3!</h1>
         <ul>
-          <li><a href="/register/scheme" class ="awesome-button large coolest"{% block scheme_id %}{% endblock %}>1. Select A Scheme</a></li>
-          <li><a href="/register/participant_detail" class ="awesome-button large cool"{% block participant_detail_id %}{% endblock %}>2. Provide Details</a></li>
-          <li><a href="/register/payment" class ="awesome-button large cooler"{% block payment_id %}{% endblock %}>3. Make Payment</a></li>
+          <li><a href="/register/scheme" class ="awesome-button large disabled"{% block scheme_id %} id="current"{% endblock %}>1. Select A Scheme</a></li>
+          <li><a href="/register/participant_detail" class ="awesome-button large disabled"{% block participant_detail_id %}{% endblock %}>2. Provide Details</a></li>
+          <li><a href="/register/payment" class ="awesome-button large disabled"{% block payment_id %}{% endblock %}>3. Make Payment</a></li>
         </ul>
-        {% block scheme %}
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th id="individual"></th>
-          <th id="group_of_3"></th>
-          <th id="group_of_6"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="row-head">Number of Participants</td>
-          <td>1</td>
-          <td>3-5</td>
-          <td>6-8</td>
-        </tr>
-        <tr>
-          <td class="row-head">Fees Per Participant</td>
-          <td>7,500 INR</td>
-          <td>6,000 INR</td>
-          <td>5,500 INR</td>
-        </tr>
-        <tr>
-          <td class="row-head">Savings Per Participant</td>
-          <td>Nil</td>
-          <td>1,500 INR</td>
-          <td>2,000 INR</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td><a href="" class="awesome-button large ice-cool">Register</a></td>
-          <td><a href="" class="awesome-button large ice-cool">Register</a></td>
-          <td><a href="" class="awesome-button large ice-cool">Register</a></td>
-        </tr>
-      </tbody>
-    </table>
-{% endblock %}
+            <table>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th id="individual"></th>
+                  <th id="group_of_3"></th>
+                  <th id="group_of_6"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="row-head">Number of Participants</td>
+                  <td>1</td>
+                  <td>3-5</td>
+                  <td>6-8</td>
+                </tr>
+                <tr>
+                  <td class="row-head">Fees Per Participant</td>
+                  <td>7,500 INR</td>
+                  <td>6,000 INR</td>
+                  <td>5,500 INR</td>
+                </tr>
+                <tr>
+                  <td class="row-head">Savings Per Participant</td>
+                  <td>Nil</td>
+                  <td>1,500 INR</td>
+                  <td>2,000 INR</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td><a href="" class="awesome-button large ice-cool">Register</a></td>
+                  <td><a href="" class="awesome-button large ice-cool">Register</a></td>
+                  <td><a href="" class="awesome-button large ice-cool">Register</a></td>
+                </tr>
+              </tbody>
+            </table>
         {% block participant_detail %} {% endblock %}
         {% block payment %} {% endblock %}
         
