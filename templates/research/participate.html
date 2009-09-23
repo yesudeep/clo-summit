@@ -6,70 +6,64 @@
     </header>
     <article>
       <form id="participate_survey" class="decorated-fields table column-1of2" action="/research/participate" method="post">
-        <label for="first_name">
-          <span class="prefix">First Name</span>
-          <input type="text" name="first_name" value="" />
-          <span class="suffix"></span>
-        </label>
-
-        <label for="last_name">
-          <span class="prefix">Last Name</span>
-          <input type="text" name="last_name" value="" />
+        <label for="full_name">
+          <span class="prefix">full name</span>
+          <input type="text" name="full_name" value="" class="required" />
           <span class="suffix"></span>
         </label>
 
         <label for="designation">
-          <span class="prefix">Designation</span>
-          <input type="text" name="designation" value="" />
+          <span class="prefix">designation</span>
+          <input type="text" name="designation" value="" class="required" />
           <span class="suffix"></span>
         </label>
 
         <label for="department">
-          <span class="prefix">Function/Department</span>
-          <input type="text" name="department" value="" />
+          <span class="prefix">department</span>
+          <input type="text" name="department" value="" class="required" />
           <span class="suffix"></span>
         </label>
 
         <label for="person_responsible">
-          <span class="prefix">Person Responsible</span>
+          <span class="prefix">person responsible</span>
           <select name="job_type">
-              <option value="">Chief Learning Officer</option>
-              <option value="">Head Of Learning &amp; Development</option>
-              <option value="">Talent Management</option>
-              <option value="">Employee Development</option>
-              <option value="">Head Of Human Resources</option>
+              <option value="clo">Chief Learning Officer</option>
+              <option value="head_of_learning_development">Head Of Learning &amp; Development</option>
+              <option value="talent_management">Talent Management</option>
+              <option value="employee_development">Employee Development</option>
+              <option value="head_of_human_resources">Head Of Human Resources</option>
           </select>
           <span class="suffix"></span>
         </label>
 
-        <label for="organisation">
-          <span class="prefix">Organisation</span>
-          <input type="text" name="organisation" value="" />
+        <label for="organization">
+          <span class="prefix">organization</span>
+          <input type="text" name="organization" value="" class="required" />
           <span class="suffix"></span>
         </label>
 
-        <label for="organisation_website">
-          <span class="prefix">Organisation Website</span>
-          <input type="text" name="organisation_website" value="" />
-          <span class="suffix"></span>
+        <label for="organization_website">
+          <span class="prefix">organization website</span>
+          <input type="text" name="organization_website" value="" class="required url" />
+          <span class="suffix">(eg. http://www.google.com)</span>
         </label>
 
-        <label for="City">
-          <span class="prefix">City</span>
-          <input type="text" name="city" value="" />
+        <label for="city">
+          <span class="prefix">city</span>
+          <input type="text" name="city" value="" class="required" />
           <span class="suffix"></span>
         </label>
 
         <label for="email">
-          <span class="prefix">Email</span>
-          <input type="text" name="email" value="" />
-          <span class="suffix"></span>
+          <span class="prefix">email</span>
+          <input type="text" name="email" value="" class="required email" />
+          <span class="suffix">(eg. john@doe.com)</span>
         </label>
 
         <label for="mobile_number">
-          <span class="prefix">Mobile Number</span>
-          <input type="text" name="mobile_number" value="" />
-          <span class="suffix"></span>
+          <span class="prefix">mobile number</span>
+          <input type="text" name="mobile_number" value="" class="required mobile" />
+          <span class="suffix">Include your <a href="http://en.wikipedia.org/wiki/List_of_country_calling_codes" target="_blank"> country code</a> and full mobile number. eg. +1 650 555 1212</span>
         </label>
 
         <label for="submit">
@@ -78,6 +72,7 @@
           <span class="suffix"></span>
         </label>
       </form>
+
       <aside class= "column-2of2">
           <img src= "{{ MEDIA_URL }}image/background/survey.png" width="300px" height= "300px"/>
       </aside>

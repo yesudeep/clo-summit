@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% block tag_trunk %}
   <section>
-    <article class="clearfix">
+    <article>
       <h1>Register now.  It's as easy as 1, 2, 3!</h1>
-      <ul id="breadcrumbs">
+      <ol id="breadcrumbs">
         <li {% block pricing_attributes %}{% endblock %}>Pricing</li>
         <li {% block participants_attributes %}{% endblock %}>Participant Details</li>
         <li {% block payment_attributes %}{% endblock %}>Make your Payment</li>
-      </ul>
+      </ol>
       {% block wizard_step_content %}{% endblock %}
     </article>
     {% block wizard_additional_content %}{% endblock %}

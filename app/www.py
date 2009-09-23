@@ -6,16 +6,14 @@ import configuration as config
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from utils import render_template, dec
-
+#from appengine_utilities import Session
 import logging
 
 logging.basicConfig(level=logging.INFO)
 
 class IndexPage(webapp.RequestHandler):
     def get(self):
-
         response = render_template('index.html')
-        logging.info(response)
         self.response.out.write(response)
 
 class ProgramPage(webapp.RequestHandler):
@@ -57,7 +55,6 @@ class RegisterParticipantsHandler(webapp.RequestHandler):
     def get(self):
         count = dec(self.request.get('count'))
         response = render_template('register/participants.html', count=count)
-        logging.info(response)
         self.response.out.write(response)
 
     def post(self):

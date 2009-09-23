@@ -5,10 +5,13 @@ body
   :font-size 1em
   :color #555
   :line-height 1.4
-  :font-family= !font_stack_verdana
+  :font-family= !font_stack_garamond
 
 p
   :margin-bottom 15px
+  :font-size 1.1em
+h1, h2, h3
+  :font-family= !font_stack_verdana
 
 strong
   :font-weight bold
@@ -18,20 +21,10 @@ ul
     :margin 0px 15px 0px 0px
 
 a
-  :font-family= !font_stack_verdana
   :text-decoration none
   :color= !color_nav_link
-
 a:hover
   :color= !color_nav_link_hover
-
-.current
-  :background-color= !color_awesome_blue
-  :color white
-  :font-weight bold
-  :padding 5px
-  +border-radius(10px)
-  :text-shadow 0px 1px 1px #222
 
 #main_wrapper
   +grid-container
@@ -45,6 +38,7 @@ nav
   :width 470px
   :float right
   :margin 50px 0px 10px 70px
+  :font-family= !font_stack_verdana
   >ul
     :font-size 1.1em
     >li
@@ -69,10 +63,11 @@ nav
   :margin 40px 75px 10px 0px
 
 header
-  :margin 45px auto 20px
   >h1
-    :line-height 1.2
-    :font-size 2.2em
+    :margin 45px auto 40px
+    :line-height 1
+    :font-size 1.8em
+    :font-weight bold
     :color #006c94
     :letter-spacing -0.03em
     :font-family= !font_stack_trebuchet
@@ -89,6 +84,8 @@ section
   h1
     :color= !color_nav_link
     :font-size 1.8em
+    :letter-spacing -0.03em
+    :font-weight bold
   h2
     :color= !color_nav_link
     :font-size 1.2em
@@ -145,6 +142,7 @@ table
   :background= "transparent" !url_tiss_logo "no-repeat scroll center bottom"
 
 form.decorated-fields
+  :font-family= !font_stack_verdana
   span.suffix
     :display block
     :margin-left 210px
@@ -155,10 +153,11 @@ form.decorated-fields
 
 // Home Page //
 #video_wrapper
+  :margin-top 30px
   :padding 10px
-  :background-color rgba(0, 0, 0, 0.4)
-  +border-radius(10px)
-  :border 1px solid #000
+  //:background-color rgba(0, 0, 0, 0.4)
+  //+border-radius(10px)
+  //:border 1px solid #000
   :width 50%
   :float left
   :margin-left 25px
@@ -198,4 +197,36 @@ form.decorated-fields
     h2
       :color #20d5ea
       :text-shadow 0px 1px 1px #222
+
+// Styles for the registration steps //
+ol#breadcrumbs
+  :list-style decimal inside none
+  :background-color #efefef
+  :padding 10px 20px
+  :border-bottom 2px solid silver
+  :font-size 1.6em
+  :margin-bottom 10px
+  +clearfix
+  > li
+    //+display-inline-block
+    :float left
+    :margin-left 20px
+    :margin-right 40px
+    :color #888
+    :text-shadow 1px 2px 2px #fff
+  > li.current
+    :color= !color_awesome_gray_dark
+    :background-color #dedede
+    :border 1px solid silver
+    :padding-left 10px
+    :padding-right 10px
+    :text-shadow none
+    +border-radius(10px)
+//.current
+//  :background-color= !color_awesome_blue
+//  :color white
+//  :font-weight bold
+//  :padding 5px
+//  +border-radius(10px)
+//  :text-shadow 0px 1px 1px #222
 
