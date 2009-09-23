@@ -33,6 +33,7 @@ IMAGE_FILES = Split("""
     image/background/textfield_normal.png
     image/background/textfield_readonly.png
     image/background/button_overlay.png
+    image/background/pixels.jpg
 """)
 
 CSS_FILES = Split("""

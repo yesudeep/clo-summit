@@ -1,6 +1,7 @@
 @import base.sass
 
 body
+  :background= "transparent" !url_pixel_bg "no repeat scroll -50px 50px"
   :font-size 1em
   :color #555
   :line-height 1.4
@@ -26,8 +27,12 @@ a:hover
 
 .current
   :background-color= !color_awesome_blue
-//.current:hover
-  //:background-color= !color_awesome_blue_dark
+  :color white
+  :font-weight bold
+  :padding 5px
+  +border-radius(10px)
+  :text-shadow 0px 1px 1px #222
+
 #main_wrapper
   +grid-container
   :background= "transparent" !url_nav_bg "no-repeat scroll top right"
@@ -80,9 +85,16 @@ header
 section
   :width 90%
   :margin 0px auto 20px
+  :overflow auto
   h1
     :color= !color_nav_link
     :font-size 1.8em
+  h2
+    :color= !color_nav_link
+    :font-size 1.2em
+  h3
+    :color= !color_nav_link
+    :font-size 1.1em
   ul
     li
       :margin-top 15px
@@ -99,13 +111,16 @@ aside
         :display block
         :width 180px
         :height 170px
+
+table#pricing thead th
+  :height 100px
+
 table
   :width 100%
-  //:margin 30px 0px
   :border-collapse collapse
   thead
     th
-      :height 100px
+      :font-weight bold
     #individual
       :background= "transparent" !url_individual_price "no-repeat scroll 0 0"
     #group_of_3
@@ -117,6 +132,7 @@ table
       :border-top 1px solid #aaa
       td
         :padding 10px 0px
+        //:text-align right
       .row-head
         :font-weight bold
         :font-size 1em
@@ -137,6 +153,16 @@ form.decorated-fields
     :margin-left 210px
     +transition("opacity 1s linear")
 
+// Home Page //
+#video_wrapper
+  :padding 10px
+  :background-color rgba(0, 0, 0, 0.4)
+  +border-radius(10px)
+  :border 1px solid #000
+  :width 50%
+  :float left
+  :margin-left 25px
+
 // Two column layout //
 .column-1of2
   :width 65%
@@ -154,4 +180,22 @@ form.decorated-fields
       :width 300px
     input[type="checkbox"], input[type="submit"], input[type="image"]
       :margin-left 310px
+// Register - Payment Page //
+#payment_options
+  :width 99.5%
+  :background-color #a7a7a7
+  +border-radius(10px)
+  :border 1px solid black
+  >h1
+    :padding 15px
+    :color white
+    :text-shadow 0px 1px 1px #222
+  article
+    :padding 15px
+    :color white
+    :width 45%
+    :float left
+    h2
+      :color #20d5ea
+      :text-shadow 0px 1px 1px #222
 

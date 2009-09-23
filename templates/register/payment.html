@@ -1,3 +1,57 @@
 {% extends "register/wizard.html" %}
 {% block payment_attributes %}class="current"{% endblock %}
-
+{% block wizard_step_content %}
+  <header>
+    <h1>Participant Details Confirmation.</h1>
+    <p>Please check if the participant information is correct before proceeding to making payments.</p>
+  </header>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Mobile Number</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Muthu Swami</td>
+        <td>mswami@axisbank.com</td>
+        <td>9870456523</td>
+        <td>6000</td>
+      </tr>
+      <tr>
+        <td>Tenali Raman</td>
+        <td>t.raman@akerkavener.com</td>
+        <td>562328852</td>
+        <td>6000</td>
+      </tr>
+      <tr>
+        <td>Avinash Gupta</td>
+        <td>avinashg@bpclmum.com</td>
+        <td>456221128</td>
+        <td>6000</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td class="row-head">Grand Total</td>
+        <td>18000</td>
+      </tr>
+    </tbody>
+  </table>
+  <section id="payment_options">
+    <h1>Payment Options</h1>
+    <article id="offline_payment">
+      <h2>Offline Payment</h2>
+      <p>You could send us a cheque. Please download the following PDF for the payment details and the offline registeration form.</p>
+      <a href="" class="awesome-button large warm">Download Form &raquo;</a>
+    </article>
+    <article id="online_payment">
+      <h2>Online Payment</h2>
+      <p>Make your payment using your credit card.</p>
+      <a href="" class="awesome-button large warm">Proceed to PayPal &raquo;</a>
+    </article>
+  </section>
+{% endblock %}
