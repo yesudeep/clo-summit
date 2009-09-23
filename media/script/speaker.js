@@ -4,6 +4,9 @@ jQuery(function(){
             presentation: {
               required: true,
               accept: "ppt|doc|pdf"
+            },
+            mobile_number: {
+              mobile: true
             }
         },
         messages: {
