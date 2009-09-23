@@ -13,6 +13,9 @@ DEST_DIR = '../' + env['MEDIA_DEST_DIR'] + '/'
 
 SCRIPT_FILES = Split("""
     script/lib/chickoojs/src/jquery/jquery-1.3.2.js
+    script/lib/chickoojs/src/jquery/form/jquery.form.js
+    script/lib/chickoojs/src/jquery/metadata/jquery.metadata.js
+    script/lib/chickoojs/src/jquery/validate/jquery.validate.js
 """)
 
 IMAGE_FILES = Split("""
@@ -123,6 +126,17 @@ screen_all_css_files =  Split("""
 screen_all_css_files = [SRC_DIR + f for f in screen_all_css_files]
 screen_all_css = env.Concatenate([DEST_DIR + 'css/screen-all.css'], screen_all_css_files)
 env.YuiCompressorMinify(screen_all_css)
+
+REGISTER_JS_FILES =  Split("""
+    script/lib/chickoojs/src/jquery/form/jquery.form.js
+    script/lib/chickoojs/src/jquery/metadata/jquery.metadata.js
+    script/lib/chickoojs/src/jquery/validate/jquery.validate.js
+    script/register.js
+""")
+REGISTER_JS_FILES = [SRC_DIR + f for f in REGISTER_JS_FILES]
+register_js = env.Concatenate([DEST_DIR + 'script/page/register.js'], REGISTER_JS_FILES)
+env.YuiCompressorMinify(register_js)
+env.JsminMinify(register_js)
 
 # Include licenses.
 #c3 = env.Concatenate([DEST_DIR + 'script/lib/all-min.js'], [

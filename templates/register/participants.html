@@ -1,4 +1,39 @@
-{% extends "register/register.html" %}
-{% block register_info %} {% endblock %}
-{% block scheme_id %} {% endblock %}
-{% block participant_detail_id %} id="current"{% endblock %}
+{% extends "register/wizard.html" %}
+{% block participants_attributes %}class="current"{% endblock %}
+
+{% block wizard_step_content %}
+<form id="form_register_participants" class="decorated-fields table" action="/register/participants/" method="post">
+
+  <input type="hidden" name="count" value="{{ count }}" />
+  {% for index in range(count) %}
+  <fieldset>
+    <legend>Person {{ loop.index }}</legend>
+    <label for="full_name_{{ loop.index }}">
+      <span class="prefix">full name</span>
+      <input type="text" name="full_name_{{ loop.index }}" value="" class="required" />
+      <span class="suffix"></span>
+    </label>
+
+    <label for="email_{{ loop.index }}">
+      <span class="prefix">email</span>
+      <input type="text" name="email_{{ loop.index }}" value="" class="required email" />
+      <span class="suffix"></span>
+    </label>
+
+    <label for="mobile_number_{{ loop.index }}">
+      <span class="prefix">mobile number</span>
+      <input type="text" name="mobile_number_{{ loop.index }}" value="" class="required number" />
+      <span class="suffix"></span>
+    </label>
+  </fieldset>
+  {% endfor %}
+
+  <label for="submit">
+    <span class="prefix"></span>
+    <input type="submit" name="submit" value="Complete registration &raquo;" />
+    <span class="suffix"></span>
+  </label>
+
+</form>
+{% endblock %}
+

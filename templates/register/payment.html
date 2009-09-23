@@ -1,4 +1,3 @@
-{% extends "register/register.html" %}
-{% block scheme_id %} {% endblock %}
-{% block register_info %} {% endblock %}
-{% block payment_id %} id="current" {% endblock %}
+{% extends "register/wizard.html" %}
+{% block payment_attributes %}class="current"{% endblock %}
+
