@@ -64,8 +64,6 @@ nav
   :margin 40px 75px 10px 0px
 
 header
-  //:clear both
-  //:width 90%
   :margin 45px auto 20px
   >h1
     :line-height 1.2
@@ -123,12 +121,15 @@ table
         :font-weight bold
         :font-size 1.2em
 
+// About Page //
 #leapvault
   :background= "transparent" !url_leapvault_logo "no-repeat scroll 0 bottom"
   :height 90px  
 #tiss
   :background= "transparent" !url_tiss_logo "no-repeat scroll center bottom"
   
+
+// Two column layout //
 .column-1of2
   :width 65%
   :float left
@@ -138,3 +139,11 @@ table
   :margin-left 10px
 .clearfix
   :clear both  
+// Form Override Styles //
+#nominate_speaker
+  lable
+    span.prefix
+      :width 300px
+    input[type="checkbox"], input[type="submit"], input[type="image"]
+      :margin-left 310px
+  
