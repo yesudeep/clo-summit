@@ -5,24 +5,29 @@
 import configuration as config
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
-from utils import render_template
+from utils import render_template, dec
 
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 class IndexPage(webapp.RequestHandler):
     def get(self):
+
         response = render_template('index.html')
+        logging.info(response)
         self.response.out.write(response)
 
 class ProgramPage(webapp.RequestHandler):
     def get(self):
         response = render_template('program.html')
         self.response.out.write(response)
-        
+
 class ResearchPage(webapp.RequestHandler):
     def get(self):
         response = render_template('research/research.html')
         self.response.out.write(response)
-        
+
 class SponsorsPage(webapp.RequestHandler):
     def get(self):
         response = render_template('sponsors.html')
@@ -38,23 +43,25 @@ class AboutPage(webapp.RequestHandler):
         response = render_template('about.html')
         self.response.out.write(response)
 
-class RegisterPage(webapp.RequestHandler):
+class RegisterPricingHandler(webapp.RequestHandler):
     def get(self):
-        response = render_template('register/register.html')
+        response = render_template('register/pricing.html')
         self.response.out.write(response)
 
-class SchemePage(webapp.RequestHandler):
+class RegisterPaymentHandler(webapp.RequestHandler):
     def get(self):
-        response = render_template('register/scheme.html')
+        response = render_template('register/payment.html')
         self.response.out.write(response)
-        
-class ParticipantDetailPage(webapp.RequestHandler):
+
+class RegisterParticipantsHandler(webapp.RequestHandler):
     def get(self):
-        response = render_template('register/participant_detail.html')
+        count = dec(self.request.get('count'))
+        response = render_template('register/participants.html', count=count)
+        logging.info(response)
         self.response.out.write(response)
-        
-class PaymentPage(webapp.RequestHandler):
-    def get(self):
+
+    def post(self):
+        count = dec(self.request.get('count'))
         response = render_template('register/payment.html')
         self.response.out.write(response)
 
@@ -68,6 +75,8 @@ class SpeakerPage(webapp.RequestHandler):
         response = render_template('speaker.html')
         self.response.out.write(response)
 
+
+
 urls = (
     ('/', IndexPage),
     ('/program/?', ProgramPage),
@@ -75,14 +84,12 @@ urls = (
     ('/research/participate/?', ParticipatePage),
     ('/sponsors/?', SponsorsPage),
     ('/media/?', MediaPage),
-    ('/register/?', RegisterPage),
-    ('/register/scheme/?', SchemePage),
-    ('/register/participant_detail/?', ParticipantDetailPage),
-    ('/register/payment/?', PaymentPage),
+    ('/register/pricing/?', RegisterPricingHandler),
+    ('/register/payment/?', RegisterPaymentHandler),
+    ('/register/participants/?', RegisterParticipantsHandler),
     ('/about/?', AboutPage),
     ('/speaker/?', SpeakerPage),
 )
-
 
 application = webapp.WSGIApplication(urls)
 
@@ -91,5 +98,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-
 

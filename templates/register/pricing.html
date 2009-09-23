@@ -1,0 +1,55 @@
+{% extends "register/wizard.html" %}
+{% block pricing_attributes %}class="current"{% endblock %}
+{% block wizard_step_content %}
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th id="individual"></th>
+        <th id="group_of_3"></th>
+        <th id="group_of_6"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="row-head">Number of Participants</td>
+        <td>1</td>
+        <td>3-5</td>
+        <td>6-8</td>
+      </tr>
+      <tr>
+        <td class="row-head">Fees Per Participant</td>
+        <td>7,500 INR</td>
+        <td>6,000 INR</td>
+        <td>5,500 INR</td>
+      </tr>
+      <tr>
+        <td class="row-head">Savings Per Participant</td>
+        <td>Nil</td>
+        <td>1,500 INR</td>
+        <td>2,000 INR</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="/register/participants?count=1" class="awesome-button large ice-cool">Register person &raquo;</a></td>
+        <td><a href="/register/participants?count=5" class="awesome-button large ice-cool">Register 3-5 people &raquo;</a></td>
+        <td><a href="/register/participants?count=8" class="awesome-button large ice-cool">Register 6-8 people &raquo;</a></td>
+      </tr>
+    </tbody>
+  </table>
+{% endblock %}
+
+{% block wizard_additional_content %}
+<header>
+  <h1>Sample Heading</h1>
+</header>
+<article>
+  <div class="column-1of2">
+    <p>A never before opportunity to meet and network with CEOs, CLOs and other thought leaders in the fields of learning, training, coaching, organisation development, and assessments  who have and will continue to shape the learning dna of organizations.</p>
+  </div>
+  <aside class="column-2of2">
+    <img src="{{ MEDIA_URL }}image/background/register.png" width="300px" height= "300px"/>
+  </aside>
+</article>
+{% endblock %}
+

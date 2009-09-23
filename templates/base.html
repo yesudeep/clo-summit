@@ -5,25 +5,25 @@
 	    <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/screen-all{{ MINIFIED }}.css" media="screen, projection" charset="utf-8" />
 	{% endblock %}
 
-{% block tag_additional_stylesheets %}{% endblock %}
+  {% block tag_additional_stylesheets %}{% endblock %}
 
-    {% block ie_head_includes %}
-    <!--[if IE 7]>
-	    <link rel="stylesheet" href="{{ MEDIA_URL }}css/ie7.css" type="text/css" media="screen" charset="utf-8" />
-    <![endif]-->
-	  <!--[if IE 8]>
-	    <link rel="stylesheet" href="{{ MEDIA_URL }}css/ie8.css" type="text/css" media="screen" charset="utf-8" />
-    <![endif]-->
-    <!--[if lt IE 7]>
-        <script src="http://ie7-js.googlecode.com/svn/version/2.0(beta3)/IE7.js" type="text/javascript"></script>
-    <![endif]-->
-    {% endblock %}
+  {% block ie_head_includes %}
+  <!--[if IE 7]>
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/ie7.css" type="text/css" media="screen" charset="utf-8" />
+  <![endif]-->
+  <!--[if IE 8]>
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/ie8.css" type="text/css" media="screen" charset="utf-8" />
+  <![endif]-->
+  <!--[if lt IE 7]>
+      <script src="http://ie7-js.googlecode.com/svn/version/2.0(beta3)/IE7.js" type="text/javascript"></script>
+  <![endif]-->
+  {% endblock %}
 {% endblock %}
 
 {% block tag_body %}
-    <div id="main_wrapper" {% block logo_class %}{% endblock %}>
+    <div id="main_wrapper" class="{% block wrapper_class %}logo{% endblock %}">
       {% block tag_header %}
-        <nav {% block nav_id %}{% endblock %}>
+        <nav {% block nav_attributes %}{% endblock %}>
           <ul>
             {% block tag_link_home %}<li><a href="/">Home</a></li>{% endblock %}
             <li><a href="/program">Program</a></li>
@@ -31,10 +31,10 @@
             <li><a href="/sponsors">Sponsors</a></li>
             <li><a href="/media">Media</a></li>
             <li><a href="/about">About</a></li>
-            <li><a href="/register" id="register" class="tag"></a></li>
+            <li><a href="/register/pricing/" id="register" class="tag"></a></li>
             <li><a href="/speaker" id="nominate_speaker" class="tag"></a></li>
           </ul>
-        </nav>    
+        </nav>
         <header>
           <h1>
           Organisational Learning.
@@ -47,3 +47,4 @@
       {% block tag_footer %}{% endblock %}
     </div>
 {% endblock %}
+

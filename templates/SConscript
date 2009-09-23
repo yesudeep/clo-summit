@@ -23,15 +23,15 @@ HTML_FILES = Split("""
   program.html
   sponsors.html
   media.html
-  register/register.html
-  register/scheme.html
-  register/participant_detail.html
+  register/wizard.html
+  register/pricing.html
+  register/participants.html
   register/payment.html
   speaker.html
 """)
 
 TEMPLATE_FILES = HTML_FILES + Split("""
-  
+
 """)
 
 PLAIN_COPIES = Split("""

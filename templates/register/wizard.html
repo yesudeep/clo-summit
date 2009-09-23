@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block tag_trunk %}
+  <section>
+    <article class="clearfix">
+      <h1>Register now.  It's as easy as 1, 2, 3!</h1>
+      <ul id="breadcrumbs">
+        <li {% block pricing_attributes %}{% endblock %}>Pricing</li>
+        <li {% block participants_attributes %}{% endblock %}>Participant Details</li>
+        <li {% block payment_attributes %}{% endblock %}>Make your Payment</li>
+      </ul>
+      {% block wizard_step_content %}{% endblock %}
+    </article>
+    {% block wizard_additional_content %}{% endblock %}
+  </section>
+{% endblock %}
+
+{% block tag_scripts %}
+<script type="text/javascript">
+  window.scripts.push("{{ MEDIA_URL }}script/page/register{{ MINIFIED }}.js");
+</script>
+{% endblock %}
+
