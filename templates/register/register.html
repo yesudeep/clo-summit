@@ -24,9 +24,9 @@
       <tbody>
         <tr>
           <td class="row-head">Number of Participants</td>
-          <td>1</td>
-          <td>3-5</td>
-          <td>6-8</td>
+          <td>1 person</td>
+          <td>3-5 people</td>
+          <td>6-8 people</td>
         </tr>
         <tr>
           <td class="row-head">Fees Per Participant</td>
@@ -42,16 +42,16 @@
         </tr>
         <tr>
           <td></td>
-          <td><a href="" class="awesome-button large ice-cool">Register</a></td>
-          <td><a href="" class="awesome-button large ice-cool">Register</a></td>
-          <td><a href="" class="awesome-button large ice-cool">Register</a></td>
+          <td><a href="/register/participant?count=1" class="awesome-button large ice-cool">Register person &raquo;</a></td>
+          <td><a href="/register/participant?count=5" class="awesome-button large ice-cool">Register 5 people &raquo;</a></td>
+          <td><a href="/register/participant?count=8" class="awesome-button large ice-cool">Register 8 people &raquo;</a></td>
         </tr>
       </tbody>
     </table>
 {% endblock %}
         {% block participant_detail %} {% endblock %}
         {% block payment %} {% endblock %}
-        
+
       </article>
       {% block register_info %}
       <header>
@@ -68,3 +68,4 @@
       {% endblock %}
     </section>
   {% endblock %}
+
