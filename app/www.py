@@ -59,8 +59,9 @@ class RegisterParticipantsHandler(webapp.RequestHandler):
 
     def post(self):
         count = dec(self.request.get('count'))
-        response = render_template('register/payment.html')
-        self.response.out.write(response)
+        #response = render_template('register/payment.html')
+        #self.response.out.write(response)
+        self.redirect('/register/payment/')
 
 class ParticipatePage(webapp.RequestHandler):
     def get(self):
