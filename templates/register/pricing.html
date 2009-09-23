@@ -1,7 +1,7 @@
 {% extends "register/wizard.html" %}
 {% block pricing_attributes %}class="current"{% endblock %}
 {% block wizard_step_content %}
-  <table>
+  <table id="pricing">
     <thead>
       <tr>
         <th></th>
@@ -31,9 +31,9 @@
       </tr>
       <tr>
         <td></td>
-        <td><a href="/register/participants?count=1" class="awesome-button large ice-cool">Register person &raquo;</a></td>
-        <td><a href="/register/participants?count=5" class="awesome-button large ice-cool">Register 3-5 people &raquo;</a></td>
-        <td><a href="/register/participants?count=8" class="awesome-button large ice-cool">Register 6-8 people &raquo;</a></td>
+        <td><a href="/register/participants?count=1" class="awesome-button ice-cool">Register person &raquo;</a></td>
+        <td><a href="/register/participants?count=5" class="awesome-button ice-cool">Register 3-5 people &raquo;</a></td>
+        <td><a href="/register/participants?count=8" class="awesome-button ice-cool">Register 6-8 people &raquo;</a></td>
       </tr>
     </tbody>
   </table>
@@ -48,7 +48,7 @@
     <p>A never before opportunity to meet and network with CEOs, CLOs and other thought leaders in the fields of learning, training, coaching, organisation development, and assessments  who have and will continue to shape the learning dna of organizations.</p>
   </div>
   <aside class="column-2of2">
-    <img src="{{ MEDIA_URL }}image/background/register.png" width="300px" height= "300px"/>
+    <img src="{{ MEDIA_URL }}image/background/register.png" width="280px" height= "280px"/>
   </aside>
 </article>
 {% endblock %}

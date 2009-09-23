@@ -27,8 +27,12 @@ a:hover
 
 .current
   :background-color= !color_awesome_blue
-//.current:hover
-  //:background-color= !color_awesome_blue_dark
+  :color white
+  :font-weight bold
+  :padding 5px
+  +border-radius(10px)
+  :text-shadow 0px 1px 1px #222
+
 #main_wrapper
   +grid-container
   :background= "transparent" !url_nav_bg "no-repeat scroll top right"
@@ -85,6 +89,12 @@ section
   h1
     :color= !color_nav_link
     :font-size 1.8em
+  h2
+    :color= !color_nav_link
+    :font-size 1.2em
+  h3
+    :color= !color_nav_link
+    :font-size 1.1em
   ul
     li
       :margin-top 15px
@@ -101,24 +111,28 @@ aside
         :display block
         :width 180px
         :height 170px
+        
+table#pricing thead th
+  :height 100px
+  
 table
   :width 100%
-  //:margin 30px 0px
   :border-collapse collapse
   thead
     th
-      :height 100px
+      :font-weight bold
     #individual
-      :background= "transparent" !url_individual_price "no-repeat scroll 0 0"
+      :background= "transparent" !url_individual_price "no-repeat scroll right 0"
     #group_of_3
-      :background= "transparent" !url_group_of_3_price "no-repeat scroll 0 0"
+      :background= "transparent" !url_group_of_3_price "no-repeat scroll right 0"
     #group_of_6
-      :background= "transparent" !url_group_of_6_price "no-repeat scroll 0 0"
+      :background= "transparent" !url_group_of_6_price "no-repeat scroll right 0"
   tbody
     tr
       :border-top 1px solid #aaa
       td
         :padding 10px 0px
+        //:text-align right
       .row-head
         :font-weight bold
         :font-size 1em
@@ -157,4 +171,22 @@ table
       :width 300px
     input[type="checkbox"], input[type="submit"], input[type="image"]
       :margin-left 310px
-
+// Register - Payment Page //
+#payment_options
+  :width 99.5%
+  :background-color #a7a7a7
+  +border-radius(10px)
+  :border 1px solid black
+  >h1
+    :padding 15px
+    :color white
+    :text-shadow 0px 1px 1px #222
+  article
+    :padding 15px
+    :color white
+    :width 45%
+    :float left
+    h2
+      :color #20d5ea
+      :text-shadow 0px 1px 1px #222
+  
