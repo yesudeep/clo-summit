@@ -28,6 +28,7 @@ IMAGE_FILES = Split("""
     image/background/survey.png
     image/background/textfield_normal.png
     image/background/textfield_readonly.png
+    image/background/button_overlay.png
 """)
 
 CSS_FILES = Split("""
