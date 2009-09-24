@@ -10,6 +10,7 @@ body
 p
   :margin-bottom 15px
   :font-size 1.1em
+  
 h1, h2, h3
   :font-family= !font_stack_verdana
 
@@ -19,7 +20,15 @@ ul
   li
     +display-inline-block
     :margin 0px 15px 0px 0px
-
+    
+ol
+  :list-style decimal inside none
+  li
+    :margin-top 5px
+    :padding 10px
+  li:hover
+    :background-color #cff5ff
+    +border-radius(10px)
 a
   :text-decoration none
   :color= !color_nav_link
@@ -46,18 +55,18 @@ nav
       :margin-right 15px
       .tag
         :background= "transparent" !url_nav_button "no-repeat scroll 0 0"
-        :width 63px
+        :height 60px
       #register
-        :top 210px
+        :top -5px
         :position fixed
-        :left -5px
-        :height 145px
+        :left 35px
+        :width 145px
       #nominate_speaker
-        :height 255px
+        :width 255px
         :position fixed
-        :top 350px
-        :left -1px
-        :background-position 0px -150px
+        :top -10px
+        :left 190px
+        :background-position -150px 0px
 
 #home
   :margin 40px 75px 10px 0px
@@ -78,7 +87,7 @@ header
       :color #00bae8
 
 section
-  :width 90%
+  //:width 90%
   :margin 0px auto 20px
   :overflow auto
   h1

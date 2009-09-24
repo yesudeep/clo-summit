@@ -82,7 +82,7 @@ stitched_images = [
                 image/button/register.png
                 image/button/nominate_speaker.png
             """),
-            orientation='vertical'  # or "vertical"
+            orientation='horizontal'  # or "vertical"
             ),
 ]
 for stitch in stitched_images:
