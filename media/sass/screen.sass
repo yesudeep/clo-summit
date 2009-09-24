@@ -26,9 +26,9 @@ ol
   li
     :margin-top 5px
     :padding 10px
-  li:hover
-    :background-color #cff5ff
-    +border-radius(10px)
+  //li:hover
+    //:background-color #cff5ff
+    //+border-radius(10px)
 a
   :text-decoration none
   :color= !color_nav_link
@@ -162,14 +162,19 @@ form.decorated-fields
 
 // Home Page //
 #video_wrapper
-  :margin-top 30px
+  :margin-top 20px
   :padding 10px
   //:background-color rgba(0, 0, 0, 0.4)
   //+border-radius(10px)
   //:border 1px solid #000
-  :width 50%
+  :width 45%
   :float left
-  :margin-left 25px
+  :margin-left 55px
+
+.social_network
+  :position absolute
+  :top 600px
+  //:right 795px
 
 // Two column layout //
 .column-1of2
@@ -179,8 +184,10 @@ form.decorated-fields
   :width 30%
   :float left
   :margin-left 10px
+  +clearfix  
 .clearfix
   :clear both
+  
 // Form Override Styles //
 #nominate_speaker
   lable

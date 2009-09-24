@@ -30,10 +30,14 @@ IMAGE_FILES = Split("""
     image/icon/favicon.png
     image/background/register.png
     image/background/survey.png
+    image/background/partners.png
     image/background/textfield_normal.png
     image/background/textfield_readonly.png
     image/background/button_overlay.png
     image/background/pixels.jpg
+    image/logo/facebook.png
+    image/logo/twitter.png
+    image/logo/linkedin.png
 """)
 
 CSS_FILES = Split("""
@@ -152,6 +156,8 @@ SPEAKER_JS_FILES = [SRC_DIR + f for f in SPEAKER_JS_FILES]
 speaker_js = env.Concatenate([DEST_DIR + 'script/page/speaker.js'], SPEAKER_JS_FILES)
 env.YuiCompressorMinify(speaker_js)
 env.JsminMinify(speaker_js)
+
+
 
 # Include licenses.
 #c3 = env.Concatenate([DEST_DIR + 'script/lib/all-min.js'], [
