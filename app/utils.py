@@ -25,6 +25,42 @@ jinja_env.filters['urlencode'] = urllib.urlencode
 
 dec = partial(int, base=10)
 
+def birthdate_to_tuple(birthdate):
+    birthdate_year, birthdate_month, birthdate_day = birthdate.split('-')
+    if birthdate_year == '0000':
+         birthdate_year = str(models.DEFAULT_BIRTHDATE[0])
+    return (dec(birthdate_year), dec(birthdate_month), dec(birthdate_day))
+
+def birthdate_to_string(*birthdate_items):
+    return '%d-%d-%d' % birthdate_items
+
+def parse_iso_datetime_string(datetime_string):
+    if 'T' in datetime_string:
+        date_string, time_string = datetime_string.split('T')
+    else:
+        date_string = datetime_string
+        time_string = '00:00:00'
+    year, month, day = date_string.split('-')
+    hours, minutes, seconds = time_string.split(':')
+    year = dec(year)
+    month = dec(month)
+    day = dec(day)
+    hours = dec(hours)
+    minutes = dec(minutes)
+    seconds = dec(seconds)
+    return datetime(year, month, day, hours, minutes, seconds)
+
+
+
+def queue_task(queue_name='default', *args, **kwargs):
+    #taskqueue.Task(*args, **kwargs).add(queue_name=queue_name)
+    taskqueue.Task(*args, **kwargs).add(queue_name)
+    info = ' %(url)s %(method)s' % kwargs
+    logging.info('[%s]' % (queue_name,) + info)
+
+def queue_mail_task(*args, **kwargs):
+    queue_task(queue_name='mail-queue', *args, **kwargs)
+
 def render_template(template_name, **context):
 	template = jinja_env.get_template(template_name)
 	new_context = {}
