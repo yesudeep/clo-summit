@@ -14,7 +14,6 @@
         </p>
       </div>
       <div id="video_wrapper">
-        <object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/Xf8VePS4X9I&hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/Xf8VePS4X9I&hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object>
       </div>
       <ul class="social_network">
         <li><a class="a2a_dd" href="http://www.addtoany.com/share_save"><img src="http://static.addtoany.com/buttons/share_save_120_16.gif" width="120" height="16" border="0" alt="Share/Bookmark"/></a><script type="text/javascript">a2a_linkname=document.title;a2a_linkurl=location.href;a2a_onclick=1;a2a_hide_embeds=0;a2a_num_services=6;</script><script type="text/javascript" src="http://static.addtoany.com/menu/page.js"></script></li>
@@ -25,5 +24,11 @@
     </article>
   </section>
 
+{% endblock %}
+
+{% block tag_scripts %}
+<script type="text/javascript">
+window.scripts.push("{{ MEDIA_URL }}script/page/index{{ MINIFIED }}.js");
+</script>
 {% endblock %}
 

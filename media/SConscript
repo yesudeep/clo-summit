@@ -118,10 +118,11 @@ for f in minifiables(MINIFIABLE_FILES, NON_MINIFIABLE_FILES):
 # Warning:  THE ORDER MATTERS.
 #
 LIB_INDEX_JS_FILES =  Split("""
-
+    script/lib/chickoojs/src/jquery/tools/1.1.1/tools.flashembed-1.0.4.js
+    script/index.js
 """)
 LIB_INDEX_JS_FILES = [SRC_DIR + f for f in LIB_INDEX_JS_FILES]
-lib_index_js = env.Concatenate([DEST_DIR + 'script/lib/page/index.js'], LIB_INDEX_JS_FILES)
+lib_index_js = env.Concatenate([DEST_DIR + 'script/page/index.js'], LIB_INDEX_JS_FILES)
 env.YuiCompressorMinify(lib_index_js)
 env.JsminMinify(lib_index_js)
 
