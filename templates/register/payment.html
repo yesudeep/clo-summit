@@ -13,24 +13,14 @@
       </tr>
     </thead>
     <tbody>
+      {% for participant in participants %}
       <tr>
-        <td>Muthu Swami</td>
-        <td>mswami@axisbank.com</td>
-        <td>9870456523</td>
+        <td>{{ participant.full_name }}</td>
+        <td>{{ participant.email }}</td>
+        <td>{{ participant.mobile_number }}</td>
         <td>6000</td>
       </tr>
-      <tr>
-        <td>Tenali Raman</td>
-        <td>t.raman@akerkavener.com</td>
-        <td>562328852</td>
-        <td>6000</td>
-      </tr>
-      <tr>
-        <td>Avinash Gupta</td>
-        <td>avinashg@bpclmum.com</td>
-        <td>456221128</td>
-        <td>6000</td>
-      </tr>
+      {% endfor %}
       <tr>
         <td></td>
         <td></td>

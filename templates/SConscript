@@ -20,6 +20,7 @@ HTML_FILES = Split("""
   about.html
   research/research.html
   research/participate.html
+  research/thank_you.html
   program.html
   sponsors.html
   media.html

@@ -1,11 +1,9 @@
 {% extends "base.html" %}
 {% block tag_trunk %}
   <section>
-    <header>
-      <h1>CLO Survey Participation Form.</h1>
-    </header>
+    <h1>CLO Survey Participation Form.</h1>
     <article>
-      <form id="participate_survey" class="decorated-fields table column-1of2" action="/research/participate" method="post">
+      <form id="form_participate_survey" class="decorated-fields table column-1of2" action="/research/participate" method="post">
         <label for="full_name">
           <span class="prefix">full name</span>
           <input type="text" name="full_name" value="" class="required" />
@@ -24,14 +22,12 @@
           <span class="suffix"></span>
         </label>
 
-        <label for="person_responsible">
+        <label for="job_type">
           <span class="prefix">person responsible</span>
           <select name="job_type">
-              <option value="clo">Chief Learning Officer</option>
-              <option value="head_of_learning_development">Head Of Learning &amp; Development</option>
-              <option value="talent_management">Talent Management</option>
-              <option value="employee_development">Employee Development</option>
-              <option value="head_of_human_resources">Head Of Human Resources</option>
+              {% for job_type in job_types %}
+                <option value="{{ job_type.0 }}">{{ job_type.1 }}</option>
+              {% endfor %}
           </select>
           <span class="suffix"></span>
         </label>
@@ -73,8 +69,8 @@
         </label>
       </form>
 
-      <aside class= "column-2of2">
-          <img src= "{{ MEDIA_URL }}image/background/survey.png" width="280px" height="280px"/>
+      <aside class="column-2of2">
+          <img src="{{ MEDIA_URL }}image/background/survey.png" width="280px" height="280px"/>
       </aside>
     </article>
   </section>

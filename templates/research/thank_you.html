@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block tag_trunk %}
+  <section>
+    <h1>Thank you for participating in the survey.</h1>
+    <article>
+      <p>We appreciate you taking the time to participate in the survey.  We shall contact you within 48 hours.</p>
+    </article>
+  </section>
+{% endblock %}
+
+{% block tag_scripts %}
+<script type="text/javascript">
+window.setTimeout(function(){
+  window.top.location='/';
+}, 3000);
+</script>
+{% endblock %}
+
