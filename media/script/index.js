@@ -5,6 +5,6 @@ jQuery(function(){
       loop: 'false',
       allowFullScreen: 'true',
       allowscriptaccess: 'always',
-      height: '344px'
+      height: '280px'
   });
 });
