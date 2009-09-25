@@ -3,64 +3,69 @@
   <section>
     <h1>CLO Survey Participation Form.</h1>
     <article>
-      <form id="form_participate_survey" class="decorated-fields table column-1of2" action="/research/participate" method="post">
-        <label for="full_name">
-          <span class="prefix">full name</span>
-          <input type="text" name="full_name" value="" class="required" />
-          <span class="suffix"></span>
-        </label>
+      <form id="form_participate_survey" class="decorated-fields vertical column-1of2" action="/research/participate" method="post">
+        <div class="column">
+          <label for="full_name">
+            <span class="prefix">full name</span>
+            <input type="text" name="full_name" value="" class="required" />
+            <span class="suffix"></span>
+          </label>
 
-        <label for="designation">
-          <span class="prefix">designation</span>
-          <input type="text" name="designation" value="" class="required" />
-          <span class="suffix"></span>
-        </label>
+          <label for="designation">
+            <span class="prefix">designation</span>
+            <input type="text" name="designation" value="" class="required" />
+            <span class="suffix"></span>
+          </label>
 
-        <label for="department">
-          <span class="prefix">department</span>
-          <input type="text" name="department" value="" class="required" />
-          <span class="suffix"></span>
-        </label>
+          <label for="department">
+            <span class="prefix">department</span>
+            <input type="text" name="department" value="" class="required" />
+            <span class="suffix"></span>
+          </label>
 
-        <label for="job_type">
-          <span class="prefix">person responsible</span>
-          <select name="job_type">
-              {% for job_type in job_types %}
-                <option value="{{ job_type.0 }}">{{ job_type.1 }}</option>
-              {% endfor %}
-          </select>
-          <span class="suffix"></span>
-        </label>
+          <label for="job_type">
+            <span class="prefix">person responsible</span>
+            <select name="job_type">
+                {% for job_type in job_types %}
+                  <option value="{{ job_type.0 }}">{{ job_type.1 }}</option>
+                {% endfor %}
+            </select>
+            <span class="suffix"></span>
+          </label>
+          
+          <label for="organization">
+            <span class="prefix">organization</span>
+            <input type="text" name="organization" value="" class="required" />
+            <span class="suffix"></span>
+          </label>
+        </div>
 
-        <label for="organization">
-          <span class="prefix">organization</span>
-          <input type="text" name="organization" value="" class="required" />
-          <span class="suffix"></span>
-        </label>
+        <div class="column">
 
-        <label for="organization_website">
-          <span class="prefix">organization website</span>
-          <input type="text" name="organization_website" value="" class="required url" />
-          <span class="suffix">(eg. http://www.google.com)</span>
-        </label>
+          <label for="organization_website">
+            <span class="prefix">organization website</span>
+            <input type="text" name="organization_website" value="" class="required url" />
+            <span class="suffix">(eg. http://www.google.com)</span>
+          </label>
 
-        <label for="city">
-          <span class="prefix">city</span>
-          <input type="text" name="city" value="" class="required" />
-          <span class="suffix"></span>
-        </label>
+          <label for="city">
+            <span class="prefix">city</span>
+            <input type="text" name="city" value="" class="required" />
+            <span class="suffix"></span>
+          </label>
 
-        <label for="email">
-          <span class="prefix">email</span>
-          <input type="text" name="email" value="" class="required email" />
-          <span class="suffix">(eg. john@doe.com)</span>
-        </label>
+          <label for="email">
+            <span class="prefix">email</span>
+            <input type="text" name="email" value="" class="required email" />
+            <span class="suffix">(eg. john@doe.com)</span>
+          </label>
 
-        <label for="mobile_number">
-          <span class="prefix">mobile number</span>
-          <input type="text" name="mobile_number" value="" class="required mobile" />
-          <span class="suffix">Include your <a href="http://en.wikipedia.org/wiki/List_of_country_calling_codes" target="_blank"> country code</a> and full mobile number. eg. +1 650 555 1212</span>
-        </label>
+          <label for="mobile_number">
+            <span class="prefix">mobile number</span>
+            <input type="text" name="mobile_number" value="" class="required mobile" />
+            <span class="suffix">Include your <a href="http://en.wikipedia.org/wiki/List_of_country_calling_codes" target="_blank"> country code</a> and full mobile number. eg. +1 650 555 1212</span>
+          </label>
+        </div>
 
         <label for="submit">
           <span class="prefix"></span>
