@@ -134,6 +134,19 @@ screen_all_css_files = [SRC_DIR + f for f in screen_all_css_files]
 screen_all_css = env.Concatenate([DEST_DIR + 'css/screen-all.css'], screen_all_css_files)
 env.YuiCompressorMinify(screen_all_css)
 
+SURVEY_PARTICIPATE_JS_FILES =  Split("""
+    script/lib/chickoojs/src/jquery/form/jquery.form.js
+    script/lib/chickoojs/src/jquery/metadata/jquery.metadata.js
+    script/lib/chickoojs/src/jquery/validate/jquery.validate.js
+    script/lib/chickoojs/src/jquery/validate/jquery.validate.extra.js
+    script/survey_participate.js
+""")
+SURVEY_PARTICIPATE_JS_FILES = [SRC_DIR + f for f in SURVEY_PARTICIPATE_JS_FILES]
+survey_participate_js = env.Concatenate([DEST_DIR + 'script/page/survey_participate.js'], SURVEY_PARTICIPATE_JS_FILES)
+env.YuiCompressorMinify(survey_participate_js)
+env.JsminMinify(survey_participate_js)
+
+
 REGISTER_JS_FILES =  Split("""
     script/lib/chickoojs/src/jquery/form/jquery.form.js
     script/lib/chickoojs/src/jquery/metadata/jquery.metadata.js
