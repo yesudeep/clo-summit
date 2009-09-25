@@ -76,3 +76,9 @@
   </section>
 {% endblock %}
 
+{% block tag_scripts %}
+<script type="text/javascript">
+window.scripts.push("{{ MEDIA_URL }}script/page/survey_participate{{ MINIFIED }}.js");
+</script>
+{% endblock %}
+
