@@ -32,7 +32,7 @@ class Participant(RegularModel):
     full_name = db.StringProperty()
     email = db.EmailProperty()
     mobile_number = db.StringProperty()
-    pricing = db.
+    pricing = db.StringProperty()
 
 class Speaker(RegularModel):
     full_name = db.StringProperty()

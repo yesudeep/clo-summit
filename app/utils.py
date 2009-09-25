@@ -6,6 +6,7 @@ from functools import partial
 from google.appengine.ext import webapp
 from google.appengine.api import users
 from google.appengine.api.labs import taskqueue
+from appengine_utilities.sessions import Session
 import urllib
 
 jinja_env = Environment(loader=FileSystemLoader(['templates']))
