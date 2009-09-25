@@ -29,6 +29,7 @@ HTML_FILES = Split("""
   register/participants.html
   register/payment.html
   speaker.html
+  thank_you.html
 """)
 
 TEMPLATE_FILES = HTML_FILES + Split("""

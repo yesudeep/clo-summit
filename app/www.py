@@ -96,12 +96,30 @@ class ParticipatePage(webapp.RequestHandler):
         survey_participant.mobile_number = self.request.get('mobile_number')
         survey_participant.put()
 
-        response = render_template('research/thank_you.html')
+        response = render_template('thank_you.html', message_title="Thank you for participating in the survey.", message_body="We appreciate you taking the time to participate in the survey.  We shall contact you within 48 hours.")
         self.response.out.write(response)
 
-class SpeakerPage(webapp.RequestHandler):
+class SpeakerNominationHandler(webapp.RequestHandler):
     def get(self):
         response = render_template('speaker.html')
+        self.response.out.write(response)
+
+    def post(self):
+        speaker = Speaker()
+        speaker.full_name = self.request.get('full_name')
+        speaker.designation = self.request.get('designation')
+        speaker.organization = self.request.get('organization')
+        speaker.department = self.request.get('department')
+        speaker.organization_website = self.request.get('organization_website')
+        speaker.city = self.request.get('city')
+        speaker.email = self.request.get('email')
+        speaker.mobile_number = self.request.get('mobile_number')
+        speaker.research_topic = self.request.get('research_topic')
+        speaker.bio_sketch = self.request.get('bio_sketch')
+        speaker.presentation = db.Blob(self.request.get('presentation'))
+        speaker.put()
+
+        response = render_template('thank_you.html', message_title='Thank you for nominating a speaker.', message_body='We appreciate your taking the time to nominating a speaker.  We will get in touch with you soon')
         self.response.out.write(response)
 
 urls = (
@@ -115,7 +133,7 @@ urls = (
     ('/register/payment/?', RegisterPaymentHandler),
     ('/register/participants/?', RegisterParticipantsHandler),
     ('/about/?', AboutPage),
-    ('/speaker/?', SpeakerPage),
+    ('/speaker/nominate/?', SpeakerNominationHandler),
 )
 
 application = webapp.WSGIApplication(urls, debug=config.DEBUG)
