@@ -8,6 +8,8 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 from utils import render_template, dec
 #from appengine_utilities import Session
 import logging
+from models import Participant, SurveyParticipant, Speaker, JOB_TYPE_TUPLE_MAP
+from util.sessions import SessionRequestHandler
 
 logging.basicConfig(level=logging.INFO)
 
@@ -48,10 +50,11 @@ class RegisterPricingHandler(webapp.RequestHandler):
 
 class RegisterPaymentHandler(webapp.RequestHandler):
     def get(self):
-        response = render_template('register/payment.html')
+        participants = self.session['participants']
+        response = render_template('register/payment.html', participants=participants)
         self.response.out.write(response)
 
-class RegisterParticipantsHandler(webapp.RequestHandler):
+class RegisterParticipantsHandler(SessionRequestHandler):
     def get(self):
         count = dec(self.request.get('count'))
         response = render_template('register/participants.html', count=count)
@@ -59,21 +62,47 @@ class RegisterParticipantsHandler(webapp.RequestHandler):
 
     def post(self):
         count = dec(self.request.get('count'))
-        #response = render_template('register/payment.html')
-        #self.response.out.write(response)
+
+        participants = []
+        for x in range(count):
+            i = str(x + 1)
+            participant = Participant()
+            participant.full_name = self.request.get('full_name_' + i)
+            participant.email = self.request.get('email_' + i)
+            participant.mobile_number = self.request.get('mobile_number_' + i)
+
+            participants.append(participant)
+
+        self.session['participant_count'] = count
+        self.session['participants'] = participants
+
         self.redirect('/register/payment/')
 
 class ParticipatePage(webapp.RequestHandler):
     def get(self):
-        response = render_template('research/participate.html')
+        response = render_template('research/participate.html', job_types=JOB_TYPE_TUPLE_MAP)
+        self.response.out.write(response)
+
+    def post(self):
+        survey_participant = SurveyParticipant()
+        survey_participant.full_name = self.request.get('full_name')
+        survey_participant.designation = self.request.get('designation')
+        survey_participant.department = self.request.get('department')
+        survey_participant.job_type = self.request.get('job_type')
+        survey_participant.organization = self.request.get('organization')
+        survey_participant.organization_website = self.request.get('organization_website')
+        survey_participant.city = self.request.get('city')
+        survey_participant.email = self.request.get('email')
+        survey_participant.mobile_number = self.request.get('mobile_number')
+        survey_participant.put()
+
+        response = render_template('research/thank_you.html')
         self.response.out.write(response)
 
 class SpeakerPage(webapp.RequestHandler):
     def get(self):
         response = render_template('speaker.html')
         self.response.out.write(response)
-
-
 
 urls = (
     ('/', IndexPage),
@@ -89,7 +118,7 @@ urls = (
     ('/speaker/?', SpeakerPage),
 )
 
-application = webapp.WSGIApplication(urls)
+application = webapp.WSGIApplication(urls, debug=config.DEBUG)
 
 def main():
   run_wsgi_app(application)
