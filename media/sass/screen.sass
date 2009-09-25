@@ -173,10 +173,22 @@ form.decorated-fields
 
 .social_network
   :position absolute
-  :top 600px
+  :top 550px
 
 #qoutes
   :font-style italic
+  :font-size 1.2em
+  :float right
+  :margin 22px
+  :width 60%
+  //:height 100px
+  //:overflow hidden
+  span
+    :display block
+    :color= !color_nav_link
+    :font-size 0.8em
+    //:margin-left 30px  
+  
 // Two column layout //
 .column-1of2
   :width 65%
@@ -185,8 +197,8 @@ form.decorated-fields
   :width 30%
   :float left
   :margin-left 10px
-  +pie-clearfix
-
+.clearboth
+  :clear both
 // Form Override Styles //
 #nominate_speaker
   lable
