@@ -1,7 +1,11 @@
 @import base.sass
 
 body
-  :background= "transparent" !url_pixel_bg "no repeat scroll -50px 50px"
+  :background-color transparent 
+  :background-image= !url_pixel_bg 
+  :background-repeat no-repeat 
+  :background-attachment fixed 
+  :background-position -100px -50px
   :font-size 1em
   :color #555
   :line-height 1.4
@@ -181,8 +185,9 @@ form.decorated-fields
   :float right
   :margin 22px
   :width 60%
-  //:height 100px
-  //:overflow hidden
+  :height 80px
+  :overflow hidden
+  :background-color white
   span
     :display block
     :color= !color_nav_link

@@ -17,6 +17,7 @@ SCRIPT_FILES = Split("""
     script/lib/chickoojs/src/jquery/metadata/jquery.metadata.js
     script/lib/chickoojs/src/jquery/validate/jquery.validate.js
     script/lib/chickoojs/src/jquery/validate/jquery.validate.extra.js
+    
 """)
 
 IMAGE_FILES = Split("""
@@ -118,6 +119,8 @@ for f in minifiables(MINIFIABLE_FILES, NON_MINIFIABLE_FILES):
 # Warning:  THE ORDER MATTERS.
 #
 LIB_INDEX_JS_FILES =  Split("""
+    script/jquery.innerfade.js
+    script/qoutes.js
     script/lib/chickoojs/src/jquery/tools/1.1.1/tools.flashembed-1.0.4.js
     script/index.js
 """)
