@@ -29,7 +29,7 @@
           speed: 'slow',
           timeout: 2000,
           type: 'sequence',
-          containerheight: '77px'
+          containerheight: '88px'
       });
       jQuery('.toggle_view a[href="advisory_board"]').toggle(function(){
             jQuery('#advisory_board').css('display', 'none');
