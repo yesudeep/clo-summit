@@ -15,8 +15,8 @@
       </div>
       <div id="video_wrapper">
       </div>
-      <div id="qoutes" class="clearboth">
-        <ul>
+      <div class="clearboth">
+        <ul id="qoutes">
           <li>Learning is not compulsory but neither is survival. <span>-W. Edwards Deming</span></li>
           <li>The ability to learn faster than your competitors may be the only sustainable competitive advantage. <span>-Arie de Geus</span></li>
           <li>Learning is what most adults will do for a living in the 21st century. <span>-Sydney Joseph Perelman</span></li>
@@ -26,10 +26,12 @@
           <li>It's what you learn after you know it all that counts. <span>-John Wooden</span></li>
         </ul>
       </div>
+      <ul id="tweets">
+        <a href="http://www.twitter.com/closummitindia" id="follow_clo"></a>
+      </ul>
       <ul class="social_network">
         <li><a class="a2a_dd" href="http://www.addtoany.com/share_save"><img src="http://static.addtoany.com/buttons/share_save_120_16.gif" width="120" height="16" border="0" alt="Share/Bookmark"/></a><script type="text/javascript">a2a_linkname=document.title;a2a_linkurl=location.href;a2a_onclick=1;a2a_hide_embeds=0;a2a_num_services=6;</script><script type="text/javascript" src="http://static.addtoany.com/menu/page.js"></script></li>
         <li><a href="http://www.facebook.com/event.php?eid=126442465810"><img src="{{ MEDIA_URL }}image/logo/facebook.png" title="facebook" /></a></li>
-        <li><a href="http://twitter.com/closummitindia"><img src="{{ MEDIA_URL }}image/logo/twitter.png" title="Twitter" /></a></li>
         <li><a href="http://events.linkedin.com/Chief-Learning-Officer-CLO-Summit-India/pub/112295"><img src="{{ MEDIA_URL }}image/logo/linkedin.png" title="Linkedin" /></a></li>
       </ul>
     </article>
@@ -39,7 +41,7 @@
 
 {% block tag_scripts %}
 <script type="text/javascript">
-window.scripts.push("{{ MEDIA_URL }}script/page/index{{ MINIFIED }}.js");
+  window.scripts.push("{{ MEDIA_URL }}script/page/index{{ MINIFIED }}.js");
 </script>
 {% endblock %}
 
