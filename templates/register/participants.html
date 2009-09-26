@@ -15,18 +15,48 @@
         <span class="suffix"></span>
       </label>
 
-      <label for="email_{{ loop.index }}">
-        <span class="prefix">email</span>
-        <input type="text" name="email_{{ loop.index }}" value="" class="required email" />
+      <label for="designation_{{ loop.index }}">
+        <span class="prefix">designation</span>
+        <input type="text" name="designation_{{ loop.index }}" value="" class="required" />
+        <span class="suffix"></span>
+      </label>
+
+      <label for="department_{{ loop.index }}">
+        <span class="prefix">department</span>
+        <input type="text" name="department_{{ loop.index }}" value="" class="required" />
+        <span class="suffix"></span>
+      </label>
+
+      <label for="organization_{{ loop.index }}">
+        <span class="prefix">organization</span>
+        <input type="text" name="organization_{{ loop.index }}" value="" class="required" />
         <span class="suffix"></span>
       </label>
     </div>
-    
+
     <div class="column">
+      <label for="email_{{ loop.index }}">
+        <span class="prefix">business email</span>
+        <input type="text" name="email_{{ loop.index }}" value="" class="required email" />
+        <span class="suffix"></span>
+      </label>
+
       <label for="mobile_number_{{ loop.index }}">
         <span class="prefix">mobile number</span>
         <input type="text" name="mobile_number_{{ loop.index }}" value="" class="required mobile" />
         <span class="suffix">Include your <a href="http://en.wikipedia.org/wiki/List_of_country_calling_codes" target="_blank"> country code</a> and full mobile number. eg. +1 650 555 1212</span>
+      </label>
+
+      <label for="phone_number_{{ loop.index }}">
+        <span class="prefix">business phone number</span>
+        <input type="text" name="phone_number_{{ loop.index }}" value="" class="required mobile" />
+        <span class="suffix">Include your <a href="http://en.wikipedia.org/wiki/List_of_country_calling_codes" target="_blank"> country code</a> and full phone number. eg. +1 650 555 1212</span>
+      </label>
+
+      <label for="address_{{ loop.index }}">
+        <span class="prefix">postal address</span>
+        <textarea name="address_{{ loop.index }}" value="" cols="30" rows=5"></textarea>
+        <span class="suffix"></span>
       </label>
     </div>
   </fieldset>

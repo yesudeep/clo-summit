@@ -4,6 +4,7 @@
 from google.appengine.ext import db
 from datetime import datetime
 from util.db.models import RegularModel
+from util.db.properties import DecimalProperty
 
 JOB_TYPES = {
     'clo': 'Chief Learning Officer',
@@ -18,21 +19,31 @@ JOB_TYPE_TUPLE_MAP = [(k, v) for (k, v) in JOB_TYPES.iteritems()]
 JOB_TYPE_TUPLE_MAP.sort()
 
 PRICING = [
-    7500,
-    6000,
-    6000,
-    6000,
-    6000,
-    5500,
-    5500,
-    5500
+    7500, 7500,              # 1-2
+    6500, 6500, 6500, 6500,  # 3-6
+    6000, 6000, 6000         # 7-9
 ]
+
+def get_pricing_per_individual(count=1, min_price=5500):
+    if count >= len(PRICING):
+        return min_price
+    else:
+        return PRICING[count-1]
+
+class ParticipantGroup(RegularModel):
+    pass
 
 class Participant(RegularModel):
     full_name = db.StringProperty()
     email = db.EmailProperty()
     mobile_number = db.StringProperty()
-    pricing = db.StringProperty()
+    phone_number = db.StringProperty()
+    pricing = DecimalProperty()
+    designation = db.StringProperty()
+    department = db.StringProperty()
+    organization = db.StringProperty()
+    address = db.PostalAddressProperty()
+    group = db.ReferenceProperty(ParticipantGroup, collection_name='participants')
 
 class Speaker(RegularModel):
     full_name = db.StringProperty()

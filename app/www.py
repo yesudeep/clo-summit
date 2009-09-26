@@ -3,13 +3,14 @@
 
 
 import configuration as config
-from google.appengine.ext import webapp
+from google.appengine.ext import webapp, db
 from google.appengine.ext.webapp.util import run_wsgi_app
 from utils import render_template, dec
 #from appengine_utilities import Session
 import logging
-from models import Participant, SurveyParticipant, Speaker, JOB_TYPE_TUPLE_MAP
+from models import Participant, ParticipantGroup, SurveyParticipant, Speaker, JOB_TYPE_TUPLE_MAP, get_pricing_per_individual
 from util.sessions import SessionRequestHandler
+from decimal import Decimal
 
 logging.basicConfig(level=logging.INFO)
 
@@ -43,15 +44,18 @@ class AboutPage(webapp.RequestHandler):
         response = render_template('about.html')
         self.response.out.write(response)
 
-class RegisterPricingHandler(webapp.RequestHandler):
+class RegisterPricingHandler(SessionRequestHandler):
     def get(self):
         response = render_template('register/pricing.html')
         self.response.out.write(response)
 
-class RegisterPaymentHandler(webapp.RequestHandler):
+class RegisterPaymentHandler(SessionRequestHandler):
     def get(self):
         participants = self.session['participants']
-        response = render_template('register/payment.html', participants=participants)
+        total_price = self.session['total_price']
+        db.put(participants)
+
+        response = render_template('register/payment.html', participants=participants, total_price=total_price)
         self.response.out.write(response)
 
 class RegisterParticipantsHandler(SessionRequestHandler):
@@ -62,17 +66,31 @@ class RegisterParticipantsHandler(SessionRequestHandler):
 
     def post(self):
         count = dec(self.request.get('count'))
+        pricing = Decimal(str(get_pricing_per_individual(count)))
 
+        total_price = Decimal('0')
         participants = []
+
+        group = ParticipantGroup()
+        group.put()
+
         for x in range(count):
             i = str(x + 1)
             participant = Participant()
             participant.full_name = self.request.get('full_name_' + i)
             participant.email = self.request.get('email_' + i)
             participant.mobile_number = self.request.get('mobile_number_' + i)
-
+            participant.address = self.request.get('address_' + i)
+            participant.phone_number = self.request.get('phone_number_' + i)
+            participant.designation = self.request.get('designation_' + i)
+            participant.organization = self.request.get('organization_' + i)
+            participant.department = self.request.get('department_' + i)
+            participant.pricing = pricing
+            participant.group = group
+            total_price += pricing
             participants.append(participant)
 
+        self.session['total_price'] = total_price
         self.session['participant_count'] = count
         self.session['participants'] = participants
 
