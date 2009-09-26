@@ -51,12 +51,14 @@ class RegisterPricingHandler(SessionRequestHandler):
 
 class RegisterPaymentHandler(SessionRequestHandler):
     def get(self):
-        participants = self.session['participants']
-        total_price = self.session['total_price']
-        db.put(participants)
-
-        response = render_template('register/payment.html', participants=participants, total_price=total_price)
-        self.response.out.write(response)
+        participants = self.session.get('participants', None)
+        total_price = self.session.get('total_price', None)
+        if participants:
+            db.put(participants)
+            response = render_template('register/payment.html', participants=participants, total_price=total_price)
+            self.response.out.write(response)
+        else:
+            self.redirect('/register/pricing/')
 
 class RegisterParticipantsHandler(SessionRequestHandler):
     def get(self):
