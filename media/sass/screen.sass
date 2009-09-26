@@ -1,11 +1,11 @@
 @import base.sass
 
 body
-  //:background-color transparent 
-  //:background-image= !url_pixel_bg 
-  //:background-repeat no-repeat 
-  //:background-attachment fixed 
-  //:background-position -100px -50px
+  :background-color transparent 
+  :background-image= !url_pixel_bg 
+  :background-repeat no-repeat 
+  :background-attachment scroll 
+  :background-position -100px -50px
   :font-size 1em
   :color #555
   :line-height 1.4
@@ -38,6 +38,13 @@ a
   :color= !color_nav_link
 a:hover
   :color= !color_nav_link_hover
+
+a.toggle_view 
+  ol.toggle_content
+    :display none
+a.toggle_view:hover 
+  ol.toggle_content
+    :display block
 
 #main_wrapper
   +grid-container
@@ -188,7 +195,8 @@ form.decorated-fields
 
 .social_network
   :position absolute
-  :top 550px
+  :top 650px
+  :left 590px
 
 #qoutes
   :font-style italic
@@ -229,16 +237,10 @@ form.decorated-fields
   +border-radius(10px)
   >h1
     :padding 15px
-    //:color white
-    //:text-shadow 0px 1px 1px #222
   article
     :padding 15px
-    //:color white
     :width 45%
     :float left
-    //h2
-      //:color #20d5ea
-      //:text-shadow 0px 1px 1px #222
 
 // Styles for the registration steps //
 ol#breadcrumbs
@@ -264,5 +266,32 @@ ol#breadcrumbs
     :padding-right 10px
     :text-shadow none
     +border-radius(10px)
-
-
+    
+//Tweet
+#tweets
+  :position absolute 
+  :background-color= rgba(122, 200, 0, 0.5)
+  +border-radius(10px)
+  :top 550px
+  :width 300px
+  :height 120px
+  :display block
+  :font-style italic
+  :color #0076a2
+  :font-size 1.1em
+  :padding 10px
+  :font-weight bold
+  //:margin-bottom 20px
+  a
+    :color #00506d
+    :font-weight normal
+  a:hover
+    :text-decoration underline
+  a#follow_clo
+    :background= "transparent" !url_twitter_bg "no-repeat scroll 0 0"
+    :display block
+    :width 64px
+    :height 64px
+    :position absolute
+    :top -30px
+    :left -20px
