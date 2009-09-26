@@ -19,10 +19,17 @@
     });
       jQuery('#qoutes').innerfade({
           animationtype: 'fade',
-          speed: 750,
-          timeout: 2000,
+          speed: 'slow',
+          timeout: 6000,
           type: 'random',
-          containerheight: '100px'
+          containerheight: '120px'
+      });
+      jQuery('#theme').innerfade({
+          animationtype: 'slide',
+          speed: 'slow',
+          timeout: 2000,
+          type: 'sequence',
+          containerheight: '77px'
       });
       jQuery('.toggle_view a[href="advisory_board"]').toggle(function(){
             jQuery('#advisory_board').css('display', 'none');
