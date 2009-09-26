@@ -21,19 +21,17 @@ handlers:
   secure: never
   expiration: 7d
 
-#- url: /console/static/
-#  static_dir: lib/console/app/view/static
-#  expiration: 7d
+- url: /console/static/
+  static_dir: lib/console/app/view/static
+  expiration: 7d
 
-#- url: /console.*
-#  script: lib/console/app/console.py
-#  login: admin
+- url: /console.*
+  script: lib/console/app/console.py
+  login: admin
 
 #- url: /remote_api.*
 #  script: $PYTHON_LIB/google/appengine/ext/remote_api/handler.py
 #  login: admin
-
-
 
 #- url: /admin.*
 #  script: admin.py
