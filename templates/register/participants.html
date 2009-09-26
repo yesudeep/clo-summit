@@ -2,29 +2,33 @@
 {% block participants_attributes %}class="current"{% endblock %}
 
 {% block wizard_step_content %}
-<form id="form_register_participants" class="decorated-fields table" action="/register/participants/" method="post">
+<form id="form_register_participants" class="decorated-fields vertical" action="/register/participants/" method="post">
 
   <input type="hidden" name="count" value="{{ count }}" />
   {% for index in range(count) %}
   <fieldset>
     <legend>Person {{ loop.index }}</legend>
-    <label for="full_name_{{ loop.index }}">
-      <span class="prefix">full name</span>
-      <input type="text" name="full_name_{{ loop.index }}" value="" class="required" />
-      <span class="suffix"></span>
-    </label>
+    <div class="column">
+      <label for="full_name_{{ loop.index }}">
+        <span class="prefix">full name</span>
+        <input type="text" name="full_name_{{ loop.index }}" value="" class="required" />
+        <span class="suffix"></span>
+      </label>
 
-    <label for="email_{{ loop.index }}">
-      <span class="prefix">email</span>
-      <input type="text" name="email_{{ loop.index }}" value="" class="required email" />
-      <span class="suffix"></span>
-    </label>
-
-    <label for="mobile_number_{{ loop.index }}">
-      <span class="prefix">mobile number</span>
-      <input type="text" name="mobile_number_{{ loop.index }}" value="" class="required mobile" />
-      <span class="suffix">Include your <a href="http://en.wikipedia.org/wiki/List_of_country_calling_codes" target="_blank"> country code</a> and full mobile number. eg. +1 650 555 1212</span>
-    </label>
+      <label for="email_{{ loop.index }}">
+        <span class="prefix">email</span>
+        <input type="text" name="email_{{ loop.index }}" value="" class="required email" />
+        <span class="suffix"></span>
+      </label>
+    </div>
+    
+    <div class="column">
+      <label for="mobile_number_{{ loop.index }}">
+        <span class="prefix">mobile number</span>
+        <input type="text" name="mobile_number_{{ loop.index }}" value="" class="required mobile" />
+        <span class="suffix">Include your <a href="http://en.wikipedia.org/wiki/List_of_country_calling_codes" target="_blank"> country code</a> and full mobile number. eg. +1 650 555 1212</span>
+      </label>
+    </div>
   </fieldset>
   {% endfor %}
 

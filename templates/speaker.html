@@ -5,72 +5,76 @@
     <p>
       We're scouring for the best minds to have them share their experiences, research, case studies, ideas and learnings. If you or someone you know would like to present or be a part of a panel discussion or hold a break out session, please submit the details below:
     </p>
-    <form id="form_nominate_speaker" class="decorated-fields table" action="/speaker/nominate" enctype="multipart/form-data" method="post">
-      <label for="full_name">
-        <span class="prefix">full name</span>
-        <input type="text" name="full_name" value="" class="required" />
-        <span class="suffix"></span>
-      </label>
+    <form id="form_nominate_speaker" class="decorated-fields vertical" action="/speaker/nominate" enctype="multipart/form-data" method="post">
+      <div class="column">
+        <label for="full_name">
+          <span class="prefix">full name</span>
+          <input type="text" name="full_name" value="" class="required" />
+          <span class="suffix"></span>
+        </label>
 
-      <label for="designation">
-        <span class="prefix">designation</span>
-        <input type="text" name="designation" value="" class="required" />
-        <span class="suffix"></span>
-      </label>
+        <label for="designation">
+          <span class="prefix">designation</span>
+          <input type="text" name="designation" value="" class="required" />
+          <span class="suffix"></span>
+        </label>
 
-      <label for="organization">
-        <span class="prefix">organization</span>
-        <input type="text" name="organization" value="" class="required" />
-        <span class="suffix"></span>
-      </label>
+        <label for="organization">
+          <span class="prefix">organization</span>
+          <input type="text" name="organization" value="" class="required" />
+          <span class="suffix"></span>
+        </label>
 
-      <label for="department">
-        <span class="prefix">department</span>
-        <input type="text" name="department" value="" class="required" />
-        <span class="suffix"></span>
-      </label>
+        <label for="department">
+          <span class="prefix">department</span>
+          <input type="text" name="department" value="" class="required" />
+          <span class="suffix"></span>
+        </label>
 
-      <label for="organization_website">
-        <span class="prefix">organization website</span>
-        <input type="text" name="organization_website" value="" class="required url" />
-        <span class="suffix">(eg. http://www.google.com)</span>
-      </label>
+        <label for="organization_website">
+          <span class="prefix">organization website</span>
+          <input type="text" name="organization_website" value="" class="required url" />
+          <span class="suffix">(eg. http://www.google.com)</span>
+        </label>
+        
+        <label for="city">
+          <span class="prefix">city</span>
+          <input type="text" name="city" value="" class="required" />
+          <span class="suffix"></span>
+        </label>
+      </div>
 
-      <label for="city">
-        <span class="prefix">city</span>
-        <input type="text" name="city" value="" class="required" />
-        <span class="suffix"></span>
-      </label>
+      <div class="column">
+        <label for="email">
+          <span class="prefix">email</span>
+          <input type="text" name="email" value="" class="required email" />
+          <span class="suffix">(eg. john@doe.com)</span>
+        </label>
 
-      <label for="email">
-        <span class="prefix">email</span>
-        <input type="text" name="email" value="" class="required email" />
-        <span class="suffix">(eg. john@doe.com)</span>
-      </label>
+        <label for="mobile_number">
+          <span class="prefix">mobile number</span>
+          <input type="text" name="mobile_number" value="" class="required" />
+          <span class="suffix">Include your <a href="http://en.wikipedia.org/wiki/List_of_country_calling_codes" target="_blank"> country code</a> and full mobile number. eg. +1 650 555 1212</span>
+        </label>
 
-      <label for="mobile_number">
-        <span class="prefix">mobile number</span>
-        <input type="text" name="mobile_number" value="" class="required" />
-        <span class="suffix">Include your <a href="http://en.wikipedia.org/wiki/List_of_country_calling_codes" target="_blank"> country code</a> and full mobile number. eg. +1 650 555 1212</span>
-      </label>
+        <label for="research_topic">
+          <span class="prefix">research topic</span>
+          <input type="text" name="research_topic" value="" class="required" />
+          <span class="suffix"></span>
+        </label>
 
-      <label for="research_topic">
-        <span class="prefix">research topic</span>
-        <input type="text" name="research_topic" value="" class="required" />
-        <span class="suffix"></span>
-      </label>
+        <label for="biosketch">
+          <span class="prefix">bio-sketch</span>
+          <textarea name="biosketch" cols="30" rows="5" class="required"></textarea>
+          <span class="suffix"></span>
+        </label>
 
-      <label for="biosketch">
-        <span class="prefix">bio-sketch</span>
-        <textarea name="biosketch" cols="50" rows="15" class="required"></textarea>
-        <span class="suffix"></span>
-      </label>
-
-      <label for="presentation">
-        <span class="prefix">presentation/paper</span>
-        <input type="file" name="presentation" value="" class="required" />
-        <span class="suffix"></span>
-      </label>
+        <label for="presentation">
+          <span class="prefix">presentation/paper</span>
+          <input type="file" name="presentation" value="" class="required" />
+          <span class="suffix"></span>
+        </label>
+      </div>
 
       <label for="submit">
         <span class="prefix"></span>

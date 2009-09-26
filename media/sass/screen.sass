@@ -1,11 +1,11 @@
 @import base.sass
 
 body
-  :background-color transparent 
-  :background-image= !url_pixel_bg 
-  :background-repeat no-repeat 
-  :background-attachment fixed 
-  :background-position -100px -50px
+  //:background-color transparent 
+  //:background-image= !url_pixel_bg 
+  //:background-repeat no-repeat 
+  //:background-attachment fixed 
+  //:background-position -100px -50px
   :font-size 1em
   :color #555
   :line-height 1.4
@@ -156,13 +156,24 @@ table
 
 form.decorated-fields
   :font-family= !font_stack_verdana
-  span.suffix
-    :display block
-    :margin-left 210px
-  label.error
-    :display block
-    :margin-left 210px
-    +transition("opacity 1s linear")
+  .column
+    :width 50%
+    :float left
+    label
+      :margin 5px 0px
+      input[type="text"], form.decorated-fields input[type="password"]
+        :padding 3px
+      textarea
+        :padding 3px
+      span.prefix
+        :padding 0px
+      span.suffix
+        :display block
+        //:margin-left 210px
+    label.error
+      :display block
+      //:margin-left 210px
+      +transition("opacity 1s linear")
 
 // Home Page //
 #video_wrapper
@@ -253,11 +264,5 @@ ol#breadcrumbs
     :padding-right 10px
     :text-shadow none
     +border-radius(10px)
-//.current
-//  :background-color= !color_awesome_blue
-//  :color white
-//  :font-weight bold
-//  :padding 5px
-//  +border-radius(10px)
-//  :text-shadow 0px 1px 1px #222
+
 
