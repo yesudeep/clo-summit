@@ -17,7 +17,7 @@ SCRIPT_FILES = Split("""
     script/lib/chickoojs/src/jquery/metadata/jquery.metadata.js
     script/lib/chickoojs/src/jquery/validate/jquery.validate.js
     script/lib/chickoojs/src/jquery/validate/jquery.validate.extra.js
-    
+
 """)
 
 IMAGE_FILES = Split("""
@@ -156,6 +156,7 @@ REGISTER_JS_FILES =  Split("""
     script/lib/chickoojs/src/jquery/metadata/jquery.metadata.js
     script/lib/chickoojs/src/jquery/validate/jquery.validate.js
     script/lib/chickoojs/src/jquery/validate/jquery.validate.extra.js
+    script/lib/chickoojs/src/jquery/defer/jquery.defer.js
     script/register.js
 """)
 REGISTER_JS_FILES = [SRC_DIR + f for f in REGISTER_JS_FILES]
