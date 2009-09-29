@@ -70,9 +70,9 @@ if DEPLOYMENT_MODE == 'development':
     MINIFIED = '-min'
 else:
     LOCAL = False
-    DEBUG = True
-    ABSOLUTE_ROOT_URL = 'http://clo-summit.appspot.com/'
-    PRIMARY_URL = 'http://clo-summit.appspot.com/'
+    DEBUG = False
+    ABSOLUTE_ROOT_URL = 'http://www.closummit.com/'
+    PRIMARY_URL = 'http://www.closummit.com/'
     SECURE_URL = 'https://%s.appspot.com/' % APPLICATION_ID
     MINIFIED = '-min'
 
