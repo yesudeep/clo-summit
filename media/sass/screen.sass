@@ -20,7 +20,7 @@ h1, h2, h3
 
 strong
   :font-weight bold
-ul
+ul.inline
   li
     +display-inline-block
     :margin 0px 15px 0px 0px
@@ -84,15 +84,14 @@ nav
 
 header
   >h1
-    :margin 45px 0px 40px
+    :margin 55px 0px 20px
     :line-height 1.1
     :font-size 1.6em
-    //:font-weight bold
     :color #006c94
     :letter-spacing -0.03em
     :font-family= !font_stack_trebuchet
-    :width 30%
-    :height 88px
+    :width 288px
+    :height 90px
     :overflow hidden
     ul
       li
@@ -206,7 +205,7 @@ form.decorated-fields
 
 .social_network
   :position absolute
-  :top 650px
+  :top 665px
   :left 590px
 
 #qoutes
@@ -281,25 +280,25 @@ ol#breadcrumbs
 
 // Event Details //
 #event_details
-  :width 37%
+  :width 35%
   :float right
-  :background-color= rgba(122, 200, 0, 0.5)
+  :background-color #bce37f
   +border-radius(10px)
   :font-family= !font_stack_verdana
-  :font-size 0.8em
+  :font-size 0.7em
   tbody
     caption
       :text-align center
     tr
       :border 0px none
       th
-        :padding 5px 10px
+        :padding 5px 8px
         :color #00506d
         :font-weight bold
         :vertical-align top
       td
         :color #0076a2
-        :padding 5px 10px
+        :padding 5px 8px
         :vertical-align top
 
 //Tweet //
