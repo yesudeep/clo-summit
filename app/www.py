@@ -7,10 +7,11 @@ from google.appengine.ext import webapp, db
 from google.appengine.ext.webapp.util import run_wsgi_app
 from utils import render_template, dec
 #from appengine_utilities import Session
-import logging
-from models import Participant, ParticipantGroup, SurveyParticipant, Speaker, JOB_TYPE_TUPLE_MAP, get_pricing_per_individual
-from util.sessions import SessionRequestHandler
+from models import Participant, ParticipantGroup, SurveyParticipant, Speaker, JOB_TYPE_TUPLE_MAP, get_pricing_per_individual, SURVEY_LINK
+from hc_gae_util.sessions import SessionRequestHandler
 from decimal import Decimal
+from utils import queue_mail_task
+import logging
 
 logging.basicConfig(level=logging.INFO)
 
@@ -26,7 +27,7 @@ class ProgramPage(webapp.RequestHandler):
 
 class ResearchPage(webapp.RequestHandler):
     def get(self):
-        response = render_template('research/research.html')
+        response = render_template('research/research.html', survey_link=SURVEY_LINK)
         self.response.out.write(response)
 
 class SponsorsPage(webapp.RequestHandler):
@@ -55,6 +56,14 @@ class RegisterPaymentHandler(SessionRequestHandler):
         total_price = self.session.get('total_price', None)
         if participants:
             db.put(participants)
+            for participant in participants:
+                queue_mail_task(url='/worker/mail/thanks/registration/',
+                    params=dict(
+                        full_name=participant.full_name,
+                        email = participant.email
+                    ),
+                    method='POST'
+                )
             response = render_template('register/payment.html', participants=participants, total_price=total_price)
             self.response.out.write(response)
         else:
@@ -116,6 +125,15 @@ class ParticipatePage(webapp.RequestHandler):
         survey_participant.mobile_number = self.request.get('mobile_number')
         survey_participant.put()
 
+        queue_mail_task(url='/worker/mail/thanks/survey_participation/',
+            params=dict(
+                full_name=survey_participant.full_name,
+                email = survey_participant.email,
+                survey_link=SURVEY_LINK
+            ),
+            method='POST'
+        )
+
         response = render_template('thank_you.html', message_title="Thank you for participating in the survey.", message_body="We appreciate you taking the time to participate in the survey.  We shall contact you within 48 hours.")
         self.response.out.write(response)
 
@@ -139,27 +157,38 @@ class SpeakerNominationHandler(webapp.RequestHandler):
         speaker.presentation = db.Blob(self.request.get('presentation'))
         speaker.put()
 
+        queue_mail_task(url='/worker/mail/thanks/speaker_nomination/',
+            params=dict(
+                full_name=speaker.full_name,
+                email = speaker.email
+            ),
+            method='POST'
+        )
+
         response = render_template('thank_you.html', message_title='Thank you for nominating a speaker.', message_body='We appreciate your taking the time to nominating a speaker.  We will get in touch with you soon')
         self.response.out.write(response)
 
 urls = (
     ('/', IndexPage),
+    ('/about/?', AboutPage),
+    ('/media/?', MediaPage),
     ('/program/?', ProgramPage),
     ('/research/?', ResearchPage),
-    ('/research/participate/?', ParticipatePage),
     ('/sponsors/?', SponsorsPage),
-    ('/media/?', MediaPage),
+    ('/speaker/nominate/?', SpeakerNominationHandler),
+    ('/research/participate/?', ParticipatePage),
     ('/register/pricing/?', RegisterPricingHandler),
     ('/register/payment/?', RegisterPaymentHandler),
     ('/register/participants/?', RegisterParticipantsHandler),
-    ('/about/?', AboutPage),
-    ('/speaker/nominate/?', SpeakerNominationHandler),
 )
 
 application = webapp.WSGIApplication(urls, debug=config.DEBUG)
 
 def main():
-  run_wsgi_app(application)
+    from gaefy.db.datastore_cache import DatastoreCachingShim
+    DatastoreCachingShim.Install()
+    run_wsgi_app(application)
+    DatastoreCachingShim.Uninstall()
 
 if __name__ == '__main__':
     main()

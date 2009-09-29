@@ -3,8 +3,8 @@
 
 from google.appengine.ext import db
 from datetime import datetime
-from util.db.models import RegularModel
-from util.db.properties import DecimalProperty
+from hc_gae_util.db.models import RegularModel
+from hc_gae_util.db.properties import DecimalProperty
 
 JOB_TYPES = {
     'clo': 'Chief Learning Officer',
@@ -23,6 +23,8 @@ PRICING = [
     6500, 6500, 6500, 6500,  # 3-6
     6000, 6000, 6000         # 7-9
 ]
+
+SURVEY_LINK = "http://www.surveymonkey.com/s.aspx?sm=hZXdTol4KmfnW0ZBoxxaow_3d_3d"
 
 def get_pricing_per_individual(count=1, min_price=5500):
     if count >= len(PRICING):

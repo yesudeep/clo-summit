@@ -1,0 +1,10 @@
+Dear {{ full_name }},
+
+Thank you for nominating a speaker for the summit.
+We will be reviewing your research presentation and will send you an email
+indicating approval.
+
+Thank you again for your patience.
+
+{{ MAIL_SIGNATURE }}
+
