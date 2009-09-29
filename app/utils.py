@@ -9,8 +9,9 @@ from google.appengine.api.labs import taskqueue
 from appengine_utilities.sessions import Session
 import urllib
 import logging
+from hc_gae_util.jinja_loaders import PythonLoader
 
-jinja_env = Environment(loader=FileSystemLoader(['templates']))
+jinja_env = Environment(loader=PythonLoader(['templates']))
 
 #Jinja2 custom filters
 def datetimeformat(value, format='%H:%M / %d-%m-%Y'):
