@@ -11,6 +11,7 @@ from models import Participant, ParticipantGroup, SurveyParticipant, Speaker, JO
 from hc_gae_util.sessions import SessionRequestHandler
 from decimal import Decimal
 from utils import queue_mail_task
+from os.path import splitext
 import logging
 
 logging.basicConfig(level=logging.INFO)
@@ -149,6 +150,8 @@ class SpeakerNominationHandler(webapp.RequestHandler):
         self.response.out.write(response)
 
     def post(self):
+        presentation_filename = self.request.get('presentation_filename')
+
         speaker = Speaker()
         speaker.full_name = self.request.get('full_name')
         speaker.designation = self.request.get('designation')
@@ -161,6 +164,8 @@ class SpeakerNominationHandler(webapp.RequestHandler):
         speaker.research_topic = self.request.get('research_topic')
         speaker.bio_sketch = self.request.get('bio_sketch')
         speaker.presentation = db.Blob(self.request.get('presentation'))
+        speaker.presentation_filename = presentation_filename
+        speaker.presentation_extension = splitext(presentation_filename)[1]
         speaker.put()
 
         queue_mail_task(url='/worker/mail/thanks/speaker_nomination/',

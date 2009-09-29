@@ -59,6 +59,8 @@ class Speaker(RegularModel):
     research_topic = db.StringProperty()
     bio_sketch = db.TextProperty()
     presentation = db.BlobProperty()
+    presentation_filename = db.StringProperty()
+    presentation_extension = db.StringProperty()
 
 class SurveyParticipant(RegularModel):
     full_name = db.StringProperty()
