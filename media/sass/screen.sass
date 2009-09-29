@@ -1,10 +1,10 @@
 @import base.sass
 
 body
-  :background-color transparent 
-  :background-image= !url_pixel_bg 
-  :background-repeat no-repeat 
-  :background-attachment scroll 
+  :background-color transparent
+  :background-image= !url_pixel_bg
+  :background-repeat no-repeat
+  :background-attachment scroll
   :background-position -30px 70px
   :font-size 1em
   :color #555
@@ -39,10 +39,10 @@ a
 a:hover
   :color= !color_nav_link_hover
 
-a.toggle_view 
+a.toggle_view
   ol.toggle_content
     :display none
-a.toggle_view:hover 
+a.toggle_view:hover
   ol.toggle_content
     :display block
 
@@ -94,7 +94,7 @@ header
     :width 30%
     :height 88px
     :overflow hidden
-    ul 
+    ul
       li
         span
           :display block
@@ -223,8 +223,8 @@ form.decorated-fields
     :display block
     :color= !color_nav_link
     :font-size 0.8em
-    //:margin-left 30px  
-  
+    //:margin-left 30px
+
 // Two column layout //
 .column-1of2
   :width 65%
@@ -237,7 +237,7 @@ form.decorated-fields
   :clear both
 // Form Override Styles //
 #nominate_speaker
-  lable
+  label
     span.prefix
       :width 300px
     input[type="checkbox"], input[type="submit"], input[type="image"]
@@ -304,7 +304,7 @@ ol#breadcrumbs
 
 //Tweet //
 #tweets
-  :position absolute 
+  :position absolute
   :background-color= rgba(0, 118, 162, 0.4)
   +border-radius(10px)
   :top 550px
@@ -317,7 +317,7 @@ ol#breadcrumbs
   :padding 10px
   :font-weight bold
   //:margin-bottom 20px
-  .tweet_list 
+  .tweet_list
     :max-height 150px
     :overflow hidden
   a
