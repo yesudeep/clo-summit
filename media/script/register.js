@@ -1,9 +1,11 @@
 jQuery(function(){
     var elements = {
+        participant_count: jQuery('#form_register_participants input[name="count"]'),
         organization_1: jQuery('#form_register_participants input[name="organization_1"]'),
         address_1: jQuery('#form_register_participants textarea[name="address_1"]'),
         other_address_fields: jQuery('#form_register_participants textarea.address'),
-        other_organization_fields: jQuery('#form_register_participants input.organization')
+        other_organization_fields: jQuery('#form_register_participants input.organization'),
+        link_remove_registrant: jQuery('#form_register_participants a[href="#remove"]')
     };
 
     jQuery('form.decorated-fields').validate({
@@ -25,5 +27,18 @@ jQuery(function(){
     }
     elements.organization_1.keyup(jQuery.defer(100, updateOrganizations));
     elements.address_1.keyup(jQuery.defer(100, updateAddresses));
+
+    elements.link_remove_registrant.click(function(event){
+        var elem = jQuery(this);
+        event.preventDefault();
+        event.stopPropagation();
+
+        elem.parents('fieldset').remove();
+        var value = elements.participant_count.val();
+        value--;
+        elements.participant_count.val(value);
+
+        return false;
+    });
 });
 

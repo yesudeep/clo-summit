@@ -73,7 +73,8 @@ class RegisterPaymentHandler(SessionRequestHandler):
 class RegisterParticipantsHandler(SessionRequestHandler):
     def get(self):
         count = dec(self.request.get('count'))
-        response = render_template('register/participants.html', count=count)
+        minimum = dec(self.request.get('min'))
+        response = render_template('register/participants.html', count=count, minimum=minimum)
         self.response.out.write(response)
 
     def post(self):
@@ -88,19 +89,22 @@ class RegisterParticipantsHandler(SessionRequestHandler):
 
         for x in range(count):
             i = str(x + 1)
-            participant = Participant()
-            participant.full_name = self.request.get('full_name_' + i)
-            participant.email = self.request.get('email_' + i)
-            participant.mobile_number = self.request.get('mobile_number_' + i)
-            participant.address = self.request.get('address_' + i)
-            participant.phone_number = self.request.get('phone_number_' + i)
-            participant.designation = self.request.get('designation_' + i)
-            participant.organization = self.request.get('organization_' + i)
-            participant.department = self.request.get('department_' + i)
-            participant.pricing = pricing
-            participant.group = group
-            total_price += pricing
-            participants.append(participant)
+
+            full_name = self.request.get('full_name_' + i)
+            if full_name:
+                participant = Participant()
+                participant.full_name = full_name
+                participant.email = self.request.get('email_' + i)
+                participant.mobile_number = self.request.get('mobile_number_' + i)
+                participant.address = self.request.get('address_' + i)
+                participant.phone_number = self.request.get('phone_number_' + i)
+                participant.designation = self.request.get('designation_' + i)
+                participant.organization = self.request.get('organization_' + i)
+                participant.department = self.request.get('department_' + i)
+                participant.pricing = pricing
+                participant.group = group
+                total_price += pricing
+                participants.append(participant)
 
         self.session['total_price'] = total_price
         self.session['participant_count'] = count
