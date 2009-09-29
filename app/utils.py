@@ -8,6 +8,7 @@ from google.appengine.api import users
 from google.appengine.api.labs import taskqueue
 from appengine_utilities.sessions import Session
 import urllib
+import logging
 
 jinja_env = Environment(loader=FileSystemLoader(['templates']))
 

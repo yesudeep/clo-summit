@@ -1,0 +1,13 @@
+Dear {{ full_name }},
+
+Thank you for taking the time to participate in our survey.
+We appreciate your input and it will help us improve our services.
+
+Please complete the survey by following this link:
+
+{{ survey_link }}
+
+Thank you again.
+
+{{ MAIL_SIGNATURE }}
+

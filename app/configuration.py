@@ -47,6 +47,18 @@ else:
 
 NO_REPLY_EMAIL = 'no-reply@closummit.com'
 ADMIN_EMAIL = 'administrator@closummit.com'
+REGISTER_EMAIL = 'register@closummit.com'
+SURVEY_EMAIL = 'survey@closummit.com'
+SPONSORS_EMAIL = 'sponsors@closummit.com'
+SPEAKERS_EMAIL = 'speakers@closummit.com'
+
+MAIL_SIGNATURE = '''
+Cheers,
+CLO Summit Organizers.'''
+NO_REPLY_MAIL_SIGNATURE = MAIL_SIGNATURE + '''
+--
+Please do not reply to this system generated message.
+'''
 
 if DEPLOYMENT_MODE == 'development':
     LOCAL = True
@@ -77,6 +89,8 @@ TEMPLATE_BUILTINS = {
     'SECURE_URL': sanitize_url(SECURE_URL),
     'TEMPLATE_DEBUG': DEBUG,
     'MINIFIED': MINIFIED,
+    'MAIL_SIGNATURE': MAIL_SIGNATURE,
+    'NO_REPLY_MAIL_SIGNATURE': NO_REPLY_MAIL_SIGNATURE,
 }
 
 TEMPLATE_DIRS = [
