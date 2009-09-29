@@ -5,7 +5,7 @@ jQuery(function(){
                 mobile: true
             },
             phone_number: {
-                mobile: true
+                phone: true
             }
         }
     });
