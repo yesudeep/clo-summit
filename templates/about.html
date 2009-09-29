@@ -3,6 +3,27 @@
   <section>
     <h1>CLO summit in a glance.</h1>
       <div class="column-1of2">
+      <table id="event_details">
+        <tbody>
+          <caption>CLO Summit India.</caption>
+          <tr>
+            <th>Date: </th>
+            <td>20th November 2009</td>
+          </tr>
+          <tr>
+            <th>Location: </th>
+            <td>Mumbai</td>
+          </tr>
+          <tr>
+            <th>Venue: </th>
+            <td><strong>TISS Convention Center, </strong>TATA Institute Of Social Sciences, Deonar.</td>
+          </tr>
+          <tr>
+            <th>Timing: </th>
+            <td>09:00 to 19:00 (Followed by networking dinner)</td>
+          </tr>
+        </tbody>
+      </table>
           <p>The importance of learning and organizational development in the modern enterprise is undeniable. From a small department in most organizations to a full fledged enabling function in many, the learning and development function as we know it has come through its own path of evolution. The journey though has just begun given the emergence of the knowledge economy</p>
         <p>The 'demographic dividend' that India is set to reap in the context of the global market for talent will shape the entire economy in time to come. This has significant implications not just for corporates but for organizations across all facets of the economy.</p>
         <p>The inaugural CLO Summit 09 shall be the premier-most platform for evangelizing and promoting Organizational Learning &amp; Development. The annual summit shall catalyze the creation and effective dissemination of next practices across corporates, institutions, NGOs, government bodies and practitioners through effective interaction, debate and research.</p>
@@ -19,7 +40,7 @@
           </li>
         </ul>
       </aside>
-      <h1 class="clearboth">Advisory Board and Patrons</h1>
+      <h1 class="clearboth">Advisory Board</h1>
       <ol>
         <li>Mr. Curtis Bateman</li>
         <li>Mr. G. P. Gupta</li>
@@ -38,5 +59,10 @@
         <li>Ms. Anjali Raina</li>
       </ol>
   </section>
+{% endblock %}
+{% block tag_scripts %}
+<script type="text/javascript">
+  window.scripts.push("{{ MEDIA_URL }}script/page/index{{ MINIFIED }}.js");
+</script>
 {% endblock %}
 

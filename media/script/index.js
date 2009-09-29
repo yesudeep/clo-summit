@@ -31,10 +31,6 @@
           type: 'sequence',
           containerheight: '88px'
       });
-      jQuery('.toggle_view a[href="advisory_board"]').toggle(function(){
-            jQuery('#advisory_board').css('display', 'none');
-        }, function(){
-            jQuery('#advisory_board').css('display', 'block');
-        });
+      
     });
 })(jQuery);
