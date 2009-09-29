@@ -37,6 +37,9 @@ TEMPLATE_FILES = HTML_FILES + Split("""
 """)
 
 PLAIN_COPIES = Split("""
+    email/thanks/survey_participation.text
+    email/thanks/speaker_nomination.text
+    email/thanks/registration.text
 """)
 
 MINIFIABLE_FILES = HTML_FILES + Split("""

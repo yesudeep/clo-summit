@@ -60,7 +60,8 @@ class RegisterPaymentHandler(SessionRequestHandler):
                 queue_mail_task(url='/worker/mail/thanks/registration/',
                     params=dict(
                         full_name=participant.full_name,
-                        email = participant.email
+                        email = participant.email,
+                        key=str(participant.key())
                     ),
                     method='POST'
                 )
@@ -129,7 +130,8 @@ class ParticipatePage(webapp.RequestHandler):
             params=dict(
                 full_name=survey_participant.full_name,
                 email = survey_participant.email,
-                survey_link=SURVEY_LINK
+                survey_link=SURVEY_LINK,
+                key=str(survey_participant.key())
             ),
             method='POST'
         )
@@ -160,7 +162,8 @@ class SpeakerNominationHandler(webapp.RequestHandler):
         queue_mail_task(url='/worker/mail/thanks/speaker_nomination/',
             params=dict(
                 full_name=speaker.full_name,
-                email = speaker.email
+                email = speaker.email,
+                key=str(speaker.key())
             ),
             method='POST'
         )
