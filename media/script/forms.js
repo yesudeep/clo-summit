@@ -1,15 +1,32 @@
+String.prototype.startsWith = function(str)
+{return (this.match("^"+str)==str)}
+
+/*
+String.prototype.endsWith = function(str)
+{return (this.match(str+"$")==str)}
+*/
+
 jQuery(function(){
     var elements = {
         mobile_or_phone_fields: jQuery('form input.mobile, form input.phone'),
         form_decorated_fields: jQuery('form.decorated-fields'),
         url_fields: jQuery('form input.url')
-    };
+    }, HTTP = "http://";
 
     elements.mobile_or_phone_fields.numeric({allow: '+-() '});
-    elements.url_fields.focus(function(event){
+    elements.url_fields/*.focus(function(event){
         var elem = jQuery(this), value = elem.val();
         if (!jQuery.trim(value)){
-            elem.val("http://");
+            elem.val(HTTP);
+        }
+    })*/.keyup(function(event){
+        var elem = jQuery(this), value = elem.val();
+        if (value == 'http:/'){
+            // For now handle only one common case where the user may press a backspace
+            // to clear the last front slash.
+            elem.val(HTTP);
+        } else if (!value.startsWith(HTTP)){
+            elem.val(HTTP + value);
         }
     });
 
