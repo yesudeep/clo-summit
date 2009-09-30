@@ -18,10 +18,8 @@ String.prototype.isSameCase = function(){
 String.prototype.sanitizeCapitalization = function(){
    // Requires the titlecaps function by john resig.
    if(this && this.isSameCase()){
-        console.log('same case');
        return titleCaps(this.toLowerCase());
    } else {
-        console.log('not same case');
        return this;
    }
 }
@@ -53,7 +51,6 @@ jQuery(function(){
     });
     elements.capitalization_fields.live('change', function(event){
        var o = jQuery(this), value = jQuery.trim(o.val());
-       console.log(value);
        o.val(value.sanitizeCapitalization());
     });
 
