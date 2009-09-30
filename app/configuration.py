@@ -56,8 +56,11 @@ SPEAKERS_MAILBOX = 'speakers@leapvault.com'
 SPONSORS_MAILBOX = 'sponsors@leapvault.com'
 REGISTER_MAILBOX = 'register@leapvault.com'
 
-MAIL_SIGNATURE = '''Cheers,
-CLO Summit Organizers.'''
+MAIL_SIGNATURE = '''Sincerely,
+Team CLO Summit
+--
+Please visit http://www.closummitindia.com for updates about the event.
+'''
 NO_REPLY_MAIL_SIGNATURE = MAIL_SIGNATURE + '''
 --
 Please do not reply to this system generated message.

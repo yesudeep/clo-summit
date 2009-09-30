@@ -7,6 +7,7 @@ from google.appengine.api import mail, memcache
 from google.appengine.ext.webapp.util import run_wsgi_app
 from utils import render_template
 import logging
+from datetime import datetime
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -49,8 +50,9 @@ class SurveyParticipationThanksWorker(webapp.RequestHandler):
 
 class RegistrationThanksWorker(webapp.RequestHandler):
     def post(self):
+
         template_values = {
-            'full_name': self.request.get('full_name'),
+            'full_name': self.request.get('full_name')
         }
         send_mail_worker(cache_key=self.request.get('key'),
             request=self.request,
@@ -66,6 +68,7 @@ class SpeakerNominationThanksWorker(webapp.RequestHandler):
     def post(self):
         template_values = {
             'full_name': self.request.get('full_name'),
+            'today': datetime.utcnow()
         }
         send_mail_worker(cache_key=self.request.get('key'),
             request=self.request,

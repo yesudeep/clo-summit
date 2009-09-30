@@ -1,10 +1,15 @@
 Dear {{ full_name }},
 
-Thank you for nominating a speaker for the summit.
-We will be reviewing your research presentation and will send you an email
-indicating approval.
+Thank you for nominating a speaker for the inaugural Chief Learning Officer,
+CLO Summit India {{ today.year }}.
 
-Thank you again for your patience.
+We're grateful for your interest and someone from our team will contact you
+if we're able to accommodate your nominee for the {{ today.year }} summit.
+
+Thank you for your invaluable support.
 
 {{ MAIL_SIGNATURE }}
+
+For specific queries regarding the speaker nomination, you can contact
+speakers@leapvault.com
 
