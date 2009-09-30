@@ -38,6 +38,7 @@ IMAGE_FILES = Split("""
     image/background/group_of_3_pricing.png
     image/background/group_of_6_pricing.png
     image/background/media.png
+    image/background/press.png
     image/icon/favicon.png
     image/background/register.png
     image/background/survey.png
@@ -222,4 +223,3 @@ env.YuiCompressorMinify(speaker_js)
 #    DEST_DIR + 'script/LICENSES',
 #    DEST_DIR + 'script/lib/all_o-min.js',
 #])
-
