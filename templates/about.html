@@ -40,32 +40,39 @@
           </li>
         </ul>
       </aside>
-      <div id="accordion" class="clearboth">
-        <h2 class="tab">Advisory Board</h2>
-        <ul class="pane">
-          <li>Mr. Pranesh Anthapur (Coo, Yahoo! India)</li>
-          <li>Dr. Arun Balakrishnan (Chairman &amp; Managing Director, HPCL)</li>
-          <li>Mr. Curtis Bateman (Ceo, Spencer Johnson Foundation, Who Moved My Cheese)</li>
-          <li>Mr. G. P. Gupta (Former Chairman IDBI &amp; UTI)</li>
-          <li>Dr. A. K. Khandelwal (Chairman, Baroda Pioneer AMC &amp; ex chairman Bank of Baroda)</li>
-          <li>Dr. S. Parasuraman (Director, Tata Institute of Social Sciences)</li>
-        </ul>
-        <h2 class="tab">Core Design Group</h2>
-        <ul class="pane">
-          <li>Dr. S. Palo (Chairperson, School of Management &amp; Labour Studies, TISS)</li>
-          <li>Dr. D. K. Srivastava (Professor, TISS)</li>
-          <li>Prof. P. Vijaykumar (Social Organizational Leadership Development, TISS)</li>
-          <li>Mr. P. Vijayan(HR director, CHEP India)</li>
-          <li>Mr. Ashis Sen(HPCL)</li>
-          <li>Ms. Susan Bloch (CLO, Aditya Birla Group)</li>
-          <li>Dr. Rajen Mehrotra (CKO, ACC)</li>
-        </ul>
-      </div>
+      <ul class="clearboth" id="tabs">
+        <li><h2>Advisory Board &dArr;</h2></li>
+        <li><h2>Core Design Group &dArr;</h2></li>
+      </ul>
+      <ul id="panes">
+        <li>
+          <ul>
+            <li>Mr. Pranesh Anthapur (Coo, Yahoo! India)</li>
+            <li>Dr. Arun Balakrishnan (Chairman &amp; Managing Director, HPCL)</li>
+            <li>Mr. Curtis Bateman (Ceo, Spencer Johnson Foundation, Who Moved My Cheese)</li>
+            <li>Mr. G. P. Gupta (Former Chairman IDBI &amp; UTI)</li>
+            <li>Dr. A. K. Khandelwal (Chairman, Baroda Pioneer AMC &amp; ex chairman Bank of Baroda)</li>
+            <li>Dr. S. Parasuraman (Director, Tata Institute of Social Sciences)</li>
+          </ul>
+        </li>
+        <li>
+          <ul>
+            <li>Dr. S. Palo (Chairperson, School of Management &amp; Labour Studies, TISS)</li>
+            <li>Dr. D. K. Srivastava (Professor, TISS)</li>
+            <li>Prof. P. Vijaykumar (Social Organizational Leadership Development, TISS)</li>
+            <li>Mr. P. Vijayan(HR director, CHEP India)</li>
+            <li>Mr. Ashis Sen(HPCL)</li>
+            <li>Ms. Susan Bloch (CLO, Aditya Birla Group)</li>
+            <li>Dr. Rajen Mehrotra (CKO, ACC)</li>
+          </ul>
+        </li>
+      </ul>
   </section>
 {% endblock %}
 {% block tag_scripts %}
 <script type="text/javascript">
   window.scripts.push("{{ MEDIA_URL }}script/page/about{{ MINIFIED }}.js");
+  window.scripts.push("{{ MEDIA_URL }}script/page/program{{ MINIFIED }}.js");
 </script>
 {% endblock %}
 
