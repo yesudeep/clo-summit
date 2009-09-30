@@ -12,16 +12,20 @@ logging.basicConfig(level=logging.DEBUG)
 
 # Workers should be idempotent.  Very rare duplicate emails are OK.
 # We can manage idempotence to a fair degree with memcache.
-def send_mail_worker(cache_key, request, sender, to, subject, template_name, template_values):
+def send_mail_worker(cache_key, request, template_name, template_values, to, subject, sender=config.NO_REPLY_EMAIL, reply_to=None):
     key = request.path + ' sent to: ' + to + ' from: ' + sender + cache_key
     logging.info('Attempting mail worker: ' + key)
     logging.info(request)
     if not memcache.get(key):
         body = render_template(template_name, **template_values)
+        if reply_to:
+            kwargs = dict(reply_to=reply_to)
+        else:
+            kwargs = {}
         mail.send_mail(sender=sender,
             to=to,
             subject=subject,
-            body=body)
+            body=body, **kwargs)
         logging.info("Mail Worker: " + key)
         memcache.set(key, True, 120)
         logging.info('not memcached + sent')
@@ -35,11 +39,11 @@ class SurveyParticipationThanksWorker(webapp.RequestHandler):
         }
         send_mail_worker(cache_key=self.request.get('key'),
             request=self.request,
-            sender=config.SURVEY_EMAIL,
             to=self.request.get('email'),
             subject='[CLO Summit] Thank you for participating in the CLO survey.',
             template_name='email/thanks/survey_participation.text',
-            template_values=template_values
+            template_values=template_values,
+            reply_to=config.SURVEY_EMAIL
         )
         self.response.out.write("Survey participation thanks.")
 
@@ -50,11 +54,11 @@ class RegistrationThanksWorker(webapp.RequestHandler):
         }
         send_mail_worker(cache_key=self.request.get('key'),
             request=self.request,
-            sender=config.REGISTER_EMAIL,
             to=self.request.get('email'),
             subject='[CLO Summit] Thank you for registering for the CLO Summit',
             template_name='email/thanks/registration.text',
-            template_values=template_values
+            template_values=template_values,
+            reply_to=config.REGISTER_MAILBOX
         )
         self.response.out.write("Registration attendee thanks.")
 
@@ -65,11 +69,11 @@ class SpeakerNominationThanksWorker(webapp.RequestHandler):
         }
         send_mail_worker(cache_key=self.request.get('key'),
             request=self.request,
-            sender=config.SPEAKERS_EMAIL,
             to=self.request.get('email'),
             subject='[CLO Summit] Thank you for nominating a speaker',
             template_name='email/thanks/speaker_nomination.text',
-            template_values=template_values
+            template_values=template_values,
+            reply_to=config.SPEAKERS_MAILBOX
         )
         self.response.out.write("Speaker nomination thanks.")
 

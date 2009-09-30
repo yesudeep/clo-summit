@@ -52,8 +52,11 @@ SURVEY_EMAIL = 'survey@closummit.com'
 SPONSORS_EMAIL = 'sponsors@closummit.com'
 SPEAKERS_EMAIL = 'speakers@closummit.com'
 
-MAIL_SIGNATURE = '''
-Cheers,
+SPEAKERS_MAILBOX = 'speakers@leapvault.com'
+SPONSORS_MAILBOX = 'sponsors@leapvault.com'
+REGISTER_MAILBOX = 'register@leapvault.com'
+
+MAIL_SIGNATURE = '''Cheers,
 CLO Summit Organizers.'''
 NO_REPLY_MAIL_SIGNATURE = MAIL_SIGNATURE + '''
 --
