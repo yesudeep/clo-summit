@@ -17,7 +17,15 @@ SCRIPT_FILES = Split("""
     script/lib/chickoojs/src/jquery/metadata/jquery.metadata.js
     script/lib/chickoojs/src/jquery/validate/jquery.validate.js
     script/lib/chickoojs/src/jquery/validate/jquery.validate.extra.js
+    script/lib/chickoojs/src/jquery/alphanumeric/jquery.alphanumeric.js
 
+    script/register.js
+    script/speaker.js
+    script/survey_participate.js
+    script/forms.js
+    script/index.js
+    script/qoutes.js
+    script/jquery.innerfade.js
 """)
 
 IMAGE_FILES = Split("""
@@ -144,12 +152,14 @@ SURVEY_PARTICIPATE_JS_FILES =  Split("""
     script/lib/chickoojs/src/jquery/metadata/jquery.metadata.js
     script/lib/chickoojs/src/jquery/validate/jquery.validate.js
     script/lib/chickoojs/src/jquery/validate/jquery.validate.extra.js
+    script/lib/chickoojs/src/jquery/alphanumeric/jquery.alphanumeric.js
+    script/forms.js
     script/survey_participate.js
 """)
 SURVEY_PARTICIPATE_JS_FILES = [SRC_DIR + f for f in SURVEY_PARTICIPATE_JS_FILES]
 survey_participate_js = env.Concatenate([DEST_DIR + 'script/page/survey_participate.js'], SURVEY_PARTICIPATE_JS_FILES)
 env.YuiCompressorMinify(survey_participate_js)
-env.JsminMinify(survey_participate_js)
+#env.JsminMinify(survey_participate_js)
 
 
 REGISTER_JS_FILES =  Split("""
@@ -157,25 +167,29 @@ REGISTER_JS_FILES =  Split("""
     script/lib/chickoojs/src/jquery/metadata/jquery.metadata.js
     script/lib/chickoojs/src/jquery/validate/jquery.validate.js
     script/lib/chickoojs/src/jquery/validate/jquery.validate.extra.js
+    script/lib/chickoojs/src/jquery/alphanumeric/jquery.alphanumeric.js
     script/lib/chickoojs/src/jquery/defer/jquery.defer.js
+    script/forms.js
     script/register.js
 """)
 REGISTER_JS_FILES = [SRC_DIR + f for f in REGISTER_JS_FILES]
 register_js = env.Concatenate([DEST_DIR + 'script/page/register.js'], REGISTER_JS_FILES)
 env.YuiCompressorMinify(register_js)
-env.JsminMinify(register_js)
+#env.JsminMinify(register_js)
 
 SPEAKER_JS_FILES =  Split("""
     script/lib/chickoojs/src/jquery/form/jquery.form.js
     script/lib/chickoojs/src/jquery/metadata/jquery.metadata.js
     script/lib/chickoojs/src/jquery/validate/jquery.validate.js
     script/lib/chickoojs/src/jquery/validate/jquery.validate.extra.js
+    script/lib/chickoojs/src/jquery/alphanumeric/jquery.alphanumeric.js
+    script/forms.js
     script/speaker.js
 """)
 SPEAKER_JS_FILES = [SRC_DIR + f for f in SPEAKER_JS_FILES]
 speaker_js = env.Concatenate([DEST_DIR + 'script/page/speaker.js'], SPEAKER_JS_FILES)
 env.YuiCompressorMinify(speaker_js)
-env.JsminMinify(speaker_js)
+#env.JsminMinify(speaker_js)
 
 
 

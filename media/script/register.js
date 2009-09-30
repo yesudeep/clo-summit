@@ -8,16 +8,8 @@ jQuery(function(){
         link_remove_registrant: jQuery('#form_register_participants a[href="#remove"]')
     };
 
-    jQuery('form.decorated-fields').validate({
-        rules: {
-            mobile_number: {
-                mobile: true
-            },
-            phone_number: {
-                phone: true
-            }
-        }
-    });
+
+
 
     function updateOrganizations(event){
         elements.other_organization_fields.val(jQuery(this).val());
