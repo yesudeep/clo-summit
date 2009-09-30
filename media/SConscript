@@ -216,6 +216,14 @@ speaker_js = env.Concatenate([DEST_DIR + 'script/page/speaker.js'], SPEAKER_JS_F
 env.YuiCompressorMinify(speaker_js)
 #env.JsminMinify(speaker_js)
 
+base_JS_FILES =  Split("""
+    script/lib/chickoojs/src/jquery/class.animation/jquery.class.animation.js
+    script/base.js
+""")
+base_JS_FILES = [SRC_DIR + f for f in base_JS_FILES]
+page_base_js = env.Concatenate([DEST_DIR + 'script/page/base.js'], base_JS_FILES)
+env.YuiCompressorMinify(page_base_js)
+#env.JsminMinify(page_base_js)
 
 
 # Include licenses.
