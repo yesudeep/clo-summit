@@ -51,4 +51,9 @@
     </div>
 {% endblock %}
 
+{% block tag_scripts_base %}
+<script type="text/javascript">
+window.scripts.push("{{ MEDIA_URL }}script/page/base{{ MINIFIED }}.js");
+</script>
+{% endblock %}
 
