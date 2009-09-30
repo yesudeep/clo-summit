@@ -37,6 +37,7 @@ IMAGE_FILES = Split("""
     image/background/individual_pricing.png
     image/background/group_of_3_pricing.png
     image/background/group_of_6_pricing.png
+    image/background/media.png
     image/icon/favicon.png
     image/background/register.png
     image/background/survey.png
@@ -157,7 +158,7 @@ program_JS_FILES =  Split("""
 program_JS_FILES = [SRC_DIR + f for f in program_JS_FILES]
 page_program_js = env.Concatenate([DEST_DIR + 'script/page/program.js'], program_JS_FILES)
 env.YuiCompressorMinify(page_program_js)
-#env.JsminMinify(page_program_js)
+env.JsminMinify(page_program_js)
 
 screen_all_css_files =  Split("""
     css/generic.css
