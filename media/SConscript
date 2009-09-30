@@ -18,6 +18,7 @@ SCRIPT_FILES = Split("""
     script/lib/chickoojs/src/jquery/validate/jquery.validate.js
     script/lib/chickoojs/src/jquery/validate/jquery.validate.extra.js
     script/lib/chickoojs/src/jquery/alphanumeric/jquery.alphanumeric.js
+    script/lib/chickoojs/src/titleCaps.js
 
     script/register.js
     script/speaker.js
@@ -173,6 +174,7 @@ SURVEY_PARTICIPATE_JS_FILES =  Split("""
     script/lib/chickoojs/src/jquery/validate/jquery.validate.js
     script/lib/chickoojs/src/jquery/validate/jquery.validate.extra.js
     script/lib/chickoojs/src/jquery/alphanumeric/jquery.alphanumeric.js
+    script/lib/chickoojs/src/titleCaps.js
     script/forms.js
     script/survey_participate.js
 """)
@@ -189,6 +191,7 @@ REGISTER_JS_FILES =  Split("""
     script/lib/chickoojs/src/jquery/validate/jquery.validate.extra.js
     script/lib/chickoojs/src/jquery/alphanumeric/jquery.alphanumeric.js
     script/lib/chickoojs/src/jquery/defer/jquery.defer.js
+    script/lib/chickoojs/src/titleCaps.js
     script/forms.js
     script/register.js
 """)
@@ -203,6 +206,7 @@ SPEAKER_JS_FILES =  Split("""
     script/lib/chickoojs/src/jquery/validate/jquery.validate.js
     script/lib/chickoojs/src/jquery/validate/jquery.validate.extra.js
     script/lib/chickoojs/src/jquery/alphanumeric/jquery.alphanumeric.js
+    script/lib/chickoojs/src/titleCaps.js
     script/forms.js
     script/speaker.js
 """)

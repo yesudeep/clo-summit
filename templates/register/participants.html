@@ -14,25 +14,25 @@
       {% endif %}
       <label for="full_name_{{ loop.index }}">
         <span class="prefix">full name</span>
-        <input type="text" name="full_name_{{ loop.index }}" value="" class="required" />
+        <input type="text" name="full_name_{{ loop.index }}" value="" class="required capitalize" />
         <span class="suffix"></span>
       </label>
 
       <label for="organization_{{ loop.index }}">
         <span class="prefix">organization</span>
-        <input type="text" name="organization_{{ loop.index }}" {% if not loop.index == 1 %}readonly="readonly"{% endif %} value="" class="required {% if not loop.index == 1 %}organization{% endif %}" />
+        <input type="text" name="organization_{{ loop.index }}" {% if not loop.index == 1 %}readonly="readonly"{% endif %} value="" class="required capitalize {% if not loop.index == 1 %}organization{% endif %}" />
         <span class="suffix"></span>
       </label>
 
       <label for="designation_{{ loop.index }}">
         <span class="prefix">designation</span>
-        <input type="text" name="designation_{{ loop.index }}" value="" class="required" />
+        <input type="text" name="designation_{{ loop.index }}" value="" class="required capitalize" />
         <span class="suffix"></span>
       </label>
 
       <label for="department_{{ loop.index }}">
         <span class="prefix">department</span>
-        <input type="text" name="department_{{ loop.index }}" value="" class="required" />
+        <input type="text" name="department_{{ loop.index }}" value="" class="required capitalize" />
         <span class="suffix"></span>
       </label>
 
