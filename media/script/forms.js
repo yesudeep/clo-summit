@@ -57,7 +57,7 @@ jQuery(function(){
     elements.form_decorated_fields.validate({
         rules: {
             presentation: {
-              required: true,
+              //required: true,
               accept: "ppt|doc|pdf"
             },
             mobile_number: {
