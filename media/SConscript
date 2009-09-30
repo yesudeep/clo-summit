@@ -44,9 +44,9 @@ IMAGE_FILES = Split("""
     image/background/textfield_readonly.png
     image/background/button_overlay.png
     image/background/pixels.jpg
-    image/logo/facebook.png
-    image/logo/twitter.png
-    image/logo/linkedin.png
+    image/icon/facebook.png
+    image/icon/twitter.png
+    image/icon/linkedin.png
     image/background/twitter.png
 """)
 
