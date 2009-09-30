@@ -149,6 +149,14 @@ page_about_js = env.Concatenate([DEST_DIR + 'script/page/about.js'], PAGE_ABOUT_
 env.YuiCompressorMinify(page_about_js)
 #env.JsminMinify(page_about_js)
 
+program_JS_FILES =  Split("""
+    script/lib/chickoojs/src/jquery/tools/1.1.1/tools.tabs-1.0.3.js
+    script/program.js
+""")
+program_JS_FILES = [SRC_DIR + f for f in program_JS_FILES]
+page_program_js = env.Concatenate([DEST_DIR + 'script/page/program.js'], program_JS_FILES)
+env.YuiCompressorMinify(page_program_js)
+#env.JsminMinify(page_program_js)
 
 screen_all_css_files =  Split("""
     css/generic.css
