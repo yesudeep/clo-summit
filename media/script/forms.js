@@ -6,11 +6,33 @@ String.prototype.endsWith = function(str)
 {return (this.match(str+"$")==str)}
 */
 
+String.prototype.isUpperCase = function(){
+   return !!this.match(/^[^a-z]*$/);
+}
+String.prototype.isLowerCase = function(){
+   return !!this.match(/^[^A-Z]*$/);
+}
+String.prototype.isSameCase = function(){
+   return (this.isLowerCase() || this.isUpperCase());
+}
+String.prototype.sanitizeCapitalization = function(){
+   // Requires the titlecaps function by john resig.
+   if(this && this.isSameCase()){
+        console.log('same case');
+       return titleCaps(this.toLowerCase());
+   } else {
+        console.log('not same case');
+       return this;
+   }
+}
+
+
 jQuery(function(){
     var elements = {
         mobile_or_phone_fields: jQuery('form input.mobile, form input.phone'),
         form_decorated_fields: jQuery('form.decorated-fields'),
-        url_fields: jQuery('form input.url')
+        url_fields: jQuery('form input.url'),
+        capitalization_fields: jQuery('form input.capitalize')
     }, HTTP = "http://";
 
     elements.mobile_or_phone_fields.numeric({allow: '+-() '});
@@ -28,6 +50,11 @@ jQuery(function(){
         } else if (!value.startsWith(HTTP)){
             elem.val(HTTP + value);
         }
+    });
+    elements.capitalization_fields.live('change', function(event){
+       var o = jQuery(this), value = jQuery.trim(o.val());
+       console.log(value);
+       o.val(value.sanitizeCapitalization());
     });
 
     elements.form_decorated_fields.validate({
