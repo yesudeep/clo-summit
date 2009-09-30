@@ -9,6 +9,9 @@
   <fieldset>
     <legend>Person {{ loop.index }}</legend>
     <div class="column">
+      {% if loop.index > minimum %}
+      <a href="#remove" >&times; remove</a>
+      {% endif %}
       <label for="full_name_{{ loop.index }}">
         <span class="prefix">full name</span>
         <input type="text" name="full_name_{{ loop.index }}" value="" class="required" />
