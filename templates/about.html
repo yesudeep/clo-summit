@@ -41,11 +41,11 @@
         </ul>
       </aside>
       <ul class="clearboth" id="tabs">
-        <li><h2>Advisory Board &dArr;</h2></li>
-        <li><h2>Core Design Group &dArr;</h2></li>
+        <li><a href="#pane_advisory_board">Advisory Board &dArr;</a></li>
+        <li><a href="#pane_core_design_group">Core Design Group &dArr;</a></li>
       </ul>
       <ul id="panes">
-        <li>
+        <li id="pane_advisory_board">
           <ul>
             <li>Mr. Pranesh Anthapur (Coo, Yahoo! India)</li>
             <li>Dr. Arun Balakrishnan (Chairman &amp; Managing Director, HPCL)</li>
@@ -55,7 +55,7 @@
             <li>Dr. S. Parasuraman (Director, Tata Institute of Social Sciences)</li>
           </ul>
         </li>
-        <li>
+        <li id="pane_core_design_group">
           <ul>
             <li>Dr. S. Palo (Chairperson, School of Management &amp; Labour Studies, TISS)</li>
             <li>Dr. D. K. Srivastava (Professor, TISS)</li>
@@ -72,7 +72,6 @@
 {% block tag_scripts %}
 <script type="text/javascript">
   window.scripts.push("{{ MEDIA_URL }}script/page/about{{ MINIFIED }}.js");
-  window.scripts.push("{{ MEDIA_URL }}script/page/program{{ MINIFIED }}.js");
 </script>
 {% endblock %}
 
