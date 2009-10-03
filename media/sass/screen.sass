@@ -14,8 +14,8 @@ body
 #sponsor_bg
   :background-image= !url_sponsor_pixel_bg
 
-//#register_bg
-  //:background-image= !url_register_pixel_bg
+#register_bg
+  :background-image= !url_register_pixel_bg
 
 #about_bg
   :background-image= !url_about_pixel_bg
@@ -24,13 +24,13 @@ body
   //:background-image= !url_speaker_pixel_bg
 
 #research_bg
-  :background-image= !url_speaker_pixel_bg
+  :background-image= !url_research_pixel_bg
 
 #program_bg
   :background-image= !url_program_pixel_bg
 
-//#media_bg
-  //:background-image= !url_media_pixel_bg
+#media_bg
+  :background-image= !url_media_pixel_bg
 
 
 #tabs
@@ -50,23 +50,32 @@ body
       :color white
       :background-color= !color_awesome_green
 #panes
-  :background-color  #d8f5fb
+  :background-color  #91BD09
   +border-radius(10px)
+  :min-height 300px
+  :color white
   > li
     :display none
     //:margin-left 30px
     :margin-bottom 10px
     :padding 20px
+    >ul
+      >li
+        :margin-top 15px
 
 p
   :margin-bottom 15px
-  :font-size 1.1em
+  :font-size 1em
 
 h1, h2, h3
   :font-family= !font_stack_verdana
 
 strong
   :font-weight bold
+strong.question
+  :font-style italic
+  :color #007c96
+  
 ul.inline
   li
     +display-inline-block

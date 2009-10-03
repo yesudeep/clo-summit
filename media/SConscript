@@ -67,6 +67,8 @@ IMAGE_FILES = Split("""
     image/background/sponsor_pixel.jpg
     image/background/research_pixel.jpg
     image/background/program_pixel.jpg
+    image/background/register_pixel.jpg
+    image/background/media_pixel.jpg
     image/icon/star.png
 """)
 
