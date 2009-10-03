@@ -115,6 +115,12 @@ jQuery(function(){
         }
     });
 
+    /*jQuery('a[rel="email-message"]').live('click', function(event){
+        event.stopPropagation();
+
+        //return false;
+    });*/
+
 
     jQuery('a[rel="unapprove"]').live('click', function(event){
         event.stopPropagation();

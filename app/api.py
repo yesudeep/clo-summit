@@ -15,6 +15,12 @@ from os.path import splitext
 
 MAX_FETCH_LIMIT = 400
 
+MIME_TYPES = {
+    '.pdf': 'application/pdf',
+    '.doc': 'application/msword',
+    '.ppt': 'application/vnd.ms-powerpoint',
+}
+
 logging.basicConfig(level=logging.INFO)
 
 class UserApproveHandler(webapp.RequestHandler):
@@ -135,10 +141,16 @@ class SpeakerListHandler(webapp.RequestHandler):
         speakers = Speaker.get_all()
         speaker_list = []
         for speaker in speakers:
-            speaker_list.append(speaker.to_json_dict('full_name',
+            speaker_list.append(speaker.to_json_dict('full_name', 'email',
                 'is_starred', 'is_active', 'is_deleted', 'when_created'))
         response = json.dumps(speaker_list)
         self.response.out.write(response)
+
+class SpeakerDownloadPresentationHandler(webapp.RequestHandler):
+    def get(self, key, filename):
+        speaker = db.get(db.Key(key))
+        self.response.headers['Content-Type'] = MIME_TYPES.get(speaker.presentation_extension, MIME_TYPES.get('.pdf'))
+        self.response.out.write(speaker.presentation)
 
 class SurveyParticipantEditHandler(webapp.RequestHandler):
     def get(self, key):
@@ -165,7 +177,7 @@ class SurveyParticipantListHandler(webapp.RequestHandler):
         survey_participants = SurveyParticipant.get_all()
         survey_participant_list = []
         for survey_participant in survey_participants:
-            survey_participant_list.append(survey_participant.to_json_dict('full_name',
+            survey_participant_list.append(survey_participant.to_json_dict('full_name', 'email',
                 'is_starred', 'is_active', 'is_deleted', 'when_created'))
         response = json.dumps(survey_participant_list)
         self.response.out.write(response)
@@ -223,10 +235,12 @@ class ParticipantListHandler(webapp.RequestHandler):
         participants = Participant.get_all()
         participant_list = []
         for participant in participants:
-            participant_list.append(participant.to_json_dict('full_name',
+            participant_list.append(participant.to_json_dict('full_name', 'email',
                 'is_starred', 'is_active', 'is_deleted', 'when_created'))
         response = json.dumps(participant_list)
         self.response.out.write(response)
+
+
 
 
 urls = [
@@ -256,6 +270,7 @@ urls = [
     (r'/api/speakers/list/?', SpeakerListHandler),
     (r'/api/speakers/new/?', SpeakerNewHandler),
     (r'/api/speakers/(.*)/edit/?', SpeakerEditHandler),
+    (r'/api/speakers/(.*)/download/(.*)/?', SpeakerDownloadPresentationHandler),
 ]
 application = webapp.WSGIApplication(urls, debug=config.DEBUG)
 

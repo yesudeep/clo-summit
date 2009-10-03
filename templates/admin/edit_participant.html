@@ -13,7 +13,7 @@
     <label for="email">
       <span class="prefix">email</span>
       <input type="text" name="email" value="{{ participant.email }}" class="required email" />
-      <span class="suffix"></span>
+      <span class="suffix"><a rel="email-message" href="mailto:{{ participant.email }}">Send email message</a></span>
     </label>
 
     <label for="mobile_number">
