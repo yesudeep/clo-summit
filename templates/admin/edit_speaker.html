@@ -14,7 +14,7 @@
     <label for="email">
       <span class="prefix">email</span>
       <input type="text" name="email" value="{{ speaker.email }}" class="required email" />
-      <span class="suffix"></span>
+      <span class="suffix"><a rel="email-message" href="mailto:{{ speaker.email }}">Send email message</a></span>
     </label>
 
     <label for="mobile_number">
@@ -65,11 +65,20 @@
       <span class="suffix"></span>
     </label>
 
+
+    <label for="existing_presentation">
+      <span class="prefix">existing presentation</span>
+      <input type="hidden" name="existing_presentation" value="" />
+      <span class="suffix">{% if speaker.presentation_filename %}<a class="awesome-button" href="/api/speakers/{{ speaker.key() }}/download/{{ speaker.presentation_filename }}">Download {{ speaker.presentation_filename }}</a>. {% endif %}
+</span>
+    </label>
+
+
     <label for="presentation">
       <span class="prefix">presentation</span>
       <input type="file" name="presentation" value="" />
       <input type="hidden" name="presentation_filename" value="" />
-      <span class="suffix">Please upload a PowerPoint presentation, a Word document, or a PDF document only.</span>
+      <span class="suffix">Please upload a PowerPoint presentation, a Word document, or a PDF document only. </span>
     </label>
 
 

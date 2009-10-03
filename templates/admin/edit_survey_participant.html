@@ -13,7 +13,7 @@
     <label for="email">
       <span class="prefix">email</span>
       <input type="text" name="email" value="{{ survey_participant.email }}" class="required email" />
-      <span class="suffix"></span>
+      <span class="suffix"><a rel="email-message" href="mailto:{{ survey_participant.email }}">Send email message</a></span>
     </label>
 
     <label for="mobile_number">
