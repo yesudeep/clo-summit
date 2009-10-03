@@ -51,6 +51,11 @@ IMAGE_FILES = Split("""
     image/icon/twitter.png
     image/icon/linkedin.png
     image/background/twitter.png
+    
+    image/background/about_pixel.jpg
+    image/background/sponsor_pixel.jpg
+    image/background/research_pixel.jpg
+    image/background/program_pixel.jpg
 """)
 
 CSS_FILES = Split("""
