@@ -62,7 +62,15 @@ IMAGE_FILES = Split("""
     image/icon/twitter.png
     image/icon/linkedin.png
     image/background/twitter.png
+<<<<<<< HEAD:media/SConscript
+    
+    image/background/about_pixel.jpg
+    image/background/sponsor_pixel.jpg
+    image/background/research_pixel.jpg
+    image/background/program_pixel.jpg
+=======
     image/icon/star.png
+>>>>>>> 54d58330c26ab8a25b9bbdf58b8786561cb264fa:media/SConscript
 """)
 
 CSS_FILES = Split("""
