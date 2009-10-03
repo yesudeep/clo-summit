@@ -21,6 +21,7 @@ __MACOSX__
 .sass-cache
 media/css/screen.css
 media/css/print.css
+media/css/admin.css
 
 app/public
 app/templates
