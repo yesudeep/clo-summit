@@ -36,13 +36,27 @@ body
 #tabs
   :margin-left 10px
   > li
+    //:padding 20px
     +display-inline-block
-    :padding 20px
-  
+    > a
+      :display block
+      :background-color #BCE37F
+      :color black
+      :padding 10px
+      :margin-right 10px
+      +border-top-right-radius(10px)
+      +border-top-left-radius(10px)
+    > a.current
+      :color white
+      :background-color= !color_awesome_green
 #panes
+  :background-color  #d8f5fb
+  +border-radius(10px)
   > li
     :display none
-    :margin-left 30px
+    //:margin-left 30px
+    :margin-bottom 10px
+    :padding 20px
 
 p
   :margin-bottom 15px
@@ -136,7 +150,7 @@ header
 
 section
   //:width 90%
-  :margin 0px auto 20px
+  :margin 0px auto 50px
   :overflow auto
   h1
     :color= !color_nav_link
@@ -149,9 +163,9 @@ section
   h3
     :color= !color_nav_link
     :font-size 1.1em
-  ul
-    li
-      :margin-top 15px
+  //> ul
+    //> li
+      //:margin-top 15px
 
 aside
   ul
@@ -365,5 +379,4 @@ ol#breadcrumbs
     :position absolute
     :top -35px
     :left -20px
-
 

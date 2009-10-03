@@ -151,6 +151,7 @@ class SpeakerNominationHandler(webapp.RequestHandler):
 
     def post(self):
         presentation_filename = self.request.get('presentation_filename')
+        presentation = self.request.get('presentation')
 
         speaker = Speaker()
         speaker.full_name = self.request.get('full_name')
@@ -163,9 +164,10 @@ class SpeakerNominationHandler(webapp.RequestHandler):
         speaker.mobile_number = self.request.get('mobile_number')
         speaker.research_topic = self.request.get('research_topic')
         speaker.bio_sketch = self.request.get('bio_sketch')
-        speaker.presentation = db.Blob(self.request.get('presentation'))
-        speaker.presentation_filename = presentation_filename
-        speaker.presentation_extension = splitext(presentation_filename)[1]
+        if presentation_filename:
+            speaker.presentation = db.Blob(presentation)
+            speaker.presentation_filename = presentation_filename
+            speaker.presentation_extension = splitext(presentation_filename)[1]
         speaker.put()
 
         queue_mail_task(url='/worker/mail/thanks/speaker_nomination/',
