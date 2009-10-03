@@ -15,21 +15,31 @@ env.Cheetah(TEMPLATE_BUILD_DIR + 'base_site.html', 'base_site.html.tmpl', PICKLE
 env.Cheetah(TEMPLATE_BUILD_DIR + 'admin/base_site.html', 'base_site.html.tmpl', PICKLE=base_site_pickle)
 
 HTML_FILES = Split("""
-  base.html
-  index.html
-  about.html
-  research/research.html
-  research/participate.html
-  research/thank_you.html
-  program.html
-  sponsors.html
-  media.html
-  register/wizard.html
-  register/pricing.html
-  register/participants.html
-  register/payment.html
-  speaker.html
-  thank_you.html
+    base.html
+    index.html
+    about.html
+    research/research.html
+    research/participate.html
+    research/thank_you.html
+    program.html
+    sponsors.html
+    media.html
+    register/wizard.html
+    register/pricing.html
+    register/participants.html
+    register/payment.html
+    speaker.html
+    thank_you.html
+    admin/generic_list.html
+    admin/base.html
+    admin/index.html
+    admin/edit.html
+    admin/edit_speaker.html
+    admin/edit_survey_participant.html
+    admin/edit_participant.html
+    admin/new.html
+    admin/new_participant.html
+    admin/new_speaker.html
 """)
 
 TEMPLATE_FILES = HTML_FILES + Split("""

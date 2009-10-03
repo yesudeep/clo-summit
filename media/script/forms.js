@@ -34,12 +34,7 @@ jQuery(function(){
     }, HTTP = "http://";
 
     elements.mobile_or_phone_fields.numeric({allow: '+-() '});
-    elements.url_fields/*.focus(function(event){
-        var elem = jQuery(this), value = elem.val();
-        if (!jQuery.trim(value)){
-            elem.val(HTTP);
-        }
-    })*/.keyup(function(event){
+    elements.url_fields.keyup(function(event){
         var elem = jQuery(this), value = elem.val();
         if (value == 'http:/'){
             // For now handle only one common case where the user may press a backspace
