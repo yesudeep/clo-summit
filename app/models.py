@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from google.appengine.api import memcache
 from google.appengine.ext import db
 from datetime import datetime
 from hc_gae_util.db.models import RegularModel
@@ -26,6 +27,8 @@ PRICING = [
 
 SURVEY_LINK = "http://www.surveymonkey.com/s.aspx?sm=hZXdTol4KmfnW0ZBoxxaow_3d_3d"
 
+MAX_FETCH_LIMIT = 1000
+
 def get_pricing_per_individual(count=1, min_price=5500):
     if count >= len(PRICING):
         return min_price
@@ -47,6 +50,17 @@ class Participant(RegularModel):
     address = db.PostalAddressProperty()
     group = db.ReferenceProperty(ParticipantGroup, collection_name='participants')
 
+    @classmethod
+    def get_all(cls):
+        cache_key = 'Participant.get_all'
+        participants = memcache.get(cache_key)
+        if not participants:
+            participants = db.Query(Participant).order('full_name').fetch(MAX_FETCH_LIMIT)
+            memcache.set(cache_key, participants, 120)
+        return participants
+
+
+
 class Speaker(RegularModel):
     full_name = db.StringProperty()
     designation = db.StringProperty()
@@ -62,6 +76,15 @@ class Speaker(RegularModel):
     presentation_filename = db.StringProperty()
     presentation_extension = db.StringProperty()
 
+    @classmethod
+    def get_all(cls):
+        cache_key = 'Speaker.get_all'
+        speakers = memcache.get(cache_key)
+        if not speakers:
+            speakers = db.Query(Speaker).order('full_name').fetch(MAX_FETCH_LIMIT)
+            memcache.set(cache_key, speakers, 120)
+        return speakers
+
 class SurveyParticipant(RegularModel):
     full_name = db.StringProperty()
     designation = db.StringProperty()
@@ -72,4 +95,13 @@ class SurveyParticipant(RegularModel):
     city = db.StringProperty()
     email = db.EmailProperty()
     mobile_number = db.StringProperty()
+
+    @classmethod
+    def get_all(cls):
+        cache_key = 'SurveyParticipant.get_all'
+        survey_participants = memcache.get(cache_key)
+        if not survey_participants:
+            survey_participants = db.Query(SurveyParticipant).order('full_name').fetch(MAX_FETCH_LIMIT)
+            memcache.set(cache_key, survey_participants, 120)
+        return survey_participants
 
