@@ -1,0 +1,76 @@
+{% extends "admin/new.html" %}
+
+
+{% block form_action %}/api/speakers/new/{% endblock %}
+
+{% block form_fields %}
+
+    <label for="full_name">
+      <span class="prefix">full name</span>
+      <input type="text" name="full_name" value="" class="required capitalize" />
+      <span class="suffix"></span>
+    </label>
+
+    <label for="email">
+      <span class="prefix">email</span>
+      <input type="text" name="email" value="" class="required email" />
+      <span class="suffix"></span>
+    </label>
+
+    <label for="mobile_number">
+      <span class="prefix">mobile number</span>
+      <input type="text" name="mobile_number" value="" class="required mobile" />
+      <span class="suffix"></span>
+    </label>
+
+    <label for="designation">
+      <span class="prefix">designation</span>
+      <input type="text" name="designation" value="" class="required capitalize" />
+      <span class="suffix"></span>
+    </label>
+
+    <label for="organization">
+      <span class="prefix">organization</span>
+      <input type="text" name="organization" value="" class="required capitalize" />
+      <span class="suffix"></span>
+    </label>
+
+    <label for="department">
+      <span class="prefix">department</span>
+      <input type="text" name="department" value="" class="required capitalize" />
+      <span class="suffix"></span>
+    </label>
+
+    <label for="organization_website">
+      <span class="prefix">organization website</span>
+      <input type="text" name="organization_website" value="" class="required url" />
+      <span class="suffix"></span>
+    </label>
+
+    <label for="city">
+      <span class="prefix">city</span>
+      <input type="text" name="city" value="" class="required capitalize" />
+      <span class="suffix"></span>
+    </label>
+
+    <label for="research_topic">
+      <span class="prefix">research topic</span>
+      <input type="text" name="research_topic" value="" class="required capitalize" />
+      <span class="suffix"></span>
+    </label>
+
+    <label for="bio_sketch">
+      <span class="prefix">bio sketch</span>
+      <textarea name="bio_sketch" rows="8" cols="40" class="required"></textarea>
+      <span class="suffix"></span>
+    </label>
+
+    <label for="presentation">
+      <span class="prefix">presentation</span>
+      <input type="file" name="presentation" value="" />
+      <input type="hidden" name="presentation_filename" value="" />
+      <span class="suffix">Please upload a PowerPoint presentation, a Word document, or a PDF document only.</span>
+    </label>
+
+{% endblock %}
+

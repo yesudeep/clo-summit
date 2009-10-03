@@ -1,0 +1,68 @@
+{% extends "admin/edit.html" %}
+
+
+{% block form_action %}/api/survey_participants/{{ survey_participant.key() }}/edit/{% endblock %}
+
+{% block form_fields %}
+    <label for="full_name">
+      <span class="prefix">full name</span>
+      <input type="text" name="full_name" value="{{ survey_participant.full_name }}" class="required capitalize" />
+      <span class="suffix"></span>
+    </label>
+
+    <label for="email">
+      <span class="prefix">email</span>
+      <input type="text" name="email" value="{{ survey_participant.email }}" class="required email" />
+      <span class="suffix"></span>
+    </label>
+
+    <label for="mobile_number">
+      <span class="prefix">mobile number</span>
+      <input type="text" name="mobile_number" value="{{ survey_participant.mobile_number }}" class="required mobile" />
+      <span class="suffix"></span>
+    </label>
+
+
+    <label for="designation">
+      <span class="prefix">designation</span>
+      <input type="text" name="designation" value="{{ survey_participant.designation }}" class="required capitalize" />
+      <span class="suffix"></span>
+    </label>
+
+    <label for="department">
+      <span class="prefix">department</span>
+      <input type="text" name="department" value="{{ survey_participant.department }}" class="required capitalize" />
+      <span class="suffix"></span>
+    </label>
+
+    <label for="job_type">
+      <span class="prefix">job type</span>
+      <select name="job_type">
+        {% for job_type in job_types %}
+        <option value="{{ job_type.0 }}" {% if job_type.0 == survey_participant.job_type %}selected="selected"{% endif %}>{{ job_type.1 }}</option>
+        {% endfor %}
+      </select>
+      <span class="suffix"></span>
+    </label>
+
+    <label for="organization">
+      <span class="prefix">organization</span>
+      <input type="text" name="organization" value="{{ survey_participant.organization }}" class="required capitalize" />
+      <span class="suffix"></span>
+    </label>
+
+    <label for="organization_website">
+      <span class="prefix">organization website</span>
+      <input type="text" name="organization_website" value="{{ survey_participant.organization_website }}" class="required url" />
+      <span class="suffix"></span>
+    </label>
+
+    <label for="city">
+      <span class="prefix">city</span>
+      <input type="text" name="city" value="{{ survey_participant.city }}" class="required capitalize" />
+      <span class="suffix"></span>
+    </label>
+
+
+{% endblock %}
+
