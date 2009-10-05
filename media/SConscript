@@ -70,6 +70,7 @@ IMAGE_FILES = Split("""
     image/background/register_pixel.jpg
     image/background/media_pixel.jpg
     image/icon/star.png
+    image/icon/down_arrow.png
 """)
 
 CSS_FILES = Split("""

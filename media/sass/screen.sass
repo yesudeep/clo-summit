@@ -35,33 +35,42 @@ body
 
 #tabs
   :margin-left 10px
+  :font-family= !font_stack_verdana
   > li
     //:padding 20px
     +display-inline-block
     > a
       :display block
-      :background-color #BCE37F
-      :color black
-      :padding 10px
+      :color white
+      :padding 10px 25px 10px 10px
       :margin-right 10px
+      :background= "transparent" !url_down_arrow "no-repeat scroll right center"
       +border-top-right-radius(10px)
       +border-top-left-radius(10px)
-    > a.current
-      :color white
-      :background-color= !color_awesome_green
+    > a.color-green
+      :background-color #7a9a00
+    >a.color-blue
+      :background-color #007c96
 #panes
-  :background-color  #91BD09
-  +border-radius(10px)
   :min-height 300px
   :color white
+  :font-family= !font_stack_verdana
   > li
+    +border-radius(10px)
     :display none
     //:margin-left 30px
     :margin-bottom 10px
     :padding 20px
-    >ul
+    p
+      :border-bottom 1px solid #016d84
+      :padding-bottom 10px
+    ul
       >li
         :margin-top 15px
+  >li.color-green
+    :background-color #7a9a00
+  >li.color-blue
+    :background-color #007c96
 
 p
   :margin-bottom 15px
