@@ -236,6 +236,16 @@ speaker_js = env.Concatenate([DEST_DIR + 'script/page/speaker.js'], SPEAKER_JS_F
 env.YuiCompressorMinify(speaker_js)
 #env.JsminMinify(speaker_js)
 
+ie_js_FILES = Split("""
+    script/lib/rounded-corner/corner.js
+    script/ie.js
+""")
+ie_js_FILES = [SRC_DIR + f for f in ie_js_FILES]
+ie_js = env.Concatenate([DEST_DIR + 'script/page/ie.js'], ie_js_FILES)
+env.YuiCompressorMinify(ie_js)
+#env.JsminMinify(ie_js)
+
+
 base_JS_FILES =  Split("""
     script/lib/chickoojs/src/jquery/class.animation/jquery.class.animation.js
     script/base.js
