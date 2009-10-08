@@ -13,11 +13,11 @@
   <![endif]-->
   <!--[if IE 8]>
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/ie8.css" type="text/css" media="screen" charset="utf-8" />
-  <![endif]-->
-  <!--[if lt IE 7]>
+  <![endif]-->*#
+  #*<!--[if lt IE 7]>
       <script src="http://ie7-js.googlecode.com/svn/version/2.0(beta3)/IE7.js" type="text/javascript"></script>
   <![endif]-->*#
-  {% endblock %}
+    {% endblock %}
 {% endblock %}
 
 {% block tag_body %}
@@ -47,7 +47,12 @@
         </header>
       {% endblock %}
       {% block tag_trunk %}{% endblock %}
-      {% block tag_footer %}{% endblock %}
+      {% block tag_footer %} 
+      <footer>
+        Copyright &copy; 2009 <a href="http://www.leapvault.com">LeapVault</a>. 
+        <!--h6>Designed and developed by <a href="http://www.happychickoo.com">HappyChickoo</a></h6-->
+      </footer>
+      {% endblock %}
     </div>
 {% endblock %}
 
@@ -55,5 +60,12 @@
 <script type="text/javascript">
 window.scripts.push("{{ MEDIA_URL }}script/page/base{{ MINIFIED }}.js");
 </script>
+
+<!--[if IE]>
+<script type="text/javascript">
+window.scripts.push("{{ MEDIA_URL }}script/page/ie.js");
+</script>
+<![endif]-->
+
 {% endblock %}
 

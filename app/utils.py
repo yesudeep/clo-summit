@@ -11,7 +11,7 @@ import urllib
 import logging
 from hc_gae_util.jinja_loaders import PythonLoader
 
-jinja_env = Environment(loader=PythonLoader(['templates']))
+jinja_env = Environment(loader=FileSystemLoader(['templates']))
 
 #Jinja2 custom filters
 def datetimeformat(value, format='%H:%M / %d-%m-%Y'):

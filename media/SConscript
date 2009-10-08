@@ -67,7 +67,10 @@ IMAGE_FILES = Split("""
     image/background/sponsor_pixel.jpg
     image/background/research_pixel.jpg
     image/background/program_pixel.jpg
+    image/background/register_pixel.jpg
+    image/background/media_pixel.jpg
     image/icon/star.png
+    image/icon/down_arrow.png
 """)
 
 CSS_FILES = Split("""
@@ -233,6 +236,16 @@ SPEAKER_JS_FILES = [SRC_DIR + f for f in SPEAKER_JS_FILES]
 speaker_js = env.Concatenate([DEST_DIR + 'script/page/speaker.js'], SPEAKER_JS_FILES)
 env.YuiCompressorMinify(speaker_js)
 #env.JsminMinify(speaker_js)
+
+ie_js_FILES = Split("""
+    script/lib/rounded-corner/corner.js
+    script/ie.js
+""")
+ie_js_FILES = [SRC_DIR + f for f in ie_js_FILES]
+ie_js = env.Concatenate([DEST_DIR + 'script/page/ie.js'], ie_js_FILES)
+env.YuiCompressorMinify(ie_js)
+#env.JsminMinify(ie_js)
+
 
 base_JS_FILES =  Split("""
     script/lib/chickoojs/src/jquery/class.animation/jquery.class.animation.js

@@ -77,8 +77,8 @@ if DEPLOYMENT_MODE == DEPLOYMENT_MODE_DEVELOPMENT:
     ABSOLUTE_ROOT_URL = 'http://%s:%s/' %(SERVER_NAME, SERVER_PORT)
     PRIMARY_URL = '/'
     SECURE_URL = '/'
-    #MINIFIED = ''
-    MINIFIED = '-min'
+    MINIFIED = ''
+    #MINIFIED = '-min'
 else:
     LOCAL = False
     DEBUG = False

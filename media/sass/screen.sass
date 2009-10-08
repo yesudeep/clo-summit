@@ -11,23 +11,23 @@ body
   :line-height 1.4
   :font-family= !font_stack_garamond
   
-#sponsor_bg
-  :background-image= !url_sponsor_pixel_bg
+//#sponsor_bg
+  //:background-image= !url_sponsor_pixel_bg
 
 //#register_bg
   //:background-image= !url_register_pixel_bg
 
-#about_bg
-  :background-image= !url_about_pixel_bg
+//#about_bg
+  //:background-image= !url_about_pixel_bg
 
 //#speaker_bg
   //:background-image= !url_speaker_pixel_bg
 
-#research_bg
-  :background-image= !url_speaker_pixel_bg
+//#research_bg
+  //:background-image= !url_research_pixel_bg
 
-#program_bg
-  :background-image= !url_program_pixel_bg
+//#program_bg
+  //:background-image= !url_program_pixel_bg
 
 //#media_bg
   //:background-image= !url_media_pixel_bg
@@ -35,38 +35,56 @@ body
 
 #tabs
   :margin-left 10px
+  :font-family= !font_stack_verdana
   > li
     //:padding 20px
     +display-inline-block
     > a
       :display block
-      :background-color #BCE37F
-      :color black
-      :padding 10px
+      :color white
+      :padding 10px 25px 10px 10px
       :margin-right 10px
+      :background= "transparent" !url_down_arrow "no-repeat scroll right center"
       +border-top-right-radius(10px)
       +border-top-left-radius(10px)
-    > a.current
-      :color white
-      :background-color= !color_awesome_green
+    > a.color-green
+      :background-color #7a9a00
+    >a.color-blue
+      :background-color #007c96
 #panes
-  :background-color  #d8f5fb
-  +border-radius(10px)
+  :min-height 300px
+  :color white
+  :font-family= !font_stack_verdana
   > li
+    +border-radius(10px)
     :display none
     //:margin-left 30px
     :margin-bottom 10px
     :padding 20px
+    p
+      :border-bottom 1px solid #016d84
+      :padding-bottom 10px
+    ul
+      >li
+        :margin-top 15px
+  >li.color-green
+    :background-color #7a9a00
+  >li.color-blue
+    :background-color #007c96
 
 p
   :margin-bottom 15px
-  :font-size 1.1em
+  :font-size 1em
 
 h1, h2, h3
   :font-family= !font_stack_verdana
 
 strong
   :font-weight bold
+strong.question
+  :font-style italic
+  :color #007c96
+  
 ul.inline
   li
     +display-inline-block
@@ -92,7 +110,10 @@ a.toggle_view
 a.toggle_view:hover
   ol.toggle_content
     :display block
-
+    
+footer
+  :font-size 0.8em
+  :color #999
 #main_wrapper
   +grid-container
   :background= "transparent" !url_nav_bg "no-repeat scroll top right"
@@ -333,6 +354,7 @@ ol#breadcrumbs
   +border-radius(10px)
   :font-family= !font_stack_verdana
   :font-size 0.8em
+  :margin 0px 0px 10px 15px
   tbody
     caption
       :text-align center
@@ -351,7 +373,7 @@ ol#breadcrumbs
 //Tweet //
 #tweets
   :position absolute
-  :background-color= rgba(0, 118, 162, 0.4)
+  :background-color= rgb(153, 200, 218)
   +border-radius(10px)
   :top 550px
   :width 300px
