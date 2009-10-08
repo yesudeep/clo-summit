@@ -35,12 +35,17 @@ SERVER_PORT = os.environ['SERVER_PORT']
 SERVER_NAME = os.environ['SERVER_NAME']
 SERVER_SOFTWARE = os.environ['SERVER_SOFTWARE']
 PRODUCTION_HTTP_PORT = 80
+
+
+DEPLOYMENT_MODE_DEVELOPMENT = 'development'
+DEPLOYMENT_MODE_PRODUCTION = 'production'
+
 #DEPLOYMENT_MODE = 'development' if 'Development' in SERVER_SOFTWARE else 'production'
 if SERVER_PORT and SERVER_PORT != str(PRODUCTION_HTTP_PORT):
-    DEPLOYMENT_MODE = 'development'
+    DEPLOYMENT_MODE = DEPLOYMENT_MODE_DEVELOPMENT
     HOST_NAME = '%s:%s' % (SERVER_NAME, SERVER_PORT)
 else:
-    DEPLOYMENT_MODE = 'production'
+    DEPLOYMENT_MODE = DEPLOYMENT_MODE_PRODUCTION
     HOST_NAME = SERVER_NAME
 
 #logging.debug(HOST_NAME)
@@ -66,7 +71,7 @@ NO_REPLY_MAIL_SIGNATURE = MAIL_SIGNATURE + '''
 Please do not reply to this system generated message.
 '''
 
-if DEPLOYMENT_MODE == 'development':
+if DEPLOYMENT_MODE == DEPLOYMENT_MODE_DEVELOPMENT:
     LOCAL = True
     DEBUG = True
     ABSOLUTE_ROOT_URL = 'http://%s:%s/' %(SERVER_NAME, SERVER_PORT)

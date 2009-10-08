@@ -3,17 +3,19 @@
 
 
 import configuration as config
+import logging
+
+from decimal import Decimal
+from google.appengine.api import memcache
 from google.appengine.ext import webapp, db
 from google.appengine.ext.webapp.util import run_wsgi_app
-from utils import render_template, dec
-from google.appengine.api import memcache
-#from appengine_utilities import Session
-from models import Participant, ParticipantGroup, SurveyParticipant, Speaker, JOB_TYPE_TUPLE_MAP, get_pricing_per_individual, SURVEY_LINK
+from hc_gae_util.data.countries import COUNTRIES_SELECTION_LIST
 from hc_gae_util.sessions import SessionRequestHandler
-from decimal import Decimal
-from utils import queue_mail_task
 from os.path import splitext
-import logging
+from utils import queue_mail_task, render_template, dec
+
+from models import Participant, ParticipantGroup, SurveyParticipant, Speaker, JOB_TYPE_TUPLE_MAP, get_pricing_per_individual, SURVEY_LINK
+
 
 logging.basicConfig(level=logging.INFO)
 
@@ -76,7 +78,7 @@ class RegisterParticipantsHandler(SessionRequestHandler):
     def get(self):
         count = dec(self.request.get('count'))
         minimum = dec(self.request.get('min'))
-        response = render_template('register/participants.html', count=count, minimum=minimum)
+        response = render_template('register/participants.html', count=count, minimum=minimum, countries=COUNTRIES_SELECTION_LIST)
         self.response.out.write(response)
 
     def post(self):
@@ -103,6 +105,10 @@ class RegisterParticipantsHandler(SessionRequestHandler):
                 participant.designation = self.request.get('designation_' + i)
                 participant.organization = self.request.get('organization_' + i)
                 participant.department = self.request.get('department_' + i)
+                participant.country_code = self.request.get('country_code_' + i)
+                participant.state_province = self.request.get('state_province_' + i)
+                participant.city = self.request.get('city_' + i)
+                participant.zip_code = self.request.get('zip_code_' + i)
                 participant.pricing = pricing
                 participant.group = group
                 total_price += pricing
@@ -182,7 +188,7 @@ class SpeakerNominationHandler(webapp.RequestHandler):
 
         response = render_template('thank_you.html', message_title='Thank you for nominating a speaker.', message_body='We appreciate your taking the time to nominating a speaker.  We will get in touch with you soon')
         self.response.out.write(response)
-        
+
 class UnsupportedBrowserPage(webapp.RequestHandler):
     def get(self):
         cache_key = 'unsupported_browser_page'
@@ -193,7 +199,7 @@ class UnsupportedBrowserPage(webapp.RequestHandler):
             response = render_template('ie.html')
             memcache.set(cache_key, response, 10)
             self.response.out.write(response)
-                    
+
 
 urls = (
     ('/', IndexPage),

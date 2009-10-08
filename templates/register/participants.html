@@ -41,9 +41,6 @@
         <input type="text" name="email_{{ loop.index }}" value="" class="required email" />
         <span class="suffix"></span>
       </label>
-    </div>
-
-    <div class="column">
 
       <label for="mobile_number_{{ loop.index }}">
         <span class="prefix">mobile number</span>
@@ -53,8 +50,40 @@
 
       <label for="phone_number_{{ loop.index }}">
         <span class="prefix">business phone number</span>
-        <input type="text" name="phone_number_{{ loop.index }}" value="" class="required phone" />
+        <input type="text" name="phone_number_{{ loop.index }}" value="" class="required phone {% if not loop.index == 1 %}phone_number{% endif %}" />
         <span class="suffix">Include your <a href="http://en.wikipedia.org/wiki/List_of_country_calling_codes" target="_blank"> country code</a> and full phone number. eg. +1 650 555 1212</span>
+      </label>
+
+    </div>
+
+    <div class="column">
+
+      <label for="country_code_{{ loop.index }}">
+        <span class="prefix">country</span>
+        <select name="country_code_{{ loop.index }}" class="required {% if not loop.index == 1 %}country_code{% endif %}">
+          {% for country in countries %}
+          <option value="{{ country.2 }}">{{ country.0 }}</option>
+          {% endfor %}
+        </select>
+        <span class="suffix"></span>
+      </label>
+
+      <label for="state_province_{{ loop.index }}">
+        <span class="prefix">state/province</span>
+        <input type="text" name="state_province_{{ loop.index }}" value="" class="required capitalize {% if not loop.index == 1 %}state_province{% endif %}" />
+        <span class="suffix"></span>
+      </label>
+
+      <label for="city_{{ loop.index }}">
+        <span class="prefix">city</span>
+        <input type="text" name="city_{{ loop.index }}" value="" class="required capitalize {% if not loop.index == 1 %}city{% endif %}" />
+        <span class="suffix"></span>
+      </label>
+
+      <label for="zip_code_{{ loop.index }}">
+        <span class="prefix">zip code</span>
+        <input type="text" name="zip_code_{{ loop.index }}" value="" class="required {% if not loop.index == 1 %}zip_code{% endif %}" />
+        <span class="suffix"></span>
       </label>
 
       <label for="address_{{ loop.index }}">
@@ -68,7 +97,7 @@
 
   <label for="submit">
     <span class="prefix"></span>
-    <input type="submit" name="submit" value="Make payment &raquo;" />
+    <input type="submit" name="submit" value="Add participants &raquo;" />
     <span class="suffix"></span>
   </label>
 
