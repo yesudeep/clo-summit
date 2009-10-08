@@ -71,6 +71,13 @@ IMAGE_FILES = Split("""
     image/background/media_pixel.jpg
     image/icon/star.png
     image/icon/down_arrow.png
+    
+    image/browser/get_chrome.png
+    image/browser/get_firefox.png
+    image/browser/get_ie.png
+    image/browser/get_opera.png
+    image/browser/get_safari.png
+    
 """)
 
 CSS_FILES = Split("""
@@ -78,6 +85,7 @@ CSS_FILES = Split("""
     css/generic.css
     css/print.css
     css/admin.css
+    css/ie.css
 """)
 
 # Do not include IMAGE files in here.

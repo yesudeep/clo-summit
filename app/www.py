@@ -6,6 +6,7 @@ import configuration as config
 from google.appengine.ext import webapp, db
 from google.appengine.ext.webapp.util import run_wsgi_app
 from utils import render_template, dec
+from google.appengine.api import memcache
 #from appengine_utilities import Session
 from models import Participant, ParticipantGroup, SurveyParticipant, Speaker, JOB_TYPE_TUPLE_MAP, get_pricing_per_individual, SURVEY_LINK
 from hc_gae_util.sessions import SessionRequestHandler
@@ -181,6 +182,18 @@ class SpeakerNominationHandler(webapp.RequestHandler):
 
         response = render_template('thank_you.html', message_title='Thank you for nominating a speaker.', message_body='We appreciate your taking the time to nominating a speaker.  We will get in touch with you soon')
         self.response.out.write(response)
+        
+class UnsupportedBrowserPage(webapp.RequestHandler):
+    def get(self):
+        cache_key = 'unsupported_browser_page'
+        cached_response = memcache.get(cache_key)
+        if cached_response:
+            self.response.out.write(cached_response)
+        else:
+            response = render_template('ie.html')
+            memcache.set(cache_key, response, 10)
+            self.response.out.write(response)
+                    
 
 urls = (
     ('/', IndexPage),
@@ -194,6 +207,7 @@ urls = (
     ('/register/pricing/?', RegisterPricingHandler),
     ('/register/payment/?', RegisterPaymentHandler),
     ('/register/participants/?', RegisterParticipantsHandler),
+    ('/unsupported/browser/?', UnsupportedBrowserPage)
 )
 
 application = webapp.WSGIApplication(urls, debug=config.DEBUG)
