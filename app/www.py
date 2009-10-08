@@ -10,12 +10,18 @@ from google.appengine.api import memcache
 from google.appengine.ext import webapp, db
 from google.appengine.ext.webapp.util import run_wsgi_app
 from hc_gae_util.data.countries import COUNTRIES_SELECTION_LIST
+from hc_gae_util.data.geoip import ip_address_to_country_code
 from hc_gae_util.sessions import SessionRequestHandler
 from os.path import splitext
 from utils import queue_mail_task, render_template, dec
 
-from models import Participant, ParticipantGroup, SurveyParticipant, Speaker, JOB_TYPE_TUPLE_MAP, get_pricing_per_individual, SURVEY_LINK
+from models import Participant, ParticipantGroup, SurveyParticipant, Speaker, JOB_TYPE_TUPLE_MAP, get_pricing_per_individual, SURVEY_LINK, BillingSettings
+from ebs import MODE_DEVELOPMENT, MODE_PRODUCTION, PAYMENT_GATEWAY_URL, ShippingContact, BillingContact, BillingInformation
 
+if config.DEPLOYMENT_MODE == config.DEPLOYMENT_MODE_PRODUCTION:
+    ebs_mode = MODE_PRODUCTION
+elif config.DEPLOYMENT_MODE == config.DEPLOYMENT_MODE_DEVELOPMENT:
+    ebs_mode = MODE_DEVELOPMENT
 
 logging.basicConfig(level=logging.INFO)
 
@@ -57,19 +63,53 @@ class RegisterPricingHandler(SessionRequestHandler):
 class RegisterPaymentHandler(SessionRequestHandler):
     def get(self):
         participants = self.session.get('participants', None)
-        total_price = self.session.get('total_price', None)
         if participants:
+            total_price = self.session.get('total_price', None)
+            primary_participant = self.session.get('primary_participant')
+            participant_count = self.session.get('participant_count')
             db.put(participants)
-            for participant in participants:
-                queue_mail_task(url='/worker/mail/thanks/registration/',
-                    params=dict(
-                        full_name=participant.full_name,
-                        email = participant.email,
-                        key=str(participant.key())
-                    ),
-                    method='POST'
-                )
-            response = render_template('register/payment.html', participants=participants, total_price=total_price)
+#           This mail should go in the thank you part after receiving successful payment from payment gateway.
+#            for participant in participants:
+#                queue_mail_task(url='/worker/mail/thanks/registration/',
+#                    params=dict(
+#                        full_name=participant.full_name,
+#                        email = participant.email,
+#                        key=str(participant.key())
+#                    ),
+#                    method='POST'
+#                )
+            primary_participant.put()
+            billing_settings = BillingSettings.get_settings(deployment_mode=ebs_mode)
+
+            billing_contact = BillingContact(name=primary_participant.full_name, \
+                phone=primary_participant.phone_number, \
+                email=primary_participant.email,
+                address=primary_participant.address, \
+                city=primary_participant.city, \
+                postal_code=primary_participant.zip_code, \
+                state=primary_participant.state_province, \
+                country=primary_participant.country_code)
+            shipping_contact = BillingContact(name=primary_participant.full_name, \
+                phone=primary_participant.phone_number, \
+                email=primary_participant.email,
+                address=primary_participant.address, \
+                city=primary_participant.city, \
+                postal_code=primary_participant.zip_code, \
+                state=primary_participant.state_province, \
+                country=primary_participant.country_code)
+            billing_information = BillingInformation(account_id=billing_settings.account_id, \
+                reference_no=primary_participant.key().id(), \
+                amount=total_price, \
+                mode=ebs_mode, \
+                description= str(total_price) + ' for ' + str(participant_count) + ' participant(s) to attend CLO Summit.', \
+                return_url='/whatever/url/you/want')
+            d = {}
+            d.update(billing_contact.fields())
+            d.update(shipping_contact.fields())
+            d.update(billing_information.fields())
+            form_fields = [(k,v) for (k,v) in d.iteritems()]
+
+            response = render_template('register/payment.html', form_fields=form_fields, payment_gateway_url=PAYMENT_GATEWAY_URL, participants=participants, total_price=total_price)
             self.response.out.write(response)
         else:
             self.redirect('/register/pricing/')
@@ -78,7 +118,8 @@ class RegisterParticipantsHandler(SessionRequestHandler):
     def get(self):
         count = dec(self.request.get('count'))
         minimum = dec(self.request.get('min'))
-        response = render_template('register/participants.html', count=count, minimum=minimum, countries=COUNTRIES_SELECTION_LIST)
+        country_code = ip_address_to_country_code(self.request.remote_addr, 'IND')
+        response = render_template('register/participants.html', count=count, minimum=minimum, country_code=country_code, countries=COUNTRIES_SELECTION_LIST)
         self.response.out.write(response)
 
     def post(self):
@@ -91,6 +132,7 @@ class RegisterParticipantsHandler(SessionRequestHandler):
         group = ParticipantGroup()
         group.put()
 
+        primary_participant = None
         for x in range(count):
             i = str(x + 1)
 
@@ -110,6 +152,9 @@ class RegisterParticipantsHandler(SessionRequestHandler):
                 participant.city = self.request.get('city_' + i)
                 participant.zip_code = self.request.get('zip_code_' + i)
                 participant.pricing = pricing
+                if x == 0:
+                    participant.is_primary = True
+                    primary_participant = participant
                 participant.group = group
                 total_price += pricing
                 participants.append(participant)
@@ -117,6 +162,7 @@ class RegisterParticipantsHandler(SessionRequestHandler):
         self.session['total_price'] = total_price
         self.session['participant_count'] = count
         self.session['participants'] = participants
+        self.session['primary_participant'] = primary_participant
 
         self.redirect('/register/payment/')
 

@@ -11,7 +11,6 @@ class PropertyDict(object):
         This does not delete p['a']. Use del ['a'] instead to delete the
         property.
     """
-    __properties__ = set([])
 
     def __getitem__(self, key):
         return getattr(self, key)
@@ -25,6 +24,7 @@ class PropertyDict(object):
         delattr(self, key)
 
     def __init__(self, *args, **kwargs):
+        self.__properties__ = set([])
         for prop in args:
             self.__properties__.add(prop)
             setattr(self, prop, None)
@@ -52,11 +52,16 @@ class PropertyDict(object):
                     result[prefix + prop + suffix] = getattr(self, prop)
         else:
             for prop in props:
-                result[prefix + prop + suffix] = getattr(self, prop)
+                result[prefix + prop + suffix] = self[prop]
         return result
 
 if __name__ == '__main__':
-    p = PropertyDict(whoo='what', what='hmm')
-    print p.whoo
-    print p['whoo']
+    p1 = PropertyDict(A='what', B='hmm')
+    p2 = PropertyDict(a='what', b='whoo')
+
+    print p1.fields()
+    print p1.A, p1['A'], p1.B, p1['B']
+
+    print p2.fields()
+    print p2.a, p2['a'], p2.b, p2['b']
 

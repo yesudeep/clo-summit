@@ -62,7 +62,7 @@
         <span class="prefix">country</span>
         <select name="country_code_{{ loop.index }}" class="required {% if not loop.index == 1 %}country_code{% endif %}">
           {% for country in countries %}
-          <option value="{{ country.2 }}">{{ country.0 }}</option>
+          <option value="{{ country.2 }}" {% if country_code == country.2 %}selected="selected"{% endif %}>{{ country.0 }}</option>
           {% endfor %}
         </select>
         <span class="suffix"></span>

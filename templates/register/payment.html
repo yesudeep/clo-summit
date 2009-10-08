@@ -29,18 +29,30 @@
       </tr>
     </tbody>
   </table>
+  <form action="{{ payment_gateway_url }}" method="POST">
+    {% for form_field in form_fields %}
+    <input type="hidden" name="{{ form_field.0 }}" value="{{ form_field.1 }}" />
+    {% endfor %}
+    <label for="submit">
+      <span class="prefix"></span>
+      <input type="submit" class="awesome-button large" name="submit" value="&#10004; Confirm Online Payment" />
+      <span class="suffix"></span>
+    </label>
+
+  </form>
+
   <section id="payment_options">
-    <h1>Payment Options</h1>
-    <article id="offline_payment">
-      <h2>Offline Payment</h2>
+    <h1>Offline Payment Options</h1>
+    #*<article id="offline_payment">
+      <h2>Offline Payment</h2>*#
       <p>You could send us a cheque. Please download the following PDF for the payment details and the offline registration form.</p>
-      <a href="{{ MEDIA_URL }}downloads/registration_form.pdf" class="awesome-button large">Download Payment Form &raquo;</a>
-    </article>
-    <article id="online_payment">
+      <a href="{{ MEDIA_URL }}downloads/offline_registration_form.pdf" class="awesome-button">Download Payment Form &raquo;</a>
+    #*</article>*#
+    #*<article id="online_payment">
       <h2>Online Payment</h2>
       <p>Use your credit card or online account to make payments.</p>
       <a href="" class="awesome-button large">Pay Online &raquo;</a>
-    </article>
+    </article>*#
   </section>
 {% endblock %}
 

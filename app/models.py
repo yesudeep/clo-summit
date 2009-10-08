@@ -8,6 +8,7 @@ from datetime import datetime
 from hc_gae_util.db.models import RegularModel
 from hc_gae_util.db.properties import DecimalProperty
 from hc_gae_util.data.countries import COUNTRY_NAME_ISO_ALPHA_3_TABLE, ISO_ALPHA_3_CODES
+from ebs import MODE_PRODUCTION, MODE_DEVELOPMENT
 
 JOB_TYPES = {
     'clo': 'Chief Learning Officer',
@@ -27,10 +28,6 @@ PRICING = [
     6000, 6000, 6000         # 7-9
 ]
 
-DEPLOYMENT_MODE_CHOICES = (
-    config.DEPLOYMENT_MODE_DEVELOPMENT,
-    config.DEPLOYMENT_MODE_PRODUCTION,
-)
 
 SURVEY_LINK = "http://www.surveymonkey.com/s.aspx?sm=hZXdTol4KmfnW0ZBoxxaow_3d_3d"
 
@@ -48,10 +45,10 @@ class ParticipantGroup(RegularModel):
 class BillingSettings(RegularModel):
     account_id = db.StringProperty()
     secret_key = db.StringProperty()
-    deployment_mode = db.StringProperty(choices=DEPLOYMENT_MODE_CHOICES)
+    deployment_mode = db.StringProperty(choices=[MODE_PRODUCTION, MODE_DEVELOPMENT])
 
     @classmethod
-    def get_settings(cls, deployment_mode=config.DEPLOYMENT_MODE):
+    def get_settings(cls, deployment_mode=MODE_PRODUCTION):
         cache_key = 'BillingSettings.' + deployment_mode + '.first'
         billing_settings = memcache.get(cache_key)
         if not billing_settings:
@@ -73,6 +70,8 @@ class Participant(RegularModel):
     department = db.StringProperty()
     organization = db.StringProperty()
     address = db.PostalAddressProperty()
+
+    is_primary = db.BooleanProperty(default=False)
 
     zip_code = db.StringProperty()
     country_code = db.StringProperty(choices=ISO_ALPHA_3_CODES)
