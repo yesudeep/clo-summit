@@ -24,13 +24,13 @@
 </head>
 <body {% block body_id %} {% endblock %}>
 
-{% block chrome_frame_plugin %}
+#*{% block chrome_frame_plugin %}
 <!--[if lt IE 7 ]>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
 <div id="chrome_frame_plugin_placeholder"></div>
 <script type="text/javascript">CFInstall.check({node:"chrome_frame_plugin_placeholder"});</script>
 <![endif]-->
-{% endblock %}
+{% endblock %}*#
 
 
 {% block tag_body %}{% endblock %}
