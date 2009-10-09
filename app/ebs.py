@@ -26,7 +26,7 @@
 from hc_gae_util.collections.propertydict import PropertyDict
 from urllib import urlencode
 
-MODE_PRODUCTION = 'LIVE'
+MODE_PRODUCTION = 'TEST'
 MODE_DEVELOPMENT = 'TEST'
 
 PAYMENT_GATEWAY_URL = 'https://secure.ebs.in/pg/ma/sale/pay/'
