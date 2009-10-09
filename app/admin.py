@@ -27,11 +27,18 @@ class SpeakersHandler(webapp.RequestHandler):
         response = render_template('admin/generic_list.html', page_name='speakers', page_description='Speakers for the event.')
         self.response.out.write(response)
 
+class LogoutHandler(webapp.RequestHandler):
+    def get(self):
+        current_user = users.get_current_user()
+        if current_user:
+            self.redirect(users.create_logout_url('/admin'))
+
 urls = [
 	('/admin/?', ParticipantsHandler),
 	('/admin/speakers/?', SpeakersHandler),
 	('/admin/survey_participants/?', SurveyParticipantsHandler),
     ('/admin/participants/?', ParticipantsHandler),
+    ('/admin/logout/?', LogoutHandler),
 ]
 application = webapp.WSGIApplication(urls, debug=config.DEBUG)
 
