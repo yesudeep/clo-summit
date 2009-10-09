@@ -27,8 +27,12 @@ logging.basicConfig(level=logging.INFO)
 
 class IndexPage(webapp.RequestHandler):
     def get(self):
+        logging.info(self.request)
         response = render_template('index.html')
         self.response.out.write(response)
+
+    def post(self):
+        logging.info(self.request)
 
 class ProgramPage(webapp.RequestHandler):
     def get(self):
@@ -102,7 +106,7 @@ class RegisterPaymentHandler(SessionRequestHandler):
                 amount=total_price, \
                 mode=ebs_mode, \
                 description= str(total_price) + ' for ' + str(participant_count) + ' participant(s) to attend CLO Summit.', \
-                return_url='/whatever/url/you/want')
+                return_url=config.ABSOLUTE_ROOT_URL)
             d = {}
             d.update(billing_contact.fields())
             d.update(shipping_contact.fields())
