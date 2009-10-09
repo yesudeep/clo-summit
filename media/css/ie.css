@@ -1,10 +1,19 @@
+a {
+  border: 0;
+  text-decoration: none;
+}
+
+a img {
+  border: 0;
+}
+
 .ie-message {
   padding: 40px;
 }
 
 .ie-message h1 {
   font-family: Georgia;
-  font-size: 1.4em;
+  font-size: 1.8em;
   font-weight: normal;
   line-height: 1.4;
   letter-spacing: -0.02em;
@@ -13,7 +22,7 @@
 
 .ie-message p {
   line-height: 1.4;
-  font-size: 0.9em;
+  font-size: 1em;
   clear: both;
   color: #444;
   margin-top: 5px;
@@ -29,15 +38,17 @@
   width: 400px;
 }
 
-.ie-message ul li {
+.ie-message ul.horizontal li {
   float: left;
+  list-style: none;
 }
 
-a {
-  border: 0;
-  text-decoration: none;
+.ie-message ol li {
+  margin-top: 10px;
 }
 
-a img {
-  border: 0;
+#highlight {
+  background-color: #ffffe1;
+  padding: 4px;
+  color: green;
 }
