@@ -49,7 +49,7 @@ class PropertyDict(object):
         if names:
             for prop in props:
                 if prop in names:
-                    result[prefix + prop + suffix] = getattr(self, prop)
+                    result[prefix + prop + suffix] = self[prop]
         else:
             for prop in props:
                 result[prefix + prop + suffix] = self[prop]
