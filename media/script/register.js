@@ -20,7 +20,7 @@ jQuery(function(){
 
 
     function updateOrganizations(event){
-        elements.other_organization_fields.val(jQuery(this).val().sanitizeCapitalization());
+        elements.other_organization_fields.val(jQuery(this).val().lowerSanitizeCapitalization());
     }
     function updateAddresses(event){
         elements.other_address_fields.val(jQuery(this).val());
@@ -40,8 +40,6 @@ jQuery(function(){
     function updatePhoneNumber(event){
         elements.other_phone_number_fields.val(jQuery(this).val());
     }
-
-
 
     elements.organization_1.keyup(jQuery.defer(100, updateOrganizations));
     elements.address_1.keyup(jQuery.defer(100, updateAddresses));
