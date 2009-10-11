@@ -40,7 +40,7 @@ def get_pricing_per_individual(count=1, min_price=5500):
         return PRICING[count-1]
 
 class ParticipantGroup(RegularModel):
-    pass
+    title = db.StringProperty()
 
 class YahooApiSettings(RegularModel):
     api_key = db.StringProperty()

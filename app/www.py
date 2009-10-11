@@ -27,12 +27,8 @@ logging.basicConfig(level=logging.INFO)
 
 class IndexPage(webapp.RequestHandler):
     def get(self):
-        logging.info(self.request)
         response = render_template('index.html')
         self.response.out.write(response)
-
-    def post(self):
-        logging.info(self.request)
 
 class ProgramPage(webapp.RequestHandler):
     def get(self):
@@ -134,6 +130,7 @@ class RegisterParticipantsHandler(SessionRequestHandler):
         participants = []
 
         group = ParticipantGroup()
+        group.title = self.request.get('organization_1') + '/' + self.request.get('email_1')
         group.put()
 
         primary_participant = None
@@ -250,6 +247,10 @@ class UnsupportedBrowserPage(webapp.RequestHandler):
             memcache.set(cache_key, response, 10)
             self.response.out.write(response)
 
+class BillingProviderHandler(webapp.RequestHandler):
+    def get(self):
+        logging.info(self.request)
+        self.redirect('/')
 
 urls = (
     ('/', IndexPage),
@@ -263,7 +264,8 @@ urls = (
     ('/register/pricing/?', RegisterPricingHandler),
     ('/register/payment/?', RegisterPaymentHandler),
     ('/register/participants/?', RegisterParticipantsHandler),
-    ('/unsupported/browser/?', UnsupportedBrowserPage)
+    ('/unsupported/browser/?', UnsupportedBrowserPage),
+    ('/billing/?', BillingProviderHandler),
 )
 
 application = webapp.WSGIApplication(urls, debug=config.DEBUG)
