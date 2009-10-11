@@ -42,6 +42,19 @@ def get_pricing_per_individual(count=1, min_price=5500):
 class ParticipantGroup(RegularModel):
     pass
 
+class YahooApiSettings(RegularModel):
+    api_key = db.StringProperty()
+    boss_id = db.StringProperty()
+
+    @classmethod
+    def get_settings(cls):
+        cache_key = 'YahooApiSettings.settings'
+        yahoo_settings = memcache.get(cache_key)
+        if not yahoo_settings:
+            yahoo_settings = db.Query(YahooApiSettings).filter('is_deleted =', False).filter('is_active =', True).get()
+            memcache.set(cache_key, yahoo_settings, 300)
+        return yahoo_settings
+
 class BillingSettings(RegularModel):
     account_id = db.StringProperty()
     secret_key = db.StringProperty()
