@@ -3,13 +3,13 @@
 {% block wizard_step_content %}
   <h1>Thanks</h1>
   <p>Thank you for taking the time to register.  You're just one step away from completing registration.</p>
-  <table>
+  <table id="table_payment_information">
     <thead>
       <tr>
         <th>Name</th>
         <th>Email</th>
         <th>Mobile Number</th>
-        <th>Price</th>
+        <th>Price (INR)</th>
       </tr>
     </thead>
     <tbody>
@@ -24,8 +24,20 @@
       <tr>
         <td></td>
         <td></td>
+        <td class="row-head">Total Price</td>
+        <td>{{ calculated_price }}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td class="row-head">Tax Amount (10.3%)</td>
+        <td>{{ tax_amount }}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
         <td class="row-head">Grand Total</td>
-        <td>{{ total_price }}</td>
+        <td><strong class="price">{{ total_price }}</strong></td>
       </tr>
     </tbody>
   </table>
@@ -35,7 +47,7 @@
     {% endfor %}
     <label for="submit">
       <span class="prefix"></span>
-      <input type="submit" class="awesome-button large"  id="online_payment"name="submit" value="&#10004; Confirm Online Payment" />
+      <input type="submit" class="awesome-button large"  id="online_payment"name="submit" value="&#10004; Confirm Payment" />
       <span class="suffix"></span>
     </label>
 

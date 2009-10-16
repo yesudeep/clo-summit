@@ -5,7 +5,7 @@
 import configuration as config
 import logging
 
-from decimal import Decimal
+from decimal import Decimal, ROUND_DOWN, ROUND_UP
 from google.appengine.api import memcache
 from google.appengine.ext import webapp, db
 from google.appengine.ext.webapp.util import run_wsgi_app
@@ -17,7 +17,7 @@ from os.path import splitext
 from utils import queue_mail_task, render_template, dec
 from datetime import datetime
 
-from models import Participant, ParticipantGroup, SurveyParticipant, Speaker, JOB_TYPE_TUPLE_MAP, get_pricing_per_individual, SURVEY_LINK, BillingSettings, TRANSACTION_TYPE_EBS
+from models import Participant, ParticipantGroup, SurveyParticipant, Speaker, JOB_TYPE_TUPLE_MAP, get_pricing_per_individual, SURVEY_LINK, BillingSettings, TRANSACTION_TYPE_EBS, PRICING_TAX
 from ebs import MODE_DEVELOPMENT, MODE_PRODUCTION, PAYMENT_GATEWAY_URL, ShippingContact, BillingContact, BillingInformation
 
 if config.DEPLOYMENT_MODE == config.DEPLOYMENT_MODE_PRODUCTION:
@@ -69,6 +69,8 @@ class RegisterPaymentHandler(SessionRequestHandler):
             db.put(participants)
             self.session['participants'] = participants
             total_price = self.session.get('total_price', None)
+            tax_amount = self.session.get('tax_amount', None)
+            calculated_price = self.session.get('calculated_price', None)
             group = self.session['participant_group']
             #primary_participant = self.session.get('primary_participant')
             primary_participant = Participant.get_primary_participant_for_group(group)
@@ -115,7 +117,13 @@ class RegisterPaymentHandler(SessionRequestHandler):
             d.update(billing_information.fields())
             form_fields = [(k,v) for (k,v) in d.iteritems()]
 
-            response = render_template('register/payment.html', form_fields=form_fields, payment_gateway_url=PAYMENT_GATEWAY_URL, participants=participants, total_price=total_price)
+            response = render_template('register/payment.html',
+                form_fields=form_fields,
+                payment_gateway_url=PAYMENT_GATEWAY_URL,
+                participants=participants,
+                total_price=total_price,
+                tax_amount=tax_amount,
+                calculated_price=calculated_price)
             self.response.out.write(response)
         else:
             self.redirect('/register/pricing/')
@@ -233,6 +241,13 @@ class RegisterParticipantsHandler(SessionRequestHandler):
                 total_price += pricing
                 participants.append(participant)
 
+        tax_amount = (total_price * PRICING_TAX)
+        tax_amount = tax_amount.quantize(Decimal('.01'), rounding=ROUND_DOWN)
+        calculated_price = total_price
+        total_price = total_price + tax_amount
+
+        self.session['calculated_price'] = calculated_price
+        self.session['tax_amount'] = tax_amount
         self.session['total_price'] = total_price
         self.session['participant_count'] = count
         self.session['participants'] = participants

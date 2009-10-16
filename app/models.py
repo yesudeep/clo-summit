@@ -9,6 +9,7 @@ from hc_gae_util.db.models import RegularModel
 from hc_gae_util.db.properties import DecimalProperty
 from hc_gae_util.data.countries import COUNTRY_NAME_ISO_ALPHA_3_TABLE, ISO_ALPHA_3_CODES
 from ebs import MODE_PRODUCTION, MODE_DEVELOPMENT
+from decimal import Decimal
 
 JOB_TYPES = {
     'clo': 'Chief Learning Officer',
@@ -27,6 +28,7 @@ PRICING = [
     6500, 6500, 6500, 6500,  # 3-6
     6000, 6000, 6000         # 7-9
 ]
+PRICING_TAX = Decimal('10.3') / 100
 
 TRANSACTION_TYPE_EBS = 'ebs'
 TRANSACTION_TYPES = [

@@ -10,7 +10,7 @@ body
   :color #555
   :line-height 1.4
   :font-family= !font_stack_garamond
-  
+
 //#sponsor_bg
   //:background-image= !url_sponsor_pixel_bg
 
@@ -93,7 +93,7 @@ strong
 strong.question
   :font-style italic
   :color #ffff7f
-  
+
 ul.inline
   li
     +display-inline-block
@@ -119,7 +119,7 @@ a.toggle_view
 a.toggle_view:hover
   ol.toggle_content
     :display block
-    
+
 footer
   :font-size 0.8em
   :color #999
@@ -237,6 +237,11 @@ table
       .row-head
         :font-weight bold
         :font-size 1em
+
+#table_payment_information
+  strong.price
+    :font-size 1.4em
+    :font-weight bold
 
 // About Page //
 #credits
@@ -364,18 +369,18 @@ ol#breadcrumbs
     :padding-right 10px
     :text-shadow none
     +border-radius(10px)
-    
+
 input.awesome-button.large
   :font-size 1.1em
   :padding 10px
 input.awesome-button.cool
   :background-color= !color_awesome_green
 input.awesome-button.cool:hover, input.awesome-button.cool:visited:hover, button.cool:hover
-  :background-color= !color_awesome_green_dark 
+  :background-color= !color_awesome_green_dark
 #online_payment
   :float right
-  :margin 10px 0px 0px 0px   
-    
+  :margin 10px 0px 0px 0px
+
 // Event Details //
 #event_details
   :width 35%
