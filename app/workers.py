@@ -64,6 +64,23 @@ class RegistrationThanksWorker(webapp.RequestHandler):
         )
         self.response.out.write("Registration attendee thanks.")
 
+class RegistrationPaymentThanksWorker(webapp.RequestHandler):
+    def post(self):
+        template_values = {
+            'full_name': self.request.get('full_name'),
+            'transaction_amount': self.request.get('transaction_amount'),
+        }
+        send_mail_worker(cache_key=self.request.get('key'),
+            request=self.request,
+            to=self.request.get('email'),
+            subject='[CLO Summit] Thank you for your payment',
+            template_name='email/thanks/registration_payment.text',
+            template_values=template_values,
+            reply_to=config.REGISTER_MAILBOX
+        )
+        self.response.out.write("Registration attendee thanks.")
+
+
 class SpeakerNominationThanksWorker(webapp.RequestHandler):
     def post(self):
         template_values = {
@@ -83,6 +100,7 @@ class SpeakerNominationThanksWorker(webapp.RequestHandler):
 urls = [
     ('/worker/mail/thanks/survey_participation/?', SurveyParticipationThanksWorker),
     ('/worker/mail/thanks/registration/?', RegistrationThanksWorker),
+    ('/worker/mail/thanks/registration_payment/?', RegistrationPaymentThanksWorker),
     ('/worker/mail/thanks/speaker_nomination/?', SpeakerNominationThanksWorker),
 ]
 application = webapp.WSGIApplication(urls, debug=config.DEBUG)

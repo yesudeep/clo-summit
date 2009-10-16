@@ -12,10 +12,12 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 from hc_gae_util.data.countries import COUNTRIES_SELECTION_LIST
 from hc_gae_util.data.geoip import ip_address_to_country_code
 from hc_gae_util.sessions import SessionRequestHandler
+from hc_gae_util.urlhelper import url_join_path
 from os.path import splitext
 from utils import queue_mail_task, render_template, dec
+from datetime import datetime
 
-from models import Participant, ParticipantGroup, SurveyParticipant, Speaker, JOB_TYPE_TUPLE_MAP, get_pricing_per_individual, SURVEY_LINK, BillingSettings
+from models import Participant, ParticipantGroup, SurveyParticipant, Speaker, JOB_TYPE_TUPLE_MAP, get_pricing_per_individual, SURVEY_LINK, BillingSettings, TRANSACTION_TYPE_EBS
 from ebs import MODE_DEVELOPMENT, MODE_PRODUCTION, PAYMENT_GATEWAY_URL, ShippingContact, BillingContact, BillingInformation
 
 if config.DEPLOYMENT_MODE == config.DEPLOYMENT_MODE_PRODUCTION:
@@ -64,10 +66,14 @@ class RegisterPaymentHandler(SessionRequestHandler):
     def get(self):
         participants = self.session.get('participants', None)
         if participants:
-            total_price = self.session.get('total_price', None)
-            primary_participant = self.session.get('primary_participant')
-            participant_count = self.session.get('participant_count')
             db.put(participants)
+            self.session['participants'] = participants
+            total_price = self.session.get('total_price', None)
+            group = self.session['participant_group']
+            #primary_participant = self.session.get('primary_participant')
+            primary_participant = Participant.get_primary_participant_for_group(group)
+            self.session['primary_participant'] = primary_participant
+            participant_count = self.session.get('participant_count')
 #           This mail should go in the thank you part after receiving successful payment from payment gateway.
 #            for participant in participants:
 #                queue_mail_task(url='/worker/mail/thanks/registration/',
@@ -78,7 +84,7 @@ class RegisterPaymentHandler(SessionRequestHandler):
 #                    ),
 #                    method='POST'
 #                )
-            primary_participant.put()
+            #primary_participant.put()
             billing_settings = BillingSettings.get_settings(deployment_mode=ebs_mode)
 
             billing_contact = BillingContact(name=primary_participant.full_name, \
@@ -98,11 +104,11 @@ class RegisterPaymentHandler(SessionRequestHandler):
                 state=primary_participant.state_province, \
                 country=primary_participant.country_code)
             billing_information = BillingInformation(account_id=billing_settings.account_id, \
-                reference_no=primary_participant.key().id(), \
+                reference_no=group.key().id(), \
                 amount=total_price, \
                 mode=ebs_mode, \
                 description= str(total_price) + ' for ' + str(participant_count) + ' participant(s) to attend CLO Summit.', \
-                return_url=config.ABSOLUTE_ROOT_URL)
+                return_url=url_join_path(config.ABSOLUTE_ROOT_URL, '/billing/ebs?DR={DR}'))
             d = {}
             d.update(billing_contact.fields())
             d.update(shipping_contact.fields())
@@ -113,6 +119,73 @@ class RegisterPaymentHandler(SessionRequestHandler):
             self.response.out.write(response)
         else:
             self.redirect('/register/pricing/')
+
+class BillingProviderEBSHandler(SessionRequestHandler):
+    def get(self):
+        from ebs import get_request_parameters, ebs_datetime
+        from pickle import dumps
+
+        dr = self.request.get('DR')
+        if dr:
+            billing_settings = BillingSettings.get_settings(deployment_mode=ebs_mode)
+            request = get_request_parameters(dr, billing_settings.secret_key)
+
+            response_code = request.get('ResponseCode', [None])[0]
+            response_message = request.get('ResponseMessage', ['There was no response from the billing system.'])[0]
+
+            group = self.session.get('participant_group')
+            group.transaction_response_id = request.get('PaymentID')[0]
+            group.transaction_response_code = response_code
+            group.transaction_response_message = response_message
+            group.transaction_response_type = TRANSACTION_TYPE_EBS
+            group.transaction_response_amount = Decimal(request.get('Amount', ['0'])[0])
+            group.transaction_response = str(request)
+            group.transaction_response_object = db.Blob(dumps(request))
+            group.when_transaction_response_occurred = ebs_datetime(request.get('DateCreated')[0])
+            group.put()
+
+            if response_code == '0':
+                # mark the participant group as paid.
+                message_title = 'Thank you for participating in the summit'
+                group_id = group.key().id()
+                logging.info('Payments for group: %s with %d processed.' % (group.title, group_id))
+
+                participants = self.session.get('participants')
+                if participants:
+                    # Send email to all the participants about their attendance.
+                    for participant in participants:
+                        queue_mail_task(url='/worker/mail/thanks/registration/',
+                            params=dict(
+                                full_name=participant.full_name,
+                                email = participant.email,
+                                key=str(participant.key())
+                            ),
+                            method='POST'
+                        )
+                    # Send email to the payer the invoice.
+                    primary_participant = self.session.get('primary_participant')
+                    queue_mail_task(url='/worker/mail/thanks/registration_payment/',
+                        params=dict(
+                            full_name=primary_participant.full_name,
+                            email = primary_participant.email,
+                            key=str(primary_participant.key()),
+                            transaction_amount=group.transaction_response_amount
+                        ),
+                        method='POST'
+                    )
+            else:
+                message_title = 'There was an error processing your payment.'
+            response = render_template('thank_you.html', message_title=message_title, message_body=response_message)
+        else:
+            response = render_template('thank_you.html', message_title="A problem occurred with the billing system.", message_body="We did not receive a proper response from the billing system.")
+
+        self.response.out.write(response)
+
+
+#    def post(self):
+#        logging.info('DR: ' + self.request.get('DR'))
+#        logging.info(self.request)
+
 
 class RegisterParticipantsHandler(SessionRequestHandler):
     def get(self):
@@ -163,6 +236,7 @@ class RegisterParticipantsHandler(SessionRequestHandler):
         self.session['total_price'] = total_price
         self.session['participant_count'] = count
         self.session['participants'] = participants
+        self.session['participant_group'] = group
         self.session['primary_participant'] = primary_participant
 
         self.redirect('/register/payment/')
@@ -247,10 +321,6 @@ class UnsupportedBrowserPage(webapp.RequestHandler):
             memcache.set(cache_key, response, 10)
             self.response.out.write(response)
 
-class BillingProviderHandler(webapp.RequestHandler):
-    def get(self):
-        logging.info(self.request)
-        self.redirect('/')
 
 urls = (
     ('/', IndexPage),
@@ -265,7 +335,7 @@ urls = (
     ('/register/payment/?', RegisterPaymentHandler),
     ('/register/participants/?', RegisterParticipantsHandler),
     ('/unsupported/browser/?', UnsupportedBrowserPage),
-    ('/billing/?', BillingProviderHandler),
+    ('/billing/ebs/?', BillingProviderEBSHandler),
 )
 
 application = webapp.WSGIApplication(urls, debug=config.DEBUG)

@@ -101,3 +101,6 @@ def login_required_signup(handler_method):
             handler_method(self, *args)
     return check_login
 
+#def url_join(path, *args):
+#    return '/'.join([path.rstrip('/')] + list(args))
+

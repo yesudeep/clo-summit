@@ -1,0 +1,12 @@
+Dear {{ full_name }},
+
+Thank you for registering for the CLO Summit. We have received your payment
+of Rs. {{ transaction_amount }} toward the CLO Summit.
+
+We look forward to meeting you there and sincerely hope you enjoy your
+attendance at the summit.
+
+Thanks again.
+
+{{ MAIL_SIGNATURE }}
+

@@ -51,6 +51,7 @@ PLAIN_COPIES = Split("""
     email/thanks/survey_participation.text
     email/thanks/speaker_nomination.text
     email/thanks/registration.text
+    email/thanks/registration_payment.text
 """)
 
 MINIFIABLE_FILES = HTML_FILES + Split("""
