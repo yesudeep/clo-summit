@@ -41,13 +41,13 @@ jQuery(function(){
         elements.other_phone_number_fields.val(jQuery(this).val());
     }
 
-    elements.organization_1.keyup(jQuery.defer(100, updateOrganizations));
-    elements.address_1.keyup(jQuery.defer(100, updateAddresses));
-    elements.zip_code_1.keyup(jQuery.defer(100, updateZipCode));
+    elements.organization_1.keyup(jQuery.defer(100, updateOrganizations)).change(updateOrganizations);
+    elements.address_1.keyup(jQuery.defer(100, updateAddresses)).change(updateAddresses);
+    elements.zip_code_1.keyup(jQuery.defer(100, updateZipCode)).change(updateZipCode);
     elements.country_code_1.change(updateCountryCode);
-    elements.state_province_1.keyup(jQuery.defer(100, updateStateProvince));
-    elements.city_1.keyup(jQuery.defer(100, updateCity));
-    elements.phone_number_1.keyup(jQuery.defer(100, updatePhoneNumber));
+    elements.state_province_1.keyup(jQuery.defer(100, updateStateProvince)).change(updateStateProvince);
+    elements.city_1.keyup(jQuery.defer(100, updateCity)).change(updateCity);
+    elements.phone_number_1.keyup(jQuery.defer(100, updatePhoneNumber)).change(updatePhoneNumber);
 
     elements.link_remove_registrant.click(function(event){
         event.preventDefault();
