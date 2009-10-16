@@ -183,7 +183,7 @@ class BillingProviderEBSHandler(SessionRequestHandler):
                     )
             else:
                 message_title = 'There was an error processing your payment.'
-            response = render_template('thank_you.html', message_title=message_title, message_body=response_message)
+            response = render_template('thank_you.html', message_title=message_title, message_body=response_message + ''' Thank you for registering for the summit. An email confirming your payment and registration shall be sent to you shortly. In case you don't receive the email confirmation within 24 hours or you have any queries, please contact +91 22 66301060 / 22026166 from 10.30 AM IST to 6.30 AM IST''')
         else:
             response = render_template('thank_you.html', message_title="A problem occurred with the billing system.", message_body="We did not receive a proper response from the billing system.")
 
