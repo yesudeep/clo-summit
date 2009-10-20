@@ -11,7 +11,7 @@ import urllib
 import logging
 from hc_gae_util.jinja_loaders import PythonLoader
 
-jinja_env = Environment(loader=FileSystemLoader(['templates']))
+jinja_env = Environment(loader=PythonLoader(['templates']))
 
 #Jinja2 custom filters
 def datetimeformat(value, format='%H:%M / %d-%m-%Y'):
@@ -100,4 +100,7 @@ def login_required_signup(handler_method):
         else:
             handler_method(self, *args)
     return check_login
+
+#def url_join(path, *args):
+#    return '/'.join([path.rstrip('/')] + list(args))
 

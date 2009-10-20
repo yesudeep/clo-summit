@@ -40,6 +40,7 @@ urls = [
     ('/admin/participants/?', ParticipantsHandler),
     ('/admin/logout/?', LogoutHandler),
 ]
+
 application = webapp.WSGIApplication(urls, debug=config.DEBUG)
 
 def main():

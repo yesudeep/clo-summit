@@ -23,14 +23,21 @@ String.prototype.sanitizeCapitalization = function(){
        return this;
    }
 }
-
+String.prototype.lowerSanitizeCapitalization = function(){
+   if(this && this.isLowerCase()){
+       return titleCaps(this);
+   } else {
+       return this;
+   }
+}
 
 jQuery(function(){
     var elements = {
         mobile_or_phone_fields: jQuery('form input.mobile, form input.phone'),
         form_decorated_fields: jQuery('form.decorated-fields'),
         url_fields: jQuery('form input.url'),
-        capitalization_fields: jQuery('form input.capitalize')
+        capitalization_fields: jQuery('form input.capitalize'),
+        lower_capitalization_fields: jQuery('form input.lower-capitalize')
     }, HTTP = "http://";
 
     elements.mobile_or_phone_fields.numeric({allow: '+-() '});
@@ -45,10 +52,13 @@ jQuery(function(){
         }
     });
     elements.capitalization_fields.live('change', function(event){
-       var o = jQuery(this), value = jQuery.trim(o.val());
-       o.val(value.sanitizeCapitalization());
+       var elem = jQuery(this), value = jQuery.trim(elem.val());
+       elem.val(value.sanitizeCapitalization());
     });
-
+    elements.lower_capitalization_fields.live('change', function(event){
+        var elem = jQuery(this), value = jQuery.trim(elem.val());
+        elem.val(value.lowerSanitizeCapitalization());
+    });
     elements.form_decorated_fields.validate({
         rules: {
             presentation: {

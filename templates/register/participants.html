@@ -20,8 +20,8 @@
 
       <label for="organization_{{ loop.index }}">
         <span class="prefix">organization</span>
-        <input type="text" name="organization_{{ loop.index }}" {% if not loop.index == 1 %}readonly="readonly"{% endif %} value="" class="required capitalize {% if not loop.index == 1 %}organization{% endif %}" />
-        <span class="suffix"></span>
+        <input type="text" name="organization_{{ loop.index }}" {% if not loop.index == 1 %}readonly="readonly"{% endif %} value="" class="required lower-capitalize {% if not loop.index == 1 %}organization{% endif %}" />
+        <span class="suffix">Please type the full name of your organization.</span>
       </label>
 
       <label for="designation_{{ loop.index }}">
@@ -97,7 +97,7 @@
 
   <label for="submit">
     <span class="prefix"></span>
-    <input type="submit" name="submit" value="Add participants &raquo;" />
+    <input type="submit" class="awesome-button large" name="submit" value="Add participants &raquo;" />
     <span class="suffix"></span>
   </label>
 

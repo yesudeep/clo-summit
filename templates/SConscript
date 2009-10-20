@@ -51,6 +51,7 @@ PLAIN_COPIES = Split("""
     email/thanks/survey_participation.text
     email/thanks/speaker_nomination.text
     email/thanks/registration.text
+    email/thanks/registration_payment.text
 """)
 
 MINIFIABLE_FILES = HTML_FILES + Split("""
@@ -66,5 +67,6 @@ for f in set(PLAIN_COPIES):
     env.Command(DEST_DIR + f, SRC_DIR + f, Copy("$TARGET", "$SOURCE"))
 
 for f in set(MINIFIABLE_FILES):
+    #env.Command(DEST_DIR + f, TEMPLATE_BUILD_DIR + f, Copy("$TARGET", "$SOURCE"))
     env.HTMLMinify(DEST_DIR + f, TEMPLATE_BUILD_DIR + f, HTML_MINIFY_INLINE=True)
 

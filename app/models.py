@@ -9,6 +9,7 @@ from hc_gae_util.db.models import RegularModel
 from hc_gae_util.db.properties import DecimalProperty
 from hc_gae_util.data.countries import COUNTRY_NAME_ISO_ALPHA_3_TABLE, ISO_ALPHA_3_CODES
 from ebs import MODE_PRODUCTION, MODE_DEVELOPMENT
+from decimal import Decimal
 
 JOB_TYPES = {
     'clo': 'Chief Learning Officer',
@@ -27,7 +28,12 @@ PRICING = [
     6500, 6500, 6500, 6500,  # 3-6
     6000, 6000, 6000         # 7-9
 ]
+PRICING_TAX = Decimal('10.3') / 100
 
+TRANSACTION_TYPE_EBS = 'ebs'
+TRANSACTION_TYPES = [
+    TRANSACTION_TYPE_EBS,
+]
 
 SURVEY_LINK = "http://www.surveymonkey.com/s.aspx?sm=hZXdTol4KmfnW0ZBoxxaow_3d_3d"
 
@@ -40,7 +46,28 @@ def get_pricing_per_individual(count=1, min_price=5500):
         return PRICING[count-1]
 
 class ParticipantGroup(RegularModel):
-    pass
+    title = db.StringProperty()
+    transaction_response_id = db.StringProperty()
+    transaction_response_amount = DecimalProperty()
+    transaction_response_code = db.StringProperty()
+    transaction_response_type = db.StringProperty(choices=TRANSACTION_TYPES)
+    transaction_response_message = db.StringProperty()
+    transaction_response = db.TextProperty()
+    transaction_response_object = db.BlobProperty()
+    when_transaction_response_occurred = db.DateTimeProperty()
+
+class YahooApiSettings(RegularModel):
+    api_key = db.StringProperty()
+    boss_id = db.StringProperty()
+
+    @classmethod
+    def get_settings(cls):
+        cache_key = 'YahooApiSettings.settings'
+        yahoo_settings = memcache.get(cache_key)
+        if not yahoo_settings:
+            yahoo_settings = db.Query(YahooApiSettings).filter('is_deleted =', False).filter('is_active =', True).get()
+            memcache.set(cache_key, yahoo_settings, 300)
+        return yahoo_settings
 
 class BillingSettings(RegularModel):
     account_id = db.StringProperty()
@@ -79,6 +106,15 @@ class Participant(RegularModel):
     state_province = db.StringProperty()
 
     group = db.ReferenceProperty(ParticipantGroup, collection_name='participants')
+
+    @classmethod
+    def get_primary_participant_for_group(cls, group):
+        cache_key = 'Participant.is_primary=True and Participant.group=' + str(group.title)
+        participant = memcache.get(cache_key)
+        if not participant:
+            participant = db.Query(Participant).filter('group =', group).filter('is_primary =', True).get()
+            memcache.set(cache_key, participant, 300)
+        return participant
 
     @classmethod
     def get_all(cls):

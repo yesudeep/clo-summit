@@ -10,7 +10,7 @@ body
   :color #555
   :line-height 1.4
   :font-family= !font_stack_garamond
-  
+
 //#sponsor_bg
   //:background-image= !url_sponsor_pixel_bg
 
@@ -89,7 +89,11 @@ strong
 strong.question
   :font-style italic
   :color #ffff7f
+<<<<<<< HEAD:media/sass/screen.sass
   
+=======
+
+>>>>>>> ee2a3174e7389bc24da34160b9344760450e3d6f:media/sass/screen.sass
 ul.inline
   li
     +display-inline-block
@@ -115,7 +119,7 @@ a.toggle_view
 a.toggle_view:hover
   ol.toggle_content
     :display block
-    
+
 footer
   :font-size 0.8em
   :color #999
@@ -225,6 +229,9 @@ table
     #group_of_6
       :background= "transparent" !url_group_of_6_price "no-repeat scroll 0 0"
   tbody
+    :border-bottom 1px solid #aaa
+    //:background-color #efefef
+    :margin-bottom 10px
     tr
       :border-top 1px solid #aaa
       td
@@ -233,12 +240,24 @@ table
       .row-head
         :font-weight bold
         :font-size 1em
+  tfoot
+    td
+      :padding 5px
+
+#table_payment_information
+  strong.price
+    :font-size 2.0em
+    :font-weight bold
 
 // About Page //
 #credits
   :position absolute
   :top 75px
+<<<<<<< HEAD:media/sass/screen.sass
   :left 550px
+=======
+  :left 750px
+>>>>>>> ee2a3174e7389bc24da34160b9344760450e3d6f:media/sass/screen.sass
   ul
     li
       :float left
@@ -340,9 +359,9 @@ form.decorated-fields
 ol#breadcrumbs
   :list-style decimal inside none
   :background-color #efefef
-  :padding 10px 20px
-  :border-bottom 2px solid silver
-  :font-size 1.6em
+  //:padding 5px 5px
+  :border-bottom 1px solid silver
+  :font-size 1.2em
   :margin-bottom 10px
   +clearfix
   > li
@@ -354,24 +373,24 @@ ol#breadcrumbs
     :text-shadow 1px 2px 2px #fff
   > li.current
     :color= !color_awesome_gray_dark
-    :background-color #dedede
-    :border 1px solid silver
-    :padding-left 10px
-    :padding-right 10px
+    //:background-color #dedede
+    //:border 1px solid silver
+    :padding-left 5px
+    :padding-right 5px
     :text-shadow none
-    +border-radius(10px)
-    
+    :font-weight bold
+    //+border-radius(10px)
+
 input.awesome-button.large
   :font-size 1.1em
   :padding 10px
 input.awesome-button.cool
   :background-color= !color_awesome_green
 input.awesome-button.cool:hover, input.awesome-button.cool:visited:hover, button.cool:hover
-  :background-color= !color_awesome_green_dark 
-#online_payment
-  :float right
-  :margin 10px 0px 0px 0px   
-    
+  :background-color= !color_awesome_green_dark
+//#online_payment
+  :margin 10px 0px 0px 0px
+
 // Event Details //
 #event_details
   :width 35%
