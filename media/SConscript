@@ -62,6 +62,7 @@ IMAGE_FILES = Split("""
     image/icon/twitter.png
     image/icon/linkedin.png
     image/background/twitter.png
+    image/button/download.png
     
     image/background/about_pixel.jpg
     image/background/sponsor_pixel.jpg
