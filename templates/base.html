@@ -1,6 +1,12 @@
 {% extends "base_site.html" %}
 
-{% block tag_title %}CLO Summit India{% endblock %}
+{% block tag_title %}
+{% if LOCAL %}
+[DEV] CLO Summit India
+{% else %}
+CLO Summit India
+{% endif %}
+{% endblock %}
 
 {% block tag_head %}
 	{% block tag_stylesheets %}
