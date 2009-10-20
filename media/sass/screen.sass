@@ -42,17 +42,18 @@ body
     > a
       :display block
       :color white
-      :padding 10px 25px 10px 10px
+      :padding 10px
       :margin-right 10px
-      :background= "transparent" !url_down_arrow "no-repeat scroll right center"
+      //:background= "transparent" !url_down_arrow "no-repeat scroll right center"
       +border-top-right-radius(10px)
       +border-top-left-radius(10px)
-    > a.color-green
+    >a.color-green
       :background-color #7a9a00
+    >a.color-cyan
+      :background-color #1f8471
     >a.color-blue
       :background-color #007c96
 #panes
-  :min-height 300px
   :color white
   :font-family= !font_stack_verdana
   > li
@@ -61,16 +62,20 @@ body
     //:margin-left 30px
     :margin-bottom 10px
     :padding 20px
-    p
-      :border-bottom 1px solid #016d84
-      :padding-bottom 10px
     ul
       >li
         :margin-top 15px
   >li.color-green
     :background-color #7a9a00
+  >li.color-cyan
+    :background-color #1f8471
   >li.color-blue
     :background-color #007c96
+    p
+      //:border-bottom 1px solid #016d84
+      :padding-bottom 10px
+#what_can_you_expect
+  :overflow auto
 
 p
   :margin-bottom 15px
@@ -83,7 +88,7 @@ strong
   :font-weight bold
 strong.question
   :font-style italic
-  :color #007c96
+  :color #ffff7f
   
 ul.inline
   li
@@ -114,6 +119,8 @@ a.toggle_view:hover
 footer
   :font-size 0.8em
   :color #999
+  :margin 10px auto
+  :width 200px
 #main_wrapper
   +grid-container
   :background= "transparent" !url_nav_bg "no-repeat scroll top right"
@@ -191,15 +198,16 @@ section
 aside
   ul
     li
-      :font-size 1.2em
+      :font-size 1em
       :font-weight bold
-      :margin-bottom 10px
+      :margin-top 10px
       a
         :font-size 0.8em
         :font-weight normal
         :display block
-        :width 180px
-        :height 170px
+        :min-width 150px
+        :height 80px
+        :color #374900
 
 table#pricing thead th
   :height 100px
@@ -227,9 +235,16 @@ table
         :font-size 1em
 
 // About Page //
+#credits
+  :position absolute
+  :top 75px
+  :left 550px
+  ul
+    li
+      :float left
 #leapvault
   :background= "transparent" !url_leapvault_logo "no-repeat scroll 0 bottom"
-  :height 90px
+  :height 50px
 #tiss
   :background= "transparent" !url_tiss_logo "no-repeat scroll center bottom"
 
