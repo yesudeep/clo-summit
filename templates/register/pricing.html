@@ -23,6 +23,14 @@
         <td>6,500* INR</td>
         <td>6,000* INR</td>
       </tr>
+      {% if today_date <= early_bird_offer_end_date %}
+      <tr class="highlight">
+        <td class="row-head">Early Bird Fees Until {{ early_bird_offer_end_date|datetimeformat('%B %d, %Y') }}</td>
+        <td>7,000* INR</td>
+        <td>6,250* INR</td>
+        <td>5,750* INR</td>
+      </tr>
+      {% endif %}
       <tr>
         <td class="row-head">Savings Per Delegate</td>
         <td>Nil</td>

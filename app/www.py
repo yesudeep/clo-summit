@@ -17,7 +17,7 @@ from os.path import splitext
 from utils import queue_mail_task, render_template, dec
 from datetime import datetime
 
-from models import Participant, ParticipantGroup, SurveyParticipant, Speaker, JOB_TYPE_TUPLE_MAP, get_pricing_per_individual, SURVEY_LINK, BillingSettings, TRANSACTION_TYPE_EBS, PRICING_TAX
+from models import Participant, ParticipantGroup, SurveyParticipant, Speaker, JOB_TYPE_TUPLE_MAP, get_pricing_per_individual, SURVEY_LINK, BillingSettings, TRANSACTION_TYPE_EBS, PRICING_TAX, EARLY_BIRD_OFFER_END_DATE
 from ebs import MODE_DEVELOPMENT, MODE_PRODUCTION, PAYMENT_GATEWAY_URL, ShippingContact, BillingContact, BillingInformation
 
 if config.DEPLOYMENT_MODE == config.DEPLOYMENT_MODE_PRODUCTION:
@@ -59,7 +59,11 @@ class AboutPage(webapp.RequestHandler):
 
 class RegisterPricingHandler(SessionRequestHandler):
     def get(self):
-        response = render_template('register/pricing.html')
+        values = {
+            'early_bird_offer_end_date': EARLY_BIRD_OFFER_END_DATE,
+            'today_date': datetime.utcnow().date(),
+        }
+        response = render_template('register/pricing.html', **values)
         self.response.out.write(response)
 
 class RegisterPaymentHandler(SessionRequestHandler):
