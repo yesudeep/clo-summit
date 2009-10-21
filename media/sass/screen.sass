@@ -349,21 +349,21 @@ form.decorated-fields
 
 // Styles for the registration steps //
 ol#breadcrumbs
-  :list-style decimal inside none
   :background-color #efefef
   //:padding 5px 5px
   :border-bottom 1px solid silver
   :font-size 1.2em
-  :margin-bottom 10px
+  //:margin-bottom 10px
   +clearfix
   > li
+    :list-style decimal inside none
     //+display-inline-block
     :float left
     :margin-left 20px
-    :margin-right 40px
+    :margin-right 20px
     :color #888
     :text-shadow 1px 2px 2px #fff
-  > li.current
+  >li.current
     :color= !color_awesome_gray_dark
     //:background-color #dedede
     //:border 1px solid silver
@@ -372,7 +372,9 @@ ol#breadcrumbs
     :text-shadow none
     :font-weight bold
     //+border-radius(10px)
-
+  >li#online_registration
+    :list-style none
+  
 input.awesome-button.large
   :font-size 1.1em
   :padding 10px
@@ -438,4 +440,10 @@ input.awesome-button.cool:hover, input.awesome-button.cool:visited:hover, button
     :position absolute
     :top -35px
     :left -20px
+
+// Sponsors Page //
+#sponsors
+  li
+    +display-inline-block
+    :margin 20px 20px 10px 0px
 
