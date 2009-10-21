@@ -51,11 +51,11 @@ jQuery(function(){
             elem.val(HTTP + value);
         }
     });
-    elements.capitalization_fields.live('change', function(event){
+    elements.capitalization_fields.change(function(event){
        var elem = jQuery(this), value = jQuery.trim(elem.val());
        elem.val(value.sanitizeCapitalization());
     });
-    elements.lower_capitalization_fields.live('change', function(event){
+    elements.lower_capitalization_fields.change(function(event){
         var elem = jQuery(this), value = jQuery.trim(elem.val());
         elem.val(value.lowerSanitizeCapitalization());
     });
