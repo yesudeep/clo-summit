@@ -74,21 +74,21 @@ Please do not reply to this system generated message.
 if DEPLOYMENT_MODE == DEPLOYMENT_MODE_DEVELOPMENT:
     LOCAL = True
     DEBUG = True
-    ABSOLUTE_ROOT_URL = 'http://%s:%s/' %(SERVER_NAME, SERVER_PORT)
-    PRIMARY_URL = '/'
+    #PRIMARY_URL = '/'
     SECURE_URL = '/'
     MINIFIED = ''
     #MINIFIED = '-min'
 else:
     LOCAL = False
     DEBUG = False
-    ABSOLUTE_ROOT_URL = 'http://www.closummit.com/'
-    PRIMARY_URL = 'http://www.closummit.com/'
+    #ABSOLUTE_ROOT_URL = 'http://www.closummit.com/'
+    #PRIMARY_URL = 'http://www.closummit.com/'
     SECURE_URL = 'https://%s.appspot.com/' % APPLICATION_ID
     MINIFIED = '-min'
 
-MEDIA_URL = '%ss/' % PRIMARY_URL
-
+ABSOLUTE_ROOT_URL = 'http://%s:%s/' % (SERVER_NAME, SERVER_PORT)
+PRIMARY_URL = ABSOLUTE_ROOT_URL
+MEDIA_URL = PRIMARY_URL + 's/'
 
 TEMPLATE_BUILTINS = {
     'LOCAL': LOCAL,
