@@ -77,15 +77,13 @@ CLO Summit India
 {% endblock %}
 
 {% block tag_scripts_base %}
-<script type="text/javascript">
+#*<script type="text/javascript">
 window.scripts.push("{{ MEDIA_URL }}script/page/base{{ MINIFIED }}.js");
-</script>
-
+</script>*#
 <!--[if IE]>
 <script type="text/javascript">
 window.scripts.push("{{ MEDIA_URL }}script/page/ie.js");
 </script>
 <![endif]-->
-
 {% endblock %}
 
