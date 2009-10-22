@@ -205,15 +205,14 @@ class BillingProviderEBSHandler(SessionRequestHandler):
         self.response.out.write(response)
 
 
-#    def post(self):
-#        logging.info('DR: ' + self.request.get('DR'))
-#        logging.info(self.request)
-
-
 class RegisterParticipantsHandler(SessionRequestHandler):
     def get(self):
-        count = dec(self.request.get('count'))
-        minimum = dec(self.request.get('min'))
+        count = dec(self.request.get('count', '0'))
+        minimum = dec(self.request.get('min', '0'))
+
+        if not count:
+            self.redirect('/register/pricing/')
+
         if config.LOCAL:
             country_code = 'IND'
         else:
