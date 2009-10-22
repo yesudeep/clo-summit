@@ -57,6 +57,15 @@ def get_pricing_per_individual(count=1, min_price=5500):
     else:
         return pricing[count-1]
 
+class HostInformation(RegularModel):
+    ip_address = db.StringProperty()
+    http_user_agent = db.StringProperty()
+    http_accept_language = db.StringProperty()
+    http_accept_charset = db.StringProperty()
+    http_accept_encoding = db.StringProperty()
+    http_accept = db.StringProperty()
+    http_referer = db.StringProperty()
+
 class ParticipantGroup(RegularModel):
     title = db.StringProperty()
     transaction_response_id = db.StringProperty()
@@ -67,6 +76,8 @@ class ParticipantGroup(RegularModel):
     transaction_response = db.TextProperty()
     transaction_response_object = db.BlobProperty()
     when_transaction_response_occurred = db.DateTimeProperty()
+
+    host_info = db.ReferenceProperty(HostInformation, collection_name='particpant_groups')
 
 class YahooApiSettings(RegularModel):
     api_key = db.StringProperty()
@@ -154,6 +165,8 @@ class Speaker(RegularModel):
     presentation_filename = db.StringProperty()
     presentation_extension = db.StringProperty()
 
+    host_info = db.ReferenceProperty(HostInformation, collection_name='speakers')
+
     @classmethod
     def get_all(cls):
         cache_key = 'Speaker.get_all'
@@ -173,6 +186,8 @@ class SurveyParticipant(RegularModel):
     city = db.StringProperty()
     email = db.EmailProperty()
     mobile_number = db.StringProperty()
+
+    host_info = db.ReferenceProperty(HostInformation, collection_name='survey_participants')
 
     @classmethod
     def get_all(cls):

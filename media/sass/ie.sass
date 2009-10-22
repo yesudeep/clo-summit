@@ -7,6 +7,8 @@ a img
 
 .ie-message
     padding: 40px
+    :background-color white
+    :border 4px solid red
 
 .ie-message h1
     font-family: Georgia
@@ -31,10 +33,17 @@ a img
     float: left
     width: 400px
 
-.ie-message ul.horizontal li
-    float: left
-    list-style: none
-    
+.ie-message ul.horizontal
+    li
+        :float left
+        :list-style none
+
+//.ie-message ul.horizontal
+    :overflow hidden
+    li
+        float: left
+        list-style: none
+
 .ie-message ol li
     margin-top: 10px
 
@@ -42,5 +51,4 @@ a img
     background-color: #ffffe1
     padding: 4px
     color: green
-
 

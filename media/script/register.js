@@ -18,7 +18,6 @@ jQuery(function(){
         link_remove_registrant: jQuery('#form_register_participants a[href="#remove"]')
     };
 
-
     function updateOrganizations(event){
         elements.other_organization_fields.val(jQuery(this).val().lowerSanitizeCapitalization());
     }

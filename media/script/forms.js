@@ -7,10 +7,12 @@ String.prototype.endsWith = function(str)
 */
 
 String.prototype.isUpperCase = function(){
-   return !!this.match(/^[^a-z]*$/);
+   var re = new RegExp("^[^a-z]*$", "g");
+   return !!re.test(this);
 }
 String.prototype.isLowerCase = function(){
-   return !!this.match(/^[^A-Z]*$/);
+   var re = new RegExp("^[^A-Z]*$", "g");
+   return !!re.test(this);
 }
 String.prototype.isSameCase = function(){
    return (this.isLowerCase() || this.isUpperCase());

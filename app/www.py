@@ -17,7 +17,7 @@ from os.path import splitext
 from utils import queue_mail_task, render_template, dec
 from datetime import datetime
 
-from models import Participant, ParticipantGroup, SurveyParticipant, Speaker, JOB_TYPE_TUPLE_MAP, get_pricing_per_individual, SURVEY_LINK, BillingSettings, TRANSACTION_TYPE_EBS, PRICING_TAX, EARLY_BIRD_OFFER_END_DATE
+from models import Participant, ParticipantGroup, SurveyParticipant, Speaker, JOB_TYPE_TUPLE_MAP, get_pricing_per_individual, SURVEY_LINK, BillingSettings, TRANSACTION_TYPE_EBS, PRICING_TAX, EARLY_BIRD_OFFER_END_DATE, HostInformation
 from ebs import MODE_DEVELOPMENT, MODE_PRODUCTION, PAYMENT_GATEWAY_URL, ShippingContact, BillingContact, BillingInformation
 
 if config.DEPLOYMENT_MODE == config.DEPLOYMENT_MODE_PRODUCTION:
@@ -26,6 +26,17 @@ elif config.DEPLOYMENT_MODE == config.DEPLOYMENT_MODE_DEVELOPMENT:
     ebs_mode = MODE_DEVELOPMENT
 
 logging.basicConfig(level=logging.INFO)
+
+def get_host_info(request):
+    host_info = HostInformation()
+    host_info.ip_address = request.remote_addr
+    host_info.http_user_agent = request.headers.get('User-Agent', '')
+    host_info.http_accept_language = request.headers.get('Accept-Language', '')
+    host_info.http_accept_encoding = request.headers.get('Accept-Encoding', '')
+    host_info.http_accept_charset = request.headers.get('Accept-Charset', '')
+    host_info.http_accept = request.headers.get('Accept', '')
+    host_info.http_referer = request.headers.get('Referer', '')
+    return host_info
 
 class IndexPage(webapp.RequestHandler):
     def get(self):
@@ -203,7 +214,10 @@ class RegisterParticipantsHandler(SessionRequestHandler):
     def get(self):
         count = dec(self.request.get('count'))
         minimum = dec(self.request.get('min'))
-        country_code = ip_address_to_country_code(self.request.remote_addr, 'IND')
+        if config.LOCAL:
+            country_code = 'IND'
+        else:
+            country_code = ip_address_to_country_code(self.request.remote_addr, 'IND')
         response = render_template('register/participants.html', count=count, minimum=minimum, country_code=country_code, countries=COUNTRIES_SELECTION_LIST)
         self.response.out.write(response)
 
@@ -214,8 +228,12 @@ class RegisterParticipantsHandler(SessionRequestHandler):
         total_price = Decimal('0')
         participants = []
 
+        host_info = get_host_info(self.request)
+        host_info.put()
+
         group = ParticipantGroup()
         group.title = self.request.get('organization_1') + '/' + self.request.get('email_1')
+        group.host_info = host_info
         group.put()
 
         primary_participant = None
@@ -258,6 +276,8 @@ class RegisterParticipantsHandler(SessionRequestHandler):
         self.session['participant_group'] = group
         self.session['primary_participant'] = primary_participant
 
+
+
         self.redirect('/register/payment/')
 
 class ParticipatePage(webapp.RequestHandler):
@@ -266,6 +286,9 @@ class ParticipatePage(webapp.RequestHandler):
         self.response.out.write(response)
 
     def post(self):
+        host_info = get_host_info(self.request)
+        host_info.put()
+
         survey_participant = SurveyParticipant()
         survey_participant.full_name = self.request.get('full_name')
         survey_participant.designation = self.request.get('designation')
@@ -276,6 +299,7 @@ class ParticipatePage(webapp.RequestHandler):
         survey_participant.city = self.request.get('city')
         survey_participant.email = self.request.get('email')
         survey_participant.mobile_number = self.request.get('mobile_number')
+        survey_participant.host_info = host_info
         survey_participant.put()
 
         queue_mail_task(url='/worker/mail/thanks/survey_participation/',
@@ -297,6 +321,9 @@ class SpeakerNominationHandler(webapp.RequestHandler):
         self.response.out.write(response)
 
     def post(self):
+        host_info = get_host_info(self.request)
+        host_info.put()
+
         presentation_filename = self.request.get('presentation_filename')
         presentation = self.request.get('presentation')
 
@@ -311,6 +338,7 @@ class SpeakerNominationHandler(webapp.RequestHandler):
         speaker.mobile_number = self.request.get('mobile_number')
         speaker.research_topic = self.request.get('research_topic')
         speaker.bio_sketch = self.request.get('bio_sketch')
+        speaker.host_info = host_info
         if presentation_filename:
             speaker.presentation = db.Blob(presentation)
             speaker.presentation_filename = presentation_filename
