@@ -18,7 +18,9 @@ from utils import queue_mail_task, render_template, dec
 from datetime import datetime
 
 from models import Participant, ParticipantGroup, SurveyParticipant, Speaker, JOB_TYPE_TUPLE_MAP, get_pricing_per_individual, SURVEY_LINK, BillingSettings, TRANSACTION_TYPE_EBS, PRICING_TAX, EARLY_BIRD_OFFER_END_DATE, HostInformation
-from ebs import MODE_DEVELOPMENT, MODE_PRODUCTION, PAYMENT_GATEWAY_URL, ShippingContact, BillingContact, BillingInformation
+from ebs.merchant.api import get_ebs_request_parameters
+from ebs.merchant.data import MODE_DEVELOPMENT, MODE_PRODUCTION, PAYMENT_GATEWAY_URL
+from ebs_properties import ShippingContact, BillingContact, BillingInformation
 
 if config.DEPLOYMENT_MODE == config.DEPLOYMENT_MODE_PRODUCTION:
     ebs_mode = MODE_PRODUCTION
@@ -145,29 +147,28 @@ class RegisterPaymentHandler(SessionRequestHandler):
 
 class BillingProviderEBSHandler(SessionRequestHandler):
     def get(self):
-        from ebs import get_request_parameters, ebs_datetime
         from pickle import dumps
 
         dr = self.request.get('DR')
         if dr:
             billing_settings = BillingSettings.get_settings(deployment_mode=ebs_mode)
-            request = get_request_parameters(dr, billing_settings.secret_key)
+            request = get_ebs_request_parameters(dr, billing_settings.secret_key)
 
-            response_code = request.get('ResponseCode', [None])[0]
-            response_message = request.get('ResponseMessage', ['There was no response from the billing system.'])[0]
+            response_code = request.get('ResponseCode', None)
+            response_message = request.get('ResponseMessage', 'There was no response from the billing system.')
 
             group = self.session.get('participant_group')
-            group.transaction_response_id = request.get('PaymentID')[0]
-            group.transaction_response_code = response_code
+            group.transaction_response_id = str(request.get('PaymentID'))
+            group.transaction_response_code = str(response_code)
             group.transaction_response_message = response_message
             group.transaction_response_type = TRANSACTION_TYPE_EBS
-            group.transaction_response_amount = Decimal(request.get('Amount', ['0'])[0])
+            group.transaction_response_amount = request.get('Amount', '0')
             group.transaction_response = str(request)
             group.transaction_response_object = db.Blob(dumps(request))
-            group.when_transaction_response_occurred = ebs_datetime(request.get('DateCreated')[0])
+            group.when_transaction_response_occurred = request.get('DateCreated')
             group.put()
 
-            if response_code == '0':
+            if response_code == 0:
                 # mark the participant group as paid.
                 message_title = 'Thank you for participating in the summit'
                 group_id = group.key().id()
