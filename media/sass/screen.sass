@@ -212,6 +212,9 @@ aside
 table#pricing thead th
   :height 100px
 
+.highlight
+  :background-color #ffc
+
 table
   :width 100%
   :border-collapse collapse
@@ -348,7 +351,7 @@ form.decorated-fields
     :float left
 
 // Styles for the registration steps //
-ol#breadcrumbs
+#breadcrumbs
   :background-color #efefef
   //:padding 5px 5px
   :border-bottom 1px solid silver
@@ -356,7 +359,7 @@ ol#breadcrumbs
   //:margin-bottom 10px
   +clearfix
   > li
-    :list-style decimal inside none
+    //:list-style decimal inside none
     //+display-inline-block
     :float left
     :margin-left 20px
@@ -372,9 +375,9 @@ ol#breadcrumbs
     :text-shadow none
     :font-weight bold
     //+border-radius(10px)
-  >li#online_registration
+  //>li#online_registration
     :list-style none
-  
+
 input.awesome-button.large
   :font-size 1.1em
   :padding 10px
@@ -450,3 +453,4 @@ h6
   :font-size 0.7em
   :font-style italic
   :margin-top 30px
+

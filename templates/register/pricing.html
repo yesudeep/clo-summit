@@ -23,12 +23,27 @@
         <td>6,500* INR</td>
         <td>6,000* INR</td>
       </tr>
-      <tr>
+      {% if today_date <= early_bird_offer_end_date %}
+      <tr class="highlight">
+        <td class="row-head">Early Bird Fees Until {{ early_bird_offer_end_date|datetimeformat('%B %d, %Y') }}</td>
+        <td>7,000* INR</td>
+        <td>6,250* INR</td>
+        <td>5,750* INR</td>
+      </tr>
+#*      <tr>
+        <td class="row-head">Savings Per Delegate</td>
+        <td>Nil</td>
+        <td>750 INR</td>
+        <td>1,250 INR</td>
+      </tr>*#
+      {% else %}
+#*      <tr>
         <td class="row-head">Savings Per Delegate</td>
         <td>Nil</td>
         <td>1,000 INR</td>
         <td>1,500 INR</td>
-      </tr>
+      </tr>*#
+      {% endif %}
       <tr>
         <td></td>
         <td><a href="/register/participants?min=1&count=2" class="awesome-button large">1-2 registrations &raquo;</a></td>
@@ -38,7 +53,7 @@
     </tbody>
   </table>
   <h6>* Excluding Service Tax @ 10.3%</h6>
-  <p>For registeration of 10 delegates and above, contact: +91 22 66301060 / 22026166</p>
+  <p>For registration of 10 delegates and above, contact: +91 22 66301060 / 22026166</p>
   <address>Postal Address: 61, Mittal Tower B Wing, Nariman Point, Mumbai 400021, India.</address>
 {% endblock %}
 

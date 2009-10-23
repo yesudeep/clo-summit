@@ -4,7 +4,7 @@
 import configuration as config
 from google.appengine.api import memcache
 from google.appengine.ext import db
-from datetime import datetime
+from datetime import datetime, date
 from hc_gae_util.db.models import RegularModel
 from hc_gae_util.db.properties import DecimalProperty
 from hc_gae_util.data.countries import COUNTRY_NAME_ISO_ALPHA_3_TABLE, ISO_ALPHA_3_CODES
@@ -23,10 +23,17 @@ JOB_TYPE_CHOICES.sort()
 JOB_TYPE_TUPLE_MAP = [(k, v) for (k, v) in JOB_TYPES.iteritems()]
 JOB_TYPE_TUPLE_MAP.sort()
 
+EARLY_BIRD_OFFER_END_DATE = date(2009, 10, 31)
+
 PRICING = [
     7500, 7500,              # 1-2
     6500, 6500, 6500, 6500,  # 3-6
-    6000, 6000, 6000         # 7-9
+    6000, 6000, 6000,        # 7-9
+]
+EARLY_BIRD_PRICING = [
+    7000, 7000,              # 1-2
+    6250, 6250, 6250, 6250,  # 3-6
+    5750, 5750, 5750, 5750,  # 7-9
 ]
 PRICING_TAX = Decimal('10.3') / 100
 
@@ -40,10 +47,24 @@ SURVEY_LINK = "http://www.surveymonkey.com/s.aspx?sm=hZXdTol4KmfnW0ZBoxxaow_3d_3
 MAX_FETCH_LIMIT = 1000
 
 def get_pricing_per_individual(count=1, min_price=5500):
-    if count >= len(PRICING):
+    today = datetime.utcnow()
+    if today.date() <= EARLY_BIRD_OFFER_END_DATE:
+        pricing = EARLY_BIRD_PRICING
+    else:
+        pricing = PRICING
+    if count >= len(pricing):
         return min_price
     else:
-        return PRICING[count-1]
+        return pricing[count-1]
+
+class HostInformation(RegularModel):
+    ip_address = db.StringProperty()
+    http_user_agent = db.StringProperty()
+    http_accept_language = db.StringProperty()
+    http_accept_charset = db.StringProperty()
+    http_accept_encoding = db.StringProperty()
+    http_accept = db.StringProperty()
+    http_referer = db.StringProperty()
 
 class ParticipantGroup(RegularModel):
     title = db.StringProperty()
@@ -55,6 +76,8 @@ class ParticipantGroup(RegularModel):
     transaction_response = db.TextProperty()
     transaction_response_object = db.BlobProperty()
     when_transaction_response_occurred = db.DateTimeProperty()
+
+    host_info = db.ReferenceProperty(HostInformation, collection_name='particpant_groups')
 
 class YahooApiSettings(RegularModel):
     api_key = db.StringProperty()
@@ -142,6 +165,8 @@ class Speaker(RegularModel):
     presentation_filename = db.StringProperty()
     presentation_extension = db.StringProperty()
 
+    host_info = db.ReferenceProperty(HostInformation, collection_name='speakers')
+
     @classmethod
     def get_all(cls):
         cache_key = 'Speaker.get_all'
@@ -161,6 +186,8 @@ class SurveyParticipant(RegularModel):
     city = db.StringProperty()
     email = db.EmailProperty()
     mobile_number = db.StringProperty()
+
+    host_info = db.ReferenceProperty(HostInformation, collection_name='survey_participants')
 
     @classmethod
     def get_all(cls):

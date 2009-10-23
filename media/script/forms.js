@@ -7,10 +7,12 @@ String.prototype.endsWith = function(str)
 */
 
 String.prototype.isUpperCase = function(){
-   return !!this.match(/^[^a-z]*$/);
+   var re = new RegExp("^[^a-z]*$", "g");
+   return !!re.test(this);
 }
 String.prototype.isLowerCase = function(){
-   return !!this.match(/^[^A-Z]*$/);
+   var re = new RegExp("^[^A-Z]*$", "g");
+   return !!re.test(this);
 }
 String.prototype.isSameCase = function(){
    return (this.isLowerCase() || this.isUpperCase());
@@ -51,11 +53,11 @@ jQuery(function(){
             elem.val(HTTP + value);
         }
     });
-    elements.capitalization_fields.live('change', function(event){
+    elements.capitalization_fields.change(function(event){
        var elem = jQuery(this), value = jQuery.trim(elem.val());
        elem.val(value.sanitizeCapitalization());
     });
-    elements.lower_capitalization_fields.live('change', function(event){
+    elements.lower_capitalization_fields.change(function(event){
         var elem = jQuery(this), value = jQuery.trim(elem.val());
         elem.val(value.lowerSanitizeCapitalization());
     });
