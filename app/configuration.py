@@ -87,8 +87,8 @@ else:
     SECURE_URL = 'https://%s.appspot.com/' % APPLICATION_ID
     MINIFIED = '-min'
 
-MEDIA_URL = '%ss/' % PRIMARY_URL
-
+#MEDIA_URL = '%ss/' % PRIMARY_URL
+MEDIA_URL = ABSOLUTE_ROOT_URL + 's/'
 
 TEMPLATE_BUILTINS = {
     'LOCAL': LOCAL,
