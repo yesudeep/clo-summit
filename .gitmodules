@@ -1,6 +1,3 @@
 [submodule "media/script/lib/chickoojs"]
 	path = media/script/lib/chickoojs
 	url = git://github.com/yesudeep/chickoojs.git
-[submodule "app/lib/pyebs"]
-	path = app/lib/pyebs
-	url = git://github.com/yesudeep/pyebs.git
