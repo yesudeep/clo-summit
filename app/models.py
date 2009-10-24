@@ -8,7 +8,7 @@ from datetime import datetime, date
 from hc_gae_util.db.models import RegularModel
 from hc_gae_util.db.properties import DecimalProperty
 from hc_gae_util.data.countries import COUNTRY_NAME_ISO_ALPHA_3_TABLE, ISO_ALPHA_3_CODES
-from ebs import MODE_PRODUCTION, MODE_DEVELOPMENT
+from ebs.merchant.data import MODE_PRODUCTION, MODE_DEVELOPMENT
 from decimal import Decimal
 
 JOB_TYPES = {
