@@ -169,7 +169,7 @@ class Speaker(RegularModel):
 
     @classmethod
     def get_all(cls):
-        cache_key = 'Speaker.get_all'
+        cache_key = 'Speaker.get_all_'
         speakers = memcache.get(cache_key)
         if not speakers:
             speakers = db.Query(Speaker).order('full_name').fetch(MAX_FETCH_LIMIT)
