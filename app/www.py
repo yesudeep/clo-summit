@@ -114,7 +114,7 @@ class RegisterPaymentHandler(SessionRequestHandler):
                 postal_code=primary_participant.zip_code, \
                 state=primary_participant.state_province, \
                 country=primary_participant.country_code)
-            shipping_contact = BillingContact(name=primary_participant.full_name, \
+            shipping_contact = ShippingContact(name=primary_participant.full_name, \
                 phone=primary_participant.phone_number, \
                 email=primary_participant.email,
                 address=primary_participant.address, \
