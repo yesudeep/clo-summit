@@ -17,8 +17,9 @@ from os.path import splitext
 from utils import queue_mail_task, render_template, dec
 from datetime import datetime
 
-from models import Participant, ParticipantGroup, SurveyParticipant, Speaker, JOB_TYPE_TUPLE_MAP, get_pricing_per_individual, SURVEY_LINK, BillingSettings, TRANSACTION_TYPE_EBS, PRICING_TAX, EARLY_BIRD_OFFER_END_DATE, HostInformation
-from ebs.merchant.api import get_ebs_request_parameters
+from models import Participant, ParticipantGroup, SurveyParticipant, Speaker, \
+    JOB_TYPE_TUPLE_MAP, get_pricing_per_individual, SURVEY_LINK, BillingSettings, \
+    TRANSACTION_TYPE_EBS, PRICING_TAX, EARLY_BIRD_OFFER_END_DATE, HostInformation
 from ebs.merchant.data import MODE_DEVELOPMENT, MODE_PRODUCTION, PAYMENT_GATEWAY_URL
 from ebs_properties import ShippingContact, BillingContact, BillingInformation
 
@@ -148,6 +149,7 @@ class RegisterPaymentHandler(SessionRequestHandler):
 class BillingProviderEBSHandler(SessionRequestHandler):
     def get(self):
         from pickle import dumps
+        from ebs.merchant.api import get_ebs_request_parameters
 
         dr = self.request.get('DR')
         if dr:

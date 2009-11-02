@@ -24,33 +24,6 @@
 # THE SOFTWARE.
 
 from hc_gae_util.collections.propertydict import PropertyDict
-from hc_gae_util.encryption import arc4_decrypt
-from base64 import b64decode
-from urllib import urlencode
-from hc_gae_util.urlhelper import urldecode
-import re
-from datetime import datetime
-
-
-MODE_PRODUCTION = 'LIVE'
-MODE_DEVELOPMENT = 'TEST'
-
-PAYMENT_GATEWAY_URL = 'https://secure.ebs.in/pg/ma/sale/pay/'
-
-def replace_spaces_with_plus(string):
-    return string.replace(' ', '+')
-
-def get_request_parameters(encoded_data, encryption_key, decoder=b64decode, transformation=replace_spaces_with_plus):
-    cipher_text = decoder(transformation(encoded_data))
-    query_string = arc4_decrypt(encryption_key, cipher_text)
-    query_params = urldecode(query_string)
-    return query_params
-
-def ebs_datetime(datetime_string):
-    re_pattern = r'^(?P<year>[0-9]{4})-(?P<month>[0-9]{2})-(?P<day>[0-9]{2}) (?P<hours>[0-9]{2}):(?P<minutes>[0-9]{2}):(?P<seconds>[0-9]{2}).*$'
-    compiled_re = re.compile(re_pattern)
-    m = compiled_re.match(datetime_string)
-    return datetime(*[int(i, 10) for i in m.groups()])
 
 class Contact(PropertyDict):
     pass
@@ -73,5 +46,3 @@ if __name__ == '__main__':
     print bc.fields()
     print sc.fields()
     print bi.fields()
-    #print urlencode(bi.fields())
-
