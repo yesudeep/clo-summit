@@ -191,7 +191,6 @@ env.JsminMinify(lib_index_js)
 PAGE_ABOUT_JS_FILES =  Split("""
     script/lib/chickoojs/src/jquery/tools/1.1.1/tools.tabs-1.0.3.js
     script/about.js
-    script/jquery.lightbox-0.5.js
 """)
 PAGE_ABOUT_JS_FILES = [SRC_DIR + f for f in PAGE_ABOUT_JS_FILES]
 page_about_js = env.Concatenate([DEST_DIR + 'script/page/about.js'], PAGE_ABOUT_JS_FILES)
