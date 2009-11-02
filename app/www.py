@@ -323,6 +323,8 @@ class SpeakerNominationHandler(webapp.RequestHandler):
         self.response.out.write(response)
 
     def post(self):
+        from models import Presentation
+        
         host_info = get_host_info(self.request)
         host_info.put()
 
@@ -341,10 +343,19 @@ class SpeakerNominationHandler(webapp.RequestHandler):
         speaker.research_topic = self.request.get('research_topic')
         speaker.bio_sketch = self.request.get('bio_sketch')
         speaker.host_info = host_info
+        #if presentation_filename:
+        #    speaker.presentation = db.Blob(presentation)
+        #    speaker.presentation_filename = presentation_filename
+        #    speaker.presentation_extension = splitext(presentation_filename)[1]
         if presentation_filename:
-            speaker.presentation = db.Blob(presentation)
-            speaker.presentation_filename = presentation_filename
-            speaker.presentation_extension = splitext(presentation_filename)[1]
+            speaker_presentation = Presentation()
+            speaker_presentation.filename = presentation_filename
+            speaker_presentation.extension = splitext(presentation_filename)[1]
+            speaker_presentation.content = db.Blob(presentation)
+            speaker_presentation.put()
+            
+            speaker.presentation = speaker_presentation
+        
         speaker.put()
 
         queue_mail_task(url='/worker/mail/thanks/speaker_nomination/',
