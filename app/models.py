@@ -149,6 +149,11 @@ class Participant(RegularModel):
         return participants
 
 
+class Presentation(RegularModel):
+    content = db.BlobProperty()
+    filename = db.StringProperty()
+    extension = db.StringProperty()
+
 
 class Speaker(RegularModel):
     full_name = db.StringProperty()
@@ -164,7 +169,8 @@ class Speaker(RegularModel):
     presentation = db.BlobProperty()
     presentation_filename = db.StringProperty()
     presentation_extension = db.StringProperty()
-
+    
+    presentation = db.ReferenceProperty(Presentation, collection_name='speaker_singleton')
     host_info = db.ReferenceProperty(HostInformation, collection_name='speakers')
 
     @classmethod

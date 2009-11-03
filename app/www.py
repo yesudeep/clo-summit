@@ -17,8 +17,9 @@ from os.path import splitext
 from utils import queue_mail_task, render_template, dec
 from datetime import datetime
 
-from models import Participant, ParticipantGroup, SurveyParticipant, Speaker, JOB_TYPE_TUPLE_MAP, get_pricing_per_individual, SURVEY_LINK, BillingSettings, TRANSACTION_TYPE_EBS, PRICING_TAX, EARLY_BIRD_OFFER_END_DATE, HostInformation
-from ebs.merchant.api import get_ebs_request_parameters
+from models import Participant, ParticipantGroup, SurveyParticipant, Speaker, \
+    JOB_TYPE_TUPLE_MAP, get_pricing_per_individual, SURVEY_LINK, BillingSettings, \
+    TRANSACTION_TYPE_EBS, PRICING_TAX, EARLY_BIRD_OFFER_END_DATE, HostInformation
 from ebs.merchant.data import MODE_DEVELOPMENT, MODE_PRODUCTION, PAYMENT_GATEWAY_URL
 from ebs_properties import ShippingContact, BillingContact, BillingInformation
 
@@ -148,6 +149,7 @@ class RegisterPaymentHandler(SessionRequestHandler):
 class BillingProviderEBSHandler(SessionRequestHandler):
     def get(self):
         from pickle import dumps
+        from ebs.merchant.api import get_ebs_request_parameters
 
         dr = self.request.get('DR')
         if dr:
@@ -321,6 +323,8 @@ class SpeakerNominationHandler(webapp.RequestHandler):
         self.response.out.write(response)
 
     def post(self):
+        from models import Presentation
+        
         host_info = get_host_info(self.request)
         host_info.put()
 
@@ -339,10 +343,19 @@ class SpeakerNominationHandler(webapp.RequestHandler):
         speaker.research_topic = self.request.get('research_topic')
         speaker.bio_sketch = self.request.get('bio_sketch')
         speaker.host_info = host_info
+        #if presentation_filename:
+        #    speaker.presentation = db.Blob(presentation)
+        #    speaker.presentation_filename = presentation_filename
+        #    speaker.presentation_extension = splitext(presentation_filename)[1]
         if presentation_filename:
-            speaker.presentation = db.Blob(presentation)
-            speaker.presentation_filename = presentation_filename
-            speaker.presentation_extension = splitext(presentation_filename)[1]
+            speaker_presentation = Presentation()
+            speaker_presentation.filename = presentation_filename
+            speaker_presentation.extension = splitext(presentation_filename)[1]
+            speaker_presentation.content = db.Blob(presentation)
+            speaker_presentation.put()
+            
+            speaker.presentation = speaker_presentation
+        
         speaker.put()
 
         queue_mail_task(url='/worker/mail/thanks/speaker_nomination/',
