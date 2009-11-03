@@ -65,6 +65,7 @@ IMAGE_FILES = Split("""
     image/button/download.png
     image/button/download_brochure_and_form.jpg
     image/logo/sponsors/who_moved_my_cheese.jpg
+    image/logo/sponsors/upside_learning.jpg
 
     image/background/about_pixel.jpg
     image/background/sponsor_pixel.jpg
