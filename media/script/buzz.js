@@ -4,7 +4,7 @@ jQuery(function(){
       speed: 'slow',
       timeout: 4000,
       type: 'sequence',
-      containerheight: '400px'
+      containerheight: '250px'
     });
 });
 
