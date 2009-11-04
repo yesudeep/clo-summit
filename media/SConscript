@@ -66,6 +66,8 @@ IMAGE_FILES = Split("""
     image/button/download_brochure_and_form.jpg
     image/logo/sponsors/who_moved_my_cheese.jpg
     image/logo/sponsors/upside_learning.jpg
+    image/logo/sponsors/eu_india_chambers_logo.jpg
+    image/logo/media_partner/management_next.jpg
 
     image/background/about_pixel.jpg
     image/background/sponsor_pixel.jpg
@@ -73,6 +75,7 @@ IMAGE_FILES = Split("""
     image/background/program_pixel.jpg
     image/background/register_pixel.jpg
     image/background/media_pixel.jpg
+    image/background/inverted_coma.png
     image/icon/star.png
     image/icon/down_arrow.png
 
@@ -82,13 +85,10 @@ IMAGE_FILES = Split("""
     image/browser/get_opera.png
     image/browser/get_safari.png
     
-    image/advisory_board/thumbnail/a_k_khandelwal.jpg
-    image/advisory_board/thumbnail/arun_balakrishnan.jpg
-    image/advisory_board/thumbnail/curtis_bateman.jpg
-    image/advisory_board/thumbnail/g_p_gupta.jpg
-    image/advisory_board/thumbnail/pranesh_anthapur.jpg
-    image/advisory_board/thumbnail/shaheen_mistry.jpg
-    image/advisory_board/thumbnail/s_parasuraman.jpg
+    image/advisory_board/arun_balakrishnan.png
+    image/advisory_board/khandelwal.png
+    image/advisory_board/sparasuraman.png
+    image/advisory_board/curtis_bateman.png
     
     image/advisory_board/image/s_parasuraman.jpg
     image/advisory_board/image/curtis_bateman.jpg
@@ -111,7 +111,7 @@ CSS_FILES = Split("""
 PLAIN_COPIES = SCRIPT_FILES + CSS_FILES + Split("""
     robots.txt
     downloads/clo_brochure_updated.pdf
-    downloads/offline_registration_form.pdf
+    downloads/offline_registration_form.doc
 """)
 
 PLAIN_COPY_DIRECTORIES = Split("""
@@ -197,6 +197,15 @@ PAGE_ABOUT_JS_FILES = [SRC_DIR + f for f in PAGE_ABOUT_JS_FILES]
 page_about_js = env.Concatenate([DEST_DIR + 'script/page/about.js'], PAGE_ABOUT_JS_FILES)
 env.YuiCompressorMinify(page_about_js)
 #env.JsminMinify(page_about_js)
+
+PAGE_BUZZ_JS_FILES =  Split("""
+    script/jquery.innerfade.js
+    script/buzz.js
+    """)
+PAGE_BUZZ_JS_FILES = [SRC_DIR + f for f in PAGE_BUZZ_JS_FILES]
+page_buzz_js = env.Concatenate([DEST_DIR + 'script/page/buzz.js'], PAGE_BUZZ_JS_FILES)
+env.YuiCompressorMinify(page_buzz_js)
+
 
 program_JS_FILES =  Split("""
     script/lib/chickoojs/src/jquery/tools/1.1.1/tools.tabs-1.0.3.js
