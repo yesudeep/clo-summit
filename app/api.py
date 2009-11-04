@@ -5,13 +5,14 @@ import configuration as config
 from google.appengine.ext import db, webapp
 from google.appengine.api import memcache, users
 from google.appengine.ext.webapp.util import run_wsgi_app
+from google.appengine.ext.webapp import template
 from utils import queue_mail_task, render_template, dec, parse_iso_datetime_string
 import logging
-from models import Participant, ParticipantGroup, SurveyParticipant, Speaker, JOB_TYPE_TUPLE_MAP
+from models import Presentation, Participant, ParticipantGroup, SurveyParticipant, Speaker, JOB_TYPE_TUPLE_MAP
 from datetime import datetime
 from django.utils import simplejson as json
 from decimal import Decimal
-from os.path import splitext
+from os.path import splitext, basename
 
 MAX_FETCH_LIMIT = 400
 
@@ -93,9 +94,12 @@ class SpeakerNewHandler(webapp.RequestHandler):
         speaker.research_topic = self.request.get('research_topic')
         speaker.bio_sketch = self.request.get('bio_sketch')
         if presentation_filename:
-            speaker.presentation = self.request.get('presentation')
-            speaker.presentation_filename = self.request.get('presentation_filename')
-            speaker.presentation_extension = splitext(presentation_filename)[1]
+            presentation = Presentation()
+            presentation.filename = self.request.get('presentation_filename')
+            presentation.content = db.Blob(self.request.get('presentation'))
+            presentation.extension = splitext(presentation_filename)[1]
+            presentation.put()
+            speaker.presentation_file = presentation
         speaker.put()
 
         queue_mail_task(url='/worker/mail/thanks/speaker_nomination/',
@@ -111,8 +115,14 @@ class SpeakerNewHandler(webapp.RequestHandler):
 
 class SpeakerEditHandler(webapp.RequestHandler):
     def get(self, key):
+        from django.template.defaultfilters import slugify
         speaker = db.get(db.Key(key))
-        response = render_template('admin/edit_speaker.html', speaker=speaker)
+        if speaker.presentation_file:
+            presentation_basename = slugify(speaker.full_name) + '-presentation' + speaker.presentation_file.extension
+        else:
+            presentation_basename = None
+        
+        response = render_template('admin/edit_speaker.html', speaker=speaker, presentation_basename=presentation_basename)
         self.response.out.write(response)
 
     def post(self, key):
@@ -129,9 +139,11 @@ class SpeakerEditHandler(webapp.RequestHandler):
         speaker.research_topic = self.request.get('research_topic')
         speaker.bio_sketch = self.request.get('bio_sketch')
         if presentation_filename:
-            speaker.presentation = self.request.get('presentation')
-            speaker.presentation_filename = self.request.get('presentation_filename')
-            speaker.presentation_extension = splitext(presentation_filename)[1]
+            presentation = speaker.presentation_file
+            presentation.content = db.Blob(self.request.get('presentation'))
+            presentation.filename = self.request.get('presentation_filename')
+            presentation.extension = splitext(presentation_filename)[1]
+            presentation.put()
         speaker.put()
 
         self.response.out.write(speaker.to_json('full_name', 'is_starred', 'is_deleted', 'is_active'))
@@ -149,8 +161,8 @@ class SpeakerListHandler(webapp.RequestHandler):
 class SpeakerDownloadPresentationHandler(webapp.RequestHandler):
     def get(self, key, filename):
         speaker = db.get(db.Key(key))
-        self.response.headers['Content-Type'] = MIME_TYPES.get(speaker.presentation_extension, MIME_TYPES.get('.pdf'))
-        self.response.out.write(speaker.presentation)
+        self.response.headers['Content-Type'] = MIME_TYPES.get(speaker.presentation_file.extension, MIME_TYPES.get('.pdf'))
+        self.response.out.write(speaker.presentation_file.content)
 
 class SurveyParticipantEditHandler(webapp.RequestHandler):
     def get(self, key):

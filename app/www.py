@@ -354,7 +354,7 @@ class SpeakerNominationHandler(webapp.RequestHandler):
             speaker_presentation.content = db.Blob(presentation)
             speaker_presentation.put()
             
-            speaker.presentation = speaker_presentation
+            speaker.presentation_file = speaker_presentation
         
         speaker.put()
 

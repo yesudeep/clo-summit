@@ -65,14 +65,13 @@
       <span class="suffix"></span>
     </label>
 
-
+	{% if presentation_basename %}
     <label for="existing_presentation">
       <span class="prefix">existing presentation</span>
       <input type="hidden" name="existing_presentation" value="" />
-      <span class="suffix">{% if speaker.presentation_filename %}<a class="awesome-button" href="/api/speakers/{{ speaker.key() }}/download/{{ speaker.presentation_filename }}">Download {{ speaker.presentation_filename }}</a>. {% endif %}
-</span>
+      <span class="suffix"><a class="awesome-button" target="_blank" href="/api/speakers/{{ speaker.key() }}/download/{{ presentation_basename }}">Download {{ presentation_basename }}</a>.</span>
     </label>
-
+	{% endif %}
 
     <label for="presentation">
       <span class="prefix">presentation</span>

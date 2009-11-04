@@ -154,7 +154,6 @@ class Presentation(RegularModel):
     filename = db.StringProperty()
     extension = db.StringProperty()
 
-
 class Speaker(RegularModel):
     full_name = db.StringProperty()
     designation = db.StringProperty()
@@ -170,12 +169,12 @@ class Speaker(RegularModel):
     presentation_filename = db.StringProperty()
     presentation_extension = db.StringProperty()
     
-    presentation = db.ReferenceProperty(Presentation, collection_name='speaker_singleton')
+    presentation_file = db.ReferenceProperty(Presentation, collection_name='speaker_singleton')
     host_info = db.ReferenceProperty(HostInformation, collection_name='speakers')
 
     @classmethod
     def get_all(cls):
-        cache_key = 'Speaker.get_all_'
+        cache_key = 'Speaker.get_all'
         speakers = memcache.get(cache_key)
         if not speakers:
             speakers = db.Query(Speaker).order('full_name').fetch(MAX_FETCH_LIMIT)
