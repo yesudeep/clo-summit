@@ -67,6 +67,7 @@ IMAGE_FILES = Split("""
     image/logo/sponsors/who_moved_my_cheese.jpg
     image/logo/sponsors/upside_learning.jpg
     image/logo/sponsors/eu_india_chambers_logo.jpg
+    image/logo/sponsors/utv_bloomberg.jpg
     image/logo/media_partner/management_next.jpg
 
     image/background/about_pixel.jpg
@@ -76,6 +77,7 @@ IMAGE_FILES = Split("""
     image/background/register_pixel.jpg
     image/background/media_pixel.jpg
     image/background/inverted_coma.png
+    image/background/black_arrow.png
     image/icon/star.png
     image/icon/down_arrow.png
 
@@ -279,6 +281,15 @@ ie_js_FILES = [SRC_DIR + f for f in ie_js_FILES]
 ie_js = env.Concatenate([DEST_DIR + 'script/page/ie.js'], ie_js_FILES)
 env.YuiCompressorMinify(ie_js)
 #env.JsminMinify(ie_js)
+
+base_JS_FILES =  Split("""
+    script/lib/chickoojs/src/jquery/class.animation/jquery.class.animation.js
+    script/base.js
+""")
+base_JS_FILES = [SRC_DIR + f for f in base_JS_FILES]
+page_base_js = env.Concatenate([DEST_DIR + 'script/page/base.js'], base_JS_FILES)
+env.YuiCompressorMinify(page_base_js)
+#env.JsminMinify(page_base_js)
 
 
 base_JS_FILES =  Split("""
