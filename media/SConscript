@@ -112,8 +112,8 @@ CSS_FILES = Split("""
 # any optimizations, then you may include them here.
 PLAIN_COPIES = SCRIPT_FILES + CSS_FILES + Split("""
     robots.txt
-    downloads/clo_brochure_updated.pdf
-    downloads/registration_form.doc
+    downloads/clo_brochure.pdf
+    downloads/registration_form_updated.doc
 """)
 
 PLAIN_COPY_DIRECTORIES = Split("""
