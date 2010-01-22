@@ -92,6 +92,10 @@ IMAGE_FILES = Split("""
     image/advisory_board/khandelwal.png
     image/advisory_board/sparasuraman.png
     image/advisory_board/curtis_bateman.png
+    image/advisory_board/rajan_mehrotra.jpg
+    image/advisory_board/gopal_mahapatra.jpg
+    image/advisory_board/v_c_agarwal.jpg
+    image/advisory_board/yogi_sriram.jpg
     
     image/advisory_board/image/s_parasuraman.jpg
     image/advisory_board/image/curtis_bateman.jpg
@@ -113,7 +117,7 @@ CSS_FILES = Split("""
 # any optimizations, then you may include them here.
 PLAIN_COPIES = SCRIPT_FILES + CSS_FILES + Split("""
     robots.txt
-    downloads/clo_brochure.pdf
+    downloads/clo_brochure_updated.pdf
     downloads/registration_form.doc
 """)
 
