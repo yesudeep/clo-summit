@@ -1,5 +1,5 @@
 application: clo-summit
-version: live
+version: development
 runtime: python
 api_version: 1
 
